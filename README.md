@@ -1,0 +1,2 @@
+# mobile
+Nativescript for project
