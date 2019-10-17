@@ -1,2 +1,1 @@
-# mobile
-Nativescript for project
+# Project
