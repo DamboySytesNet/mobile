@@ -20,11 +20,11 @@
                     <Label class="hr-light" />
                 </StackLayout>
 
-                <!-- <StackLayout row="2" class="input-field" visibility="{{ !isLoggingIn ? 'visible' : 'collapse' }}">
+                <StackLayout row="2" class="input-field" visibility="{{ !isLoggingIn ? 'visible' : 'collapse' }}">
                     <TextField id="confirmPassword" class="input" text="{{ confirmPassword }}"
                         hint="Confirm password" secure="true" returnKeyType="done" />
                     <Label class="hr-light" />
-                </StackLayout> -->
+                </StackLayout>
 
                 <ActivityIndicator rowSpan="3" busy="{{ processing }}"></ActivityIndicator>
             </GridLayout>

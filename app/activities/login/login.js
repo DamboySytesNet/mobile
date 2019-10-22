@@ -4,16 +4,14 @@ const topmost = require("tns-core-modules/ui/frame").topmost;
 
 // // const userService = require("~/services/user-service");
 
+var pageData = new observableModule.fromObject({
+    email: 'u@d.p',
+    password: 'password',
+    confirmPassword: 'password',
+    isLoggingIn: true,
+    processing: false,
 
-function LoginViewModel() {
-    return observableModule.fromObject({
-        email: "user@nativescript.org",
-        password: "password",
-        confirmPassword: "",
-        isLoggingIn: true,
-        processing: false,
-
-        toggleForm() {
+    toggleForm() {
             this.isLoggingIn = !this.isLoggingIn;
         },
 
@@ -84,19 +82,11 @@ function LoginViewModel() {
                 }
             });
         }
-    });
-}
+});
 
-module.exports = LoginViewModel;
-
-
-///////
-
-const loginViewModel = new LoginViewModel();
-
-exports.pageLoaded = function (args) {
+exports.pageLoaded = (args) => {
     const page = args.object;
-    page.bindingContext = loginViewModel;
+    page.bindingContext = pageData;
 }
 
 ///////
