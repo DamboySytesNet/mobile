@@ -37,21 +37,21 @@ Page {
                         opacity: 0.5;
                     }
 
-            Button {
+            #login {
                 font: 20 "OpenSans";
                 font-weight: bold;
                 border-radius: 5;
                 
-                margin: 5 40 15 40;
+                margin: 15 40;
                 height: 50;
                 background: #9f3b3b;
                 color: #fff;
             }
-            Button:disabled {
+            #login:disabled {
                 opacity: 0.5;
             }
 
-            Label {
+            #forgot {
                 text-align:center;
                 font-size: 16px;
                 font-weight: 700;

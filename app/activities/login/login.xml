@@ -16,7 +16,7 @@
                                autocapitalizationType="none"
                                isEnabled="{{ !loading }}"
                                returnKeyType="next" />
-                    <Label text="asd" class="hr-light" />
+                    <Label class="hr-light" />
                 </StackLayout>
 
                 <StackLayout row="1" class="input-field">
@@ -30,14 +30,16 @@
                     <Label class="hr-light" />
                 </StackLayout>
 
-                <ActivityIndicator rowSpan="3" busy="{{ loading }}"></ActivityIndicator>
+                <ActivityIndicator rowSpan="3" busy="{{ loading }}"/>
             </GridLayout>
 
-            <Button text="Zaloguj się"
+            <Button id="login"
+                    text="Zaloguj się"
                     tap="{{ submit }}"
                     isEnabled="{{ !loading }}" />
 
-            <Label text="Zapomniałeś/aś hasła?"
+            <Label id="forgot"
+                   text="Zapomniałeś/aś hasła?"
                    tap="{{ forgotPassword }}"></Label>
         </StackLayout>
 
