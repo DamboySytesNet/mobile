@@ -16,18 +16,3 @@ The imported CSS rules must precede all other types of rules.
 The following CSS rule changes the font size of all UI
 components that have the btn class name.
 */
-
-.btn {
-    font-size: 18;
-}
-
-.btn-primary {
-  height: 50;
-  background-color: #D51A1A;
-  border-radius: 5;
-  font-size: 20;
-  font-weight: 600;
-}
-.btn-primary:disabled {
-  opacity: 0.5;
-}

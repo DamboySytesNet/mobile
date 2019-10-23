@@ -1,7 +1,7 @@
 <Page class="page" actionBarHidden="true" loaded="pageLoaded">
     <ActionBar title="Login"></ActionBar>
 
-    <FlexboxLayout class="page">
+    <FlexboxLayout>
         <StackLayout class="form">
             <Image class="logo" src="~/images/pl.png" />
             <Label class="header" text="Konsultacje" />
@@ -16,7 +16,7 @@
                                autocapitalizationType="none"
                                isEnabled="{{ !loading }}"
                                returnKeyType="next" />
-                    <Label class="hr-light" />
+                    <Label text="asd" class="hr-light" />
                 </StackLayout>
 
                 <StackLayout row="1" class="input-field">
@@ -35,8 +35,7 @@
 
             <Button text="Zaloguj się"
                     tap="{{ submit }}"
-                    isEnabled="{{ !loading }}"
-                    class="btn btn-primary m-t-20" />
+                    isEnabled="{{ !loading }}" />
 
             <Label text="Zapomniałeś/aś hasła?"
                    tap="{{ forgotPassword }}"></Label>

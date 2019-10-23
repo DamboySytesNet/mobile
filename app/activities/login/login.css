@@ -1,78 +1,59 @@
-FlexboxLayout {
-    background-size: cover;
-    background-image: url("~/images/login.jpg");
+Page {
+    align-items: center;
+    flex-direction: column;
+}
+    FlexboxLayout {
+        background-size: cover;
+        background-image: url("~/images/login.jpg");
+    }
+        .form {
+            flex-grow: 1;
+            margin: 0 50 30 50;
+            vertical-align: middle;
+        }
 
-    /* justify-content: center;
-    align-items: center; */
-}
+            .logo {
+                height: 120;
+                margin-bottom:20;
+            }
 
-/* TextField {
-    width:65%;
-    margin-bottom: 80px;
-}
+            .header {
+                horizontal-align: center;
+                font:27 "OpenSans";
+                font-weight: bold;
+                margin-bottom: 30;
+                text-align: center;
+                color: #9f3b3b;
+            }
+                .input-field {
+                    margin-bottom: 20;
+                }
+                    .input-field .input {
+                        font-size: 19;
+                        placeholder-color: #A8A8A8;
+                    }
+                    .input:disabled {
+                        background-color: white;
+                        opacity: 0.5;
+                    }
 
-Button {
-    width: 50%;
-    color: #fff;
-    background: #9f3b3b;
-} */
+            Button {
+                font: 20 "OpenSans";
+                font-weight: bold;
+                border-radius: 5;
+                
+                margin: 5 40 15 40;
+                height: 50;
+                background: #9f3b3b;
+                color: #fff;
+            }
+            Button:disabled {
+                opacity: 0.5;
+            }
 
-.page {
-  align-items: center;
-  flex-direction: column;
-}
-.form {
-  margin-left: 30;
-  margin-right: 30;
-  flex-grow: 2;
-  vertical-align: middle;
-}
-
-.logo {
-  margin-bottom: 12;
-  height: 90;
-  font-weight: bold;
-}
-.header {
-  horizontal-align: center;
-  font-size: 25;
-  font-weight: 600;
-  margin-bottom: 70;
-  text-align: center;
-  color: #9f3b3b;
-}
-
-.page .input-field {
-  margin-bottom: 25;
-}
-.input-field .input {
-  font-size: 18;
-  placeholder-color: #A8A8A8;
-}
-.input:disabled {
-  background-color: white;
-  opacity: 0.5;
-}
-
-.btn-primary {
-  margin: 30 5 15 5;
-}
-
-.login-label {
-  horizontal-align: center;
-  color: #A8A8A8;
-  font-size: 16;
-}
-.sign-up-label {
-  margin-bottom: 20;
-}
-.bold {
-  color: #000000; 
-}
-
-Label {
-  text-align:center;
-  font-size: 16px;
-  font-weight: 700;
-  color: #000;
-}
+            Label {
+                text-align:center;
+                font-size: 16px;
+                font-weight: 700;
+                color: #000;
+            }
