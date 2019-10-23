@@ -10,7 +10,7 @@ exports.login = (user) => {
         }
 
         httpModule.request({
-            url: 'https://damboy.sytes.net/mk/test.php',
+            url: 'https://damboy.sytes.net/mk/auth.php',
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             content: JSON.stringify({
