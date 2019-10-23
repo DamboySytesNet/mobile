@@ -1,6 +1,6 @@
 const observableModule = require('tns-core-modules/data/observable');
 const dialogsModule = require('tns-core-modules/ui/dialogs');
-const frameModule = require("tns-core-modules/ui/frame");
+const frameModule = require('tns-core-modules/ui/frame');
 
 let page;
 const auth = require('~/modules/auth/auth');

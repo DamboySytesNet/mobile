@@ -1,3 +1,4 @@
+const httpModule = require("tns-core-modules/http");
 
 exports.login = (user) => {
     return new Promise((revoke, reject) => {
@@ -7,11 +8,12 @@ exports.login = (user) => {
             return;
         }
 
-        if (user.username === '216000') {
-            revoke(1);
-        } else {
-            reject('bad index');
-        }
+        httpModule.getString('https://damboy.sytes.net/mk/test.php')
+            .then((data) => {
+                revoke(data);
+            }).catch(() => {
+                reject('Server error...');
+            });
     });
 }
 
