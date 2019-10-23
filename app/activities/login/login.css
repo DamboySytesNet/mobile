@@ -69,3 +69,10 @@ Button {
 .bold {
   color: #000000; 
 }
+
+Label {
+  text-align:center;
+  font-size: 16px;
+  font-weight: 700;
+  color: #000;
+}

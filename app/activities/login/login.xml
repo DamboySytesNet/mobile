@@ -6,7 +6,7 @@
             <Image class="logo" src="~/images/pl.png" />
             <Label class="header" text="Konsultacje" />
 
-            <GridLayout rows="auto, auto, auto">
+            <GridLayout rows="auto, auto">
                 <StackLayout row="0" class="input-field">
                     <TextField class="input" 
                                text="{{ username }}" 
@@ -30,33 +30,17 @@
                     <Label class="hr-light" />
                 </StackLayout>
 
-                <StackLayout row="2"
-                             class="input-field"
-                             visibility="{{ !isLoggingIn ? 'visible' : 'collapse' }}">
-                    <TextField id="confirmPassword" 
-                               class="input" 
-                               text="{{ confirmPassword }}"
-                               hint="Confirm password"
-                               secure="true"
-                               isEnabled="{{ !loading }}"
-                               returnKeyType="done" />
-                    <Label class="hr-light" />
-                </StackLayout>
-
                 <ActivityIndicator rowSpan="3" busy="{{ loading }}"></ActivityIndicator>
             </GridLayout>
 
-            <Button text="{{ isLoggingIn ? 'Log In' : 'Sign Up' }}"
+            <Button text="Zaloguj się"
                     tap="{{ submit }}"
                     isEnabled="{{ !loading }}"
                     class="btn btn-primary m-t-20" />
+
+            <Label text="Zapomniałeś/aś hasła?"
+                   tap="{{ forgotPassword }}"></Label>
         </StackLayout>
 
-        <Label class="login-label sign-up-label" tap="{{ toggleForm }}">
-            <FormattedString>
-                <Span text="{{ isLoggingIn ? 'Don’t have an account? ' : 'Back to Login' }}" />
-                <Span text="{{ isLoggingIn ? 'Sign up' : '' }}" class="bold" />
-            </FormattedString>
-        </Label>
     </FlexboxLayout>
 </Page>
