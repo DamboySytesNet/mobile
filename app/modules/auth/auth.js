@@ -8,19 +8,20 @@ exports.login = (user) => {
         }
 
         if (user.username === '216000') {
-            revoke('ok');
+            revoke(1);
         } else {
             reject('bad index');
         }
     });
 }
 
-exports.forgotPassword = (newUser) => {
+exports.forgotPassword = (email) => {
     return new Promise((revoke, reject) => {
-        if (newUser.username.length === 6) {
-            revoke('ok');
-        } else {
-            reject('bad index');
+        if (email.trim() === '') {
+            reject('Podaj e-mail!');
+            return;
         }
+        
+         revoke(email);
     });
 }
