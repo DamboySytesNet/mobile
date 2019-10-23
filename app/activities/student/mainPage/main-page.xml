@@ -1,0 +1,20 @@
+<Page class="page" actionBarHidden="true" loaded="pageLoaded">
+    <ActionBar title="{{ message }}"></ActionBar>
+    <StackLayout>
+        <StackLayout class="top-bar" orientation="horizontal">
+                <StackLayout class="activity-name" orientation="vertical">
+                    <Label text="{{ message }}"></Label>
+                </StackLayout>
+                <StackLayout class="icon-container" orientation="horizontal">    
+                    <Image id="bell-icon" class="icon" src="~/images/gray.png"></Image>
+                    <Image id="logout-icon" class="icon" src="~/images/gray.png"></Image>
+                </StackLayout>
+        </StackLayout>
+        <GridLayout columns="auto, auto" rows="auto, auto">
+            <Button class="feature-btn" col="0" row="0" text="Moje konsultacje" backgroundImage="~/images/orange.png"/>
+            <Button class="feature-btn" col="1" row="0" text="Szukaj prowadzących" backgroundImage="~/images/green.png"/>
+            <Button class="feature-btn" col="0" row="1" text="Szukaj przedmiotów" backgroundImage="~/images/purple.png"/>
+            <Button class="feature-btn" col="1" row="1" text="xD" backgroundImage="~/images/white.png"/>
+        </GridLayout>
+    </StackLayout>
+</Page> 
