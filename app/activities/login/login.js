@@ -22,7 +22,7 @@ let pageData = new observableModule.fromObject({
             password: this.password
         }
         auth.login(userData)
-            .then((id) => {
+            .then((id, role) => {
                 this.set('loading', false);
 
                 const navigationEntry = {
