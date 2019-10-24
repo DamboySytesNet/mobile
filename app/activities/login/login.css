@@ -1,0 +1,59 @@
+Page {
+    align-items: center;
+    flex-direction: column;
+}
+    FlexboxLayout {
+        background-size: cover;
+        background-image: url("~/images/login.jpg");
+    }
+        .form {
+            flex-grow: 1;
+            margin: 0 50 30 50;
+            vertical-align: middle;
+        }
+
+            .logo {
+                height: 120;
+                margin-bottom:20;
+            }
+
+            .header {
+                horizontal-align: center;
+                font:27 "OpenSans";
+                font-weight: bold;
+                margin-bottom: 30;
+                text-align: center;
+                color: #9f3b3b;
+            }
+                .input-field {
+                    margin-bottom: 20;
+                }
+                    .input-field .input {
+                        font-size: 19;
+                        placeholder-color: #A8A8A8;
+                    }
+                    .input:disabled {
+                        background-color: white;
+                        opacity: 0.5;
+                    }
+
+            #login {
+                font: 20 "OpenSans";
+                font-weight: bold;
+                border-radius: 5;
+                
+                margin: 15 40;
+                height: 50;
+                background: #9f3b3b;
+                color: #fff;
+            }
+            #login:disabled {
+                opacity: 0.5;
+            }
+
+            #forgot {
+                text-align:center;
+                font-size: 16px;
+                font-weight: 700;
+                color: #000;
+            }

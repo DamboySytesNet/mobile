@@ -1,3 +1,47 @@
-<Page class="page">
+<Page class="page" actionBarHidden="true" loaded="pageLoaded">
     <ActionBar title="Login"></ActionBar>
+
+    <FlexboxLayout>
+        <StackLayout class="form">
+            <Image class="logo" src="~/images/pl.png" />
+            <Label class="header" text="Konsultacje" />
+
+            <GridLayout rows="auto, auto">
+                <StackLayout row="0" class="input-field">
+                    <TextField class="input" 
+                               text="{{ username }}" 
+                               hint="Nazwa użytkownika / E-mail" 
+                               keyboardType="email"
+                               autocorrect="false"
+                               autocapitalizationType="none"
+                               isEnabled="{{ !loading }}"
+                               returnKeyType="next" />
+                    <Label class="hr-light" />
+                </StackLayout>
+
+                <StackLayout row="1" class="input-field">
+                    <TextField id="password" 
+                               class="input"
+                               text="{{ password }}"
+                               hint="Password"
+                               secure="true"
+                               isEnabled="{{ !loading }}"
+                               returnKeyType="{{ isLoggingIn ? 'done' : 'next' }}" />
+                    <Label class="hr-light" />
+                </StackLayout>
+
+                <ActivityIndicator rowSpan="3" busy="{{ loading }}"/>
+            </GridLayout>
+
+            <Button id="login"
+                    text="Zaloguj się"
+                    tap="{{ submit }}"
+                    isEnabled="{{ !loading }}" />
+
+            <Label id="forgot"
+                   text="Zapomniałeś/aś hasła?"
+                   tap="{{ forgotPassword }}"></Label>
+        </StackLayout>
+
+    </FlexboxLayout>
 </Page>
