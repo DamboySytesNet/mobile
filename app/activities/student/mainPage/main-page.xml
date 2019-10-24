@@ -8,7 +8,7 @@
             <Label text="{{ message }}" dock="left"/>
         </DockLayout>
 
-        <ScrollView>
+        <ScrollView height="100%">
             <GridLayout class="mainContent" 
                         columns="*, *" 
                         rows="auto, auto">
