@@ -23,7 +23,7 @@ exports.login = (user) => {
                     let json = JSON.parse(res.content);
                     if (json.status === 'success') {
                         let result = JSON.parse(json.msg);
-                        revoke(result.id, result.student);
+                        revoke(result);
                     } else {
                         console.log('auth.js: 0x04');
                         reject(json.msg);

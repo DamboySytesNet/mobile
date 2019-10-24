@@ -3,7 +3,7 @@
 
     <StackLayout>
         <DockLayout id="topBarBase" stretchLastChild="false">
-            <Image id="logout-icon" src="~/icons/exit.png" dock="right" />
+            <Image tap="exit" id="logout-icon" src="~/icons/exit.png" dock="right" />
             <Image id="bell-icon"   src="~/icons/bell.png" dock="right" />
             <Label text="{{ message }}" dock="left"/>
         </DockLayout>

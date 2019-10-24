@@ -25,10 +25,20 @@ let student = {
 }
 
 var pageData = new observableModule.fromObject({
-    message: student.name + " " + student.surname
+    message: ''
 });
+
+exports.exit = (args) => {
+    const button = args.object;
+    const page = button.page;
+    
+    page.frame.goBack();
+}
 
 exports.pageLoaded = (args) => {
     let page = args.object;
+    const context = page.navigationContext;
+
+    pageData.set('message', `${context.name} ${context.surname}`);
     page.bindingContext = pageData;
 }
