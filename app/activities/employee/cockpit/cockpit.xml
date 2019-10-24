@@ -19,12 +19,12 @@
                 </DockLayout>
 
                 <DockLayout backgroundColor="#36C6A3" row="0" col="1" class="mainContent-post" stretchLastChild="false" >
-                    <Label dock="bottom" text="Prowadzący" />
+                    <Label dock="bottom" text="Moje przedmioty" />
                     <Image dock="top" src="~/images/white.png" />
                 </DockLayout>
 
                 <DockLayout backgroundColor="#585DCA" row="1" col="0" class="mainContent-post" stretchLastChild="false" >
-                    <Label dock="bottom" text="Przedmioty" />
+                    <Label dock="bottom" text="Ustawienia" />
                     <Image dock="top" src="~/images/white.png" />
                 </DockLayout>
             </GridLayout>

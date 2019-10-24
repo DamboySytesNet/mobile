@@ -17,7 +17,7 @@ let testConsultation = [
     }
 ];
 
-let student = {
+let employee = {
     id: 123456,
     name: 'testName',
     surname: 'testSurname',
