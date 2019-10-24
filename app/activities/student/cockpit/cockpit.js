@@ -24,8 +24,8 @@ let student = {
     consultations: testConsultation,
 }
 
-var pageData = new observableModule.fromObject({
-    message: ''
+let pageData = new observableModule.fromObject({
+    user: ''
 });
 
 exports.exit = (args) => {
@@ -39,6 +39,6 @@ exports.pageLoaded = (args) => {
     let page = args.object;
     const context = page.navigationContext;
 
-    pageData.set('message', `${context.name} ${context.surname}`);
+    pageData.set('user', `${context.name} ${context.surname}`);
     page.bindingContext = pageData;
 }
