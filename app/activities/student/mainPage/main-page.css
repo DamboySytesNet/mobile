@@ -1,28 +1,40 @@
-.top-bar {
-    height: 150px;
+
+#top-bar {
+    height: 60;
     width: 100%;
     font-size: 24;
-    background: crimson;
-    text-align: center;
+    background: #9f3b3b;
     color: white;
 }
+    #top-bar > Label {
+        margin-top: 10;
+        margin-left: 15;
+    }
+    #top-bar > Image {
+        margin: 10 10 10 5;
+        border-radius: 50%;
+    }
 
-.icon-container {
-    align-content: right;
-    width: 20%;
-}
+.mainContent {
+    margin: 10;
+} 
+    .mainContent-post {
+        margin: 10;
+    }
+        .mainContent-post > Image {
+            width:70%;
+            margin-top: 25;
+            margin-bottom: 5;
+        }
+        .mainContent-post > Label {
+            width:100%;
+            padding: 10 0;
+            text-align:center;
+            font:16 "OpenSans";
+            font-weight: 700;
+            color:#fff;
+        }
 
-.icon {
-    width: 40px;
-    height: 40px;
-    margin: 5px;
-    display: block;
-}
-
-.activity-name {
-    width: 80%;
-    text-align: left;
-}
 
 .feature-btn {
     width: 50%;

@@ -1,20 +1,34 @@
 <Page class="page" actionBarHidden="true" loaded="pageLoaded">
-    <ActionBar title="{{ message }}"></ActionBar>
+    <ActionBar></ActionBar>
+
     <StackLayout>
-        <StackLayout class="top-bar" orientation="horizontal">
-                <StackLayout class="activity-name" orientation="vertical">
-                    <Label text="{{ message }}"></Label>
-                </StackLayout>
-                <StackLayout class="icon-container" orientation="horizontal">    
-                    <Image id="bell-icon" class="icon" src="~/images/gray.png"></Image>
-                    <Image id="logout-icon" class="icon" src="~/images/gray.png"></Image>
-                </StackLayout>
-        </StackLayout>
-        <GridLayout columns="auto, auto" rows="auto, auto">
-            <Button class="feature-btn" col="0" row="0" text="Moje konsultacje" backgroundImage="~/images/orange.png"/>
-            <Button class="feature-btn" col="1" row="0" text="Szukaj prowadzących" backgroundImage="~/images/green.png"/>
-            <Button class="feature-btn" col="0" row="1" text="Szukaj przedmiotów" backgroundImage="~/images/purple.png"/>
-            <Button class="feature-btn" col="1" row="1" text="xD" backgroundImage="~/images/white.png"/>
-        </GridLayout>
+        <DockLayout id="top-bar" stretchLastChild="false">
+            <Image id="bell-icon"   src="~/images/gray.png" dock="right" />
+            <Image id="logout-icon" src="~/images/gray.png" dock="right" />
+            <Label text="{{ message }}" dock="left"/>
+        </DockLayout>
+
+        <ScrollView>
+            <GridLayout class="mainContent" 
+                        columns="*, *" 
+                        rows="auto, auto">
+
+                <DockLayout backgroundColor="#FF8C22" row="0" col="0" class="mainContent-post" stretchLastChild="false" >
+                    <Label dock="bottom" text="Moje konsultacje" />
+                    <Image dock="top" src="~/images/white.png" />
+                </DockLayout>
+
+                <DockLayout backgroundColor="#36C6A3" row="0" col="1" class="mainContent-post" stretchLastChild="false" >
+                    <Label dock="bottom" text="Prowadzący" />
+                    <Image dock="top" src="~/images/white.png" />
+                </DockLayout>
+
+                <DockLayout backgroundColor="#585DCA" row="1" col="0" class="mainContent-post" stretchLastChild="false" >
+                    <Label dock="bottom" text="Przedmioty" />
+                    <Image dock="top" src="~/images/white.png" />
+                </DockLayout>
+            </GridLayout>
+        </ScrollView>
+        
     </StackLayout>
 </Page> 
