@@ -2,9 +2,9 @@
     <ActionBar></ActionBar>
 
     <StackLayout>
-        <DockLayout id="top-bar" stretchLastChild="false">
-            <Image id="bell-icon"   src="~/images/gray.png" dock="right" />
-            <Image id="logout-icon" src="~/images/gray.png" dock="right" />
+        <DockLayout id="topBarBase" stretchLastChild="false">
+            <Image id="logout-icon" src="~/icons/exit.png" dock="right" />
+            <Image id="bell-icon"   src="~/icons/bell.png" dock="right" />
             <Label text="{{ message }}" dock="left"/>
         </DockLayout>
 
