@@ -3,9 +3,13 @@
 
     <StackLayout>
         <DockLayout id="topBarBase" stretchLastChild="false">
-            <Image tap="exit" src="~/icons/exit.png" dock="right" />
-            <Image src="~/icons/bell.png" dock="right" />
+            <Image tap="exit" src="~/icons/exit.png" dock="right"/>
+            <DockLayout dock="right" id="bellNumber" >
+                <Label text="{{ notifications }}"/>
+            </DockLayout>
+            <Image id="bell" src="~/icons/bell.png" dock="right" tap="{{ alertNotification }}"/>
             <Label text="{{ user }}" dock="left"/>
+            
         </DockLayout>
 
         <ScrollView height="100%">
@@ -13,17 +17,17 @@
                         columns="*, *" 
                         rows="auto, auto">
 
-                <DockLayout backgroundColor="#FF8C22" row="0" col="0" class="mainContent-post" stretchLastChild="false" >
+                <DockLayout tap="{{ goToEmployeeConsultations }}" backgroundColor="#FF8C22" row="0" col="0" class="mainContent-post" stretchLastChild="false" >
                     <Label dock="bottom" text="Moje konsultacje" />
                     <Image dock="top" src="~/images/white.png" />
                 </DockLayout>
 
-                <DockLayout backgroundColor="#36C6A3" row="0" col="1" class="mainContent-post" stretchLastChild="false" >
+                <DockLayout tap="{{ goToEmployeeSubjects }}" backgroundColor="#36C6A3" row="0" col="1" class="mainContent-post" stretchLastChild="false" >
                     <Label dock="bottom" text="Moje przedmioty" />
                     <Image dock="top" src="~/images/white.png" />
                 </DockLayout>
 
-                <DockLayout backgroundColor="#585DCA" row="1" col="0" class="mainContent-post" stretchLastChild="false" >
+                <DockLayout tap="{{ goToEmployeeSettings }}" backgroundColor="#585DCA" row="1" col="0" class="mainContent-post" stretchLastChild="false" >
                     <Label dock="bottom" text="Ustawienia" />
                     <Image dock="top" src="~/images/white.png" />
                 </DockLayout>
