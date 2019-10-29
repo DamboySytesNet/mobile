@@ -1,4 +1,5 @@
 const observableModule = require("tns-core-modules/data/observable");
+const frameModule = require('tns-core-modules/ui/frame');
 
 let testConsultation = [
     {
@@ -25,7 +26,20 @@ let student = {
 }
 
 let pageData = new observableModule.fromObject({
-    user: ''
+    user: '',
+
+    goToStudentConsultations() {
+        let moduleName = 'activities/student/consultations/consultations';
+        const navigationEntry = {
+            moduleName: moduleName,
+            context: {
+                cons:testConsultation
+            }
+        };
+        // alert("alert!");
+        frameModule.topmost().navigate(navigationEntry);
+    }
+
 });
 
 exports.exit = (args) => {

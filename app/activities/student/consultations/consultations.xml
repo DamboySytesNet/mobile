@@ -1,0 +1,12 @@
+<Page class="page" actionBarHidden="true" loaded="onPageLoaded">
+    <ActionBar></ActionBar>
+
+    <StackLayout>
+            <DockLayout id="topBarBase" stretchLastChild="false">
+                    <!-- TODO change image to back icon-->
+                    <Image tap="backToCockpit" src="~/images/gray.png" dock="right" />
+                    <Image src="~/icons/bell.png" dock="right" />
+                    <Label text="Konsultacje" dock="left" />
+            </DockLayout>
+    </StackLayout>
+</Page>

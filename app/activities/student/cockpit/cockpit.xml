@@ -13,7 +13,7 @@
                         columns="*, *" 
                         rows="auto, auto">
 
-                <DockLayout backgroundColor="#FF8C22" row="0" col="0" class="mainContent-post" stretchLastChild="false" >
+                <DockLayout tap="{{ goToStudentConsultations }}" backgroundColor="#FF8C22" row="0" col="0" class="mainContent-post" stretchLastChild="false" >
                     <Label dock="bottom" text="Moje konsultacje" />
                     <Image dock="top" src="~/images/white.png" />
                 </DockLayout>
