@@ -19,5 +19,16 @@ exports.onPageLoaded = (args) => {
     // pageData.set('user', `${context.user}`);
     pageData.set('consultations', context.consultations);
 
-    alert(pageData.consultations.subject);
+    alert(consToStr(pageData.consultations));
+}
+
+function consToStr(cons) {
+    let s = '';
+
+    for(let i = 0; i< cons.length; i++) {
+        // alert(cons[i].id);
+        // alert(cons[i].subject);
+        s += cons[i].id + " " + cons[i].subject + " " + cons[i].teacher + " " + cons[i].room + "\n"; 
+    }
+    return s;
 }
