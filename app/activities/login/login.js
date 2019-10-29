@@ -22,12 +22,22 @@ let pageData = new observableModule.fromObject({
             password: this.password
         }
         auth.login(userData)
-            .then((id, role) => {
+            .then((res) => {
                 this.set('loading', false);
 
+                let moduleName = 'activities/';
+                if (res.student)
+                    moduleName += 'student/cockpit/cockpit';
+                else
+                    moduleName += 'test/test-page';
+
                 const navigationEntry = {
-                    moduleName: 'activities/test/test-page',
-                    context: { user: id }
+                    moduleName: moduleName,
+                    context: {
+                        id: res.id,
+                        name: res.name,
+                        surname: res.surname
+                    }
                 };
 
                 frameModule.topmost().navigate(navigationEntry);
