@@ -3,7 +3,7 @@
 
     <StackLayout>
         <DockLayout id="actionbar" stretchLastChild="false">
-            <StackLayout tap="exit" orientation="horizontal" >
+            <StackLayout tap="exit" orientation="horizontal">
                 <Image src="~/icons/arrow-left.png" dock="left"/>
                 <Label text="Powrót" dock="left"/>
             </StackLayout>
@@ -12,6 +12,24 @@
         <StackLayout id="profileImage">
             <Image src="~/images/male.png" />
             <Label text="{{ user }}" />
+        </StackLayout>
+
+        <StackLayout id="main">
+            <StackLayout id="main-defaultRoom" orientation="horizontal">
+                <Label text="Domyślny pokój: " />
+                <TextField hint="Domyślny pokój"
+                           text="{{ room }}"
+                           autocorrect="false"/>
+            </StackLayout>
+
+            <StackLayout id="main-hours">
+                <StackLayout id="main-defaultRoom" orientation="horizontal">
+                    <Label text="{{ room }}" />
+                    <TextField hint="Domyślny pokój"
+                            text="{{ room }}"
+                            autocorrect="false"/>
+                </StackLayout>
+            </StackLayout>
         </StackLayout>
         
     </StackLayout>

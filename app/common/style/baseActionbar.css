@@ -16,10 +16,10 @@
         margin: 14 15 14 5;
         border-radius: 50%;
     }
-    #actionbar_bellLayout {
+    #actionbar-bellLayout {
         margin-left: -29;
     }
-        #actionbar_bellLayout > Label {
+        #actionbar-bellLayout > Label {
             width: 28;
             height: 28;
             margin-top: 50%;

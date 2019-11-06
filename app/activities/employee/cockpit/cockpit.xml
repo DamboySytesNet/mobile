@@ -6,7 +6,7 @@
             <Image tap="exit" src="~/icons/exit.png" dock="right"/>
             <DockLayout dock="right" >
                 <Image id="bell" src="~/icons/bell.png" tap="{{ alertNotification }}"/>
-                <AbsoluteLayout id="actionbar_bellLayout">
+                <AbsoluteLayout id="actionbar-bellLayout">
                     <Label text="{{ notifications }}"/>
                 </AbsoluteLayout>
             </DockLayout>

@@ -1,9 +1,13 @@
 const observableModule = require("tns-core-modules/data/observable");
 const frameModule = require('tns-core-modules/ui/frame');
 
+const myHours = {
+    
+};
 
 let pageData = new observableModule.fromObject({
-    user: ''
+    user: '',
+    room: '213'
 });
 
 exports.exit = (args) => {
