@@ -1,6 +1,8 @@
 const observableModule = require("tns-core-modules/data/observable");
 const frameModule = require('tns-core-modules/ui/frame');
 
+//! TODO: notification cannot exceed 99
+
 // let testConsultation = [
 //     {
 //         id: 1,

@@ -4,12 +4,14 @@
     <StackLayout>
         <DockLayout id="topBarBase" stretchLastChild="false">
             <Image tap="exit" src="~/icons/exit.png" dock="right"/>
-            <DockLayout dock="right" id="bellNumber" >
-                <Label text="{{ notifications }}"/>
+            <DockLayout dock="right" >
+                <Image id="bell" src="~/icons/bell.png" tap="{{ alertNotification }}"/>
+                <AbsoluteLayout id="bell_layout">
+                    <Label id="bellNumber" text="{{ notifications }}"/>
+                </AbsoluteLayout>
             </DockLayout>
-            <Image id="bell" src="~/icons/bell.png" dock="right" tap="{{ alertNotification }}"/>
-            <Label text="{{ user }}" dock="left"/>
             
+            <Label text="{{ user }}" dock="left"/>
         </DockLayout>
 
         <ScrollView height="100%">

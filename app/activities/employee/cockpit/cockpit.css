@@ -1,14 +1,1 @@
 @import '../../../common/style/cockpit.css';
-
-#bellNumber {
-    width: 25;
-    height: 25;
-    margin-top: 50%;
-    margin-left: -50px;
-    border-radius: 12;
-    text-align:center;
-    color: black;
-    background-color: #c4c4c4;
-    border-color: black;
-    font-size: 18;
-}
