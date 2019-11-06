@@ -2,18 +2,33 @@
 #topBarBase {
     height: 60;
     width: 100%;
-    font-size: 24;
+    font-size: 25;
     background: #9f3b3b;
-    color: white;
 }
     #topBarBase > Label {
-        margin-top: 10;
+        margin-top: 12;
         margin-left: 15;
+        color: white;
     }
-    #topBarBase > Image {
-        margin: 14 15 14 5;
+    #topBarBase Image {
+        margin: 12 15 12 5;
         border-radius: 50%;
     }
+    #bell_layout {
+        margin-left: -29;
+    }
+        #bell_layout > Label {
+            width: 28;
+            height: 28;
+            margin-top: 50%;
+            border-radius: 50%;
+            text-align:center;
+            color: #000;
+            background: #fff;
+            border-width:3;
+            border-color: #9f3b3b;
+            font-size: 14;
+        }
 
 .mainContent {
     margin: 10;

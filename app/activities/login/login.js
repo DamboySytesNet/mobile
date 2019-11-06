@@ -6,7 +6,7 @@ let page;
 const auth = require('~/modules/auth/auth');
 
 let pageData = new observableModule.fromObject({
-    username: '216000',
+    username: '216000p',
     password: 'password',
     confirmPassword: 'password',
     loading: false,
@@ -29,7 +29,7 @@ let pageData = new observableModule.fromObject({
                 if (res.student)
                     moduleName += 'student/cockpit/cockpit';
                 else
-                    moduleName += 'test/test-page';
+                    moduleName += 'employee/cockpit/cockpit';
 
                 const navigationEntry = {
                     moduleName: moduleName,

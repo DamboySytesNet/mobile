@@ -1,0 +1,40 @@
+<Page class="page" actionBarHidden="true" loaded="pageLoaded">
+    <ActionBar></ActionBar>
+
+    <StackLayout>
+        <DockLayout id="topBarBase" stretchLastChild="false">
+            <Image tap="exit" src="~/icons/exit.png" dock="right"/>
+            <DockLayout dock="right" >
+                <Image id="bell" src="~/icons/bell.png" tap="{{ alertNotification }}"/>
+                <AbsoluteLayout id="bell_layout">
+                    <Label id="bellNumber" text="{{ notifications }}"/>
+                </AbsoluteLayout>
+            </DockLayout>
+            
+            <Label text="{{ user }}" dock="left"/>
+        </DockLayout>
+
+        <ScrollView height="100%">
+            <GridLayout class="mainContent" 
+                        columns="*, *" 
+                        rows="auto, auto">
+
+                <DockLayout tap="{{ goToEmployeeConsultations }}" backgroundColor="#FF8C22" row="0" col="0" class="mainContent-post" stretchLastChild="false" >
+                    <Label dock="bottom" text="Moje konsultacje" />
+                    <Image dock="top" src="~/images/white.png" />
+                </DockLayout>
+
+                <DockLayout tap="{{ goToEmployeeSubjects }}" backgroundColor="#36C6A3" row="0" col="1" class="mainContent-post" stretchLastChild="false" >
+                    <Label dock="bottom" text="Moje przedmioty" />
+                    <Image dock="top" src="~/images/white.png" />
+                </DockLayout>
+
+                <DockLayout tap="{{ goToEmployeeSettings }}" backgroundColor="#585DCA" row="1" col="0" class="mainContent-post" stretchLastChild="false" >
+                    <Label dock="bottom" text="Ustawienia" />
+                    <Image dock="top" src="~/images/white.png" />
+                </DockLayout>
+            </GridLayout>
+        </ScrollView>
+        
+    </StackLayout>
+</Page> 
