@@ -2,12 +2,12 @@
     <ActionBar></ActionBar>
 
     <StackLayout>
-        <DockLayout id="topBarBase" stretchLastChild="false">
+        <DockLayout id="actionbar" stretchLastChild="false">
             <Image tap="exit" src="~/icons/exit.png" dock="right"/>
             <DockLayout dock="right" >
                 <Image id="bell" src="~/icons/bell.png" tap="{{ alertNotification }}"/>
-                <AbsoluteLayout id="bell_layout">
-                    <Label id="bellNumber" text="{{ notifications }}"/>
+                <AbsoluteLayout id="actionbar_bellLayout">
+                    <Label text="{{ notifications }}"/>
                 </AbsoluteLayout>
             </DockLayout>
             

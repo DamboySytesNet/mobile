@@ -1,0 +1,14 @@
+#actionbar {
+    height: 60;
+    width: 100%;
+    font-size: 25;
+    background: #9f3b3b;
+}
+    #actionbar > Label {
+        margin-top: 12;
+        color: #fff;
+    }
+    #actionbar Image {
+        margin: 14 10 14 12;
+        border-radius: 50%;
+    }

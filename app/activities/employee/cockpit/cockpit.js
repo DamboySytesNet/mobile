@@ -35,7 +35,7 @@ let pageData = new observableModule.fromObject({
        this.notifications++;
        animateBell();
     },
-    goToEmployeeConsultations(){
+    goToEmployeeConsultations() {
         let moduleName = 'activities/employee/consultations/consultations';
         const navigationEntry = {
             moduleName: moduleName,
@@ -46,11 +46,18 @@ let pageData = new observableModule.fromObject({
 
         frameModule.topmost().navigate(navigationEntry);
     },
-    goToEmployeeSubjects(){
+
+    goToEmployeeSubjects() {
         //frameModule.topmost().navigate(navigationEntry);
     },
-    goToEmployeeSettings(){
-        //frameModule.topmost().navigate(navigationEntry);
+
+    goToEmployeeSettings() {
+        const navigationEntry = {
+            moduleName: 'activities/employee/settings/settings',
+            context: {}
+        };
+
+        frameModule.topmost().navigate(navigationEntry);
     }
 
 });

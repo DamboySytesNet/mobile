@@ -1,5 +1,0 @@
-<Page class="page" actionBarHidden="true" loaded="pageLoaded">
-    <ActionBar title="Login"></ActionBar>
-
-    <Label text="{{ text }}" />
-</Page>
