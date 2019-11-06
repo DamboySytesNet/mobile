@@ -8,5 +8,15 @@
                     <Image src="~/icons/bell.png" dock="right" />
                     <Label text="Konsultacje" dock="left" />
             </DockLayout>
+            <ListView items="{{ consultations }}">
+                <ListView.itemTemplate>
+                        <StackLayout>
+                                <DockLayout>
+                                        <Label text="{{ time }}" dock="right"/>
+                                        <Label text="{{ teacher }}" dock="left"/>
+                                </DockLayout>
+                        </StackLayout>
+                </ListView.itemTemplate>
+            </ListView>
     </StackLayout>
 </Page>

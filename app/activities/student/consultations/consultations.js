@@ -1,4 +1,6 @@
 const observableModule = require("tns-core-modules/data/observable");
+const listViewModule = require("tns-core-modules/ui/list-view");
+
 
 let pageData = new observableModule.fromObject({
     user: '',
@@ -19,7 +21,12 @@ exports.onPageLoaded = (args) => {
     // pageData.set('user', `${context.user}`);
     pageData.set('consultations', context.consultations);
 
-    alert(consToStr(pageData.consultations));
+    for(con of pageData.consultations) {
+        con['time'] = con['date'].getHours() + ':' + con['date'].getMinutes();
+        //con["time"] = con["date"].toLocaleTimeString('pl-PL');
+    }
+
+    page.bindingContext = pageData;
 }
 
 function consToStr(cons) {
