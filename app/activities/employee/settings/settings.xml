@@ -3,11 +3,16 @@
 
     <StackLayout>
         <DockLayout id="actionbar" stretchLastChild="false">
-            <Image tap="exit" src="~/icons/arrow-left.png" dock="left"/>
-            <Label text="Powrót" dock="left"/>
+            <StackLayout tap="exit" orientation="horizontal" >
+                <Image src="~/icons/arrow-left.png" dock="left"/>
+                <Label text="Powrót" dock="left"/>
+            </StackLayout>
         </DockLayout>
 
-        
+        <StackLayout id="profileImage">
+            <Image src="~/images/male.png" />
+            <Label text="{{ user }}" />
+        </StackLayout>
         
     </StackLayout>
 </Page> 

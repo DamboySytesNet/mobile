@@ -1,2 +1,17 @@
 @import '../../../common/style/cockpit.css';
 @import '../../../common/style/backActionbar.css';
+
+#profileImage {
+    margin: 40 0;
+}
+
+    #profileImage > Image {
+        width: 40%;
+        border-radius: 100%;
+    }
+
+    #profileImage > Label {
+        text-align: center;
+        margin-top: 18;
+        font-size: 26;
+    }

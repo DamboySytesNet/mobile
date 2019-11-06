@@ -1,5 +1,6 @@
 const observableModule = require("tns-core-modules/data/observable");
 const frameModule = require('tns-core-modules/ui/frame');
+let pageContext;
 
 //! TODO: notification cannot exceed 99
 
@@ -35,6 +36,7 @@ let pageData = new observableModule.fromObject({
        this.notifications++;
        animateBell();
     },
+    
     goToEmployeeConsultations() {
         let moduleName = 'activities/employee/consultations/consultations';
         const navigationEntry = {
@@ -54,7 +56,10 @@ let pageData = new observableModule.fromObject({
     goToEmployeeSettings() {
         const navigationEntry = {
             moduleName: 'activities/employee/settings/settings',
-            context: {}
+            context: {
+                name: pageContext.name,
+                surname: pageContext.surname
+            }
         };
 
         frameModule.topmost().navigate(navigationEntry);
@@ -71,8 +76,8 @@ exports.exit = (args) => {
 
 exports.pageLoaded = (args) => {
     let page = args.object;
-    const context = page.navigationContext;
-    pageData.set('user', `${context.name} ${context.surname}`);
+    pageContext = page.navigationContext;
+    pageData.set('user', `${pageContext.name} ${pageContext.surname}`);
     page.bindingContext = pageData; 
     bells = page.getViewById("bell");
 }
