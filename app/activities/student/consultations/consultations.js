@@ -47,5 +47,9 @@ function groupByDayOfTheYear(arr) {
         });
     }
 
+    for (gr of grouped) {
+        gr['date'] = `${gr.cons[0].date.getDay()}.${gr.cons[0].date.getMonth()}.${gr.cons[0].date.getYear() + 1900}`;
+    }
+
     return grouped;
 }
