@@ -7,28 +7,28 @@ let testConsultation = [
         subject: 'Podstawy programowania',
         teacher: 'Gabriela Narutowicz',
         room: 243,
-        date: new Date(2019, 10, 30, 10, 30),
+        date: new Date(2019, 10, 30, 10, 30).toString(),
     },
     {
         id: 2,
         subject: 'Podstawy sieci komputerowych',
         teacher: 'Bł Dziuba',
         room: 270,
-        date: new Date(2019, 10, 25, 10, 30),
+        date: new Date(2019, 10, 25, 10, 30).toString(),
     },
     {
         id: 3,
         subject: 'Programowanie obiektowe',
         teacher: 'Marcin Kwapisz',
         room: 244,
-        date: new Date(2019, 10, 25, 13, 30),
+        date: new Date(2019, 10, 25, 13, 30).toString(),
     },
     {
         id: 4,
         subject: 'Podstawy grafiki komputerowej',
         teacher: 'Napierdalalski',
         room: 270,
-        date: new Date(2019, 10, 26, 8, 30),
+        date: new Date(2019, 10, 26, 8, 30).toString(),
         
     }
 ];

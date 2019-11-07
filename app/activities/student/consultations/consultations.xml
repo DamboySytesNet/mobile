@@ -12,7 +12,7 @@
                 <ListView.itemTemplate>
                         <StackLayout>
                                 <DockLayout>
-                                        <Label text="{{ time }}" dock="right"/>
+                                        <Label text="{{ timeStr }}" dock="right"/>
                                         <Label text="{{ teacher }}" dock="left"/>
                                 </DockLayout>
                         </StackLayout>
