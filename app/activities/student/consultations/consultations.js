@@ -19,6 +19,8 @@ exports.onPageLoaded = (args) => {
     const context = page.navigationContext;
     pageData.set('consultations', loadConsultations(context.consultations));
 
+    groupByDayOfTheYear(pageData.consultations);
+
     page.bindingContext = pageData;
 }
 
@@ -30,3 +32,27 @@ function loadConsultations(cons) {
 
     return c;
 }
+
+function groupByDayOfTheYear(arr) {
+    let uniqueDays = new Set();
+
+    for (a of arr) {
+        uniqueDays.add(a.dayOfTheYear);
+    }
+
+    let grouped = {};
+    
+    for (day of uniqueDays) {
+        grouped[day] = arr.filter(c => { return c.dayOfTheYear == day});
+    }
+
+    return grouped;
+}
+
+
+var groupBy = function(xs, key) {
+    return xs.reduce(function(rv, x) {
+      (rv[x[key]] = rv[x[key]] || []).push(x);
+      return rv;
+    }, {});
+  };

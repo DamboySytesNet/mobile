@@ -15,7 +15,14 @@ exports.Cons = class Consultation {
     }
 
     getDayOfTheYear() {
-        var start = new Date(new Date().getFullYear(), 0, 0);
+        let now = new Date();
+        let start;
+        if (now.getMonth() >= 9) {
+            start = new Date(now.getFullYear(), 9, 1);
+        } 
+        else {
+            start = new Date(now.getFullYear() - 1, 9, 1);
+        }
         var diff = this.date - start;
         var oneDay = 1000 * 60 * 60 * 24;
         var dayOfTheYear = Math.floor(diff / oneDay);
