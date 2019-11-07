@@ -34,8 +34,9 @@
                                 <StackLayout class="main-hour-post-date" orientation="horizontal" dock="top">
                                     <Label text="{{ from }}" />
                                     <Label text=" - " />
-                                    <Label text="{{ to }} " />
-                                    <Label text="{{ day }} " />
+                                    <Label text="{{ to }}" />
+                                    <Label text="{{ day === 'wtorek' ? ' we ' : ' w ' }} " />
+                                    <Label text="{{ day }}" />
                                 </StackLayout>
                                 <StackLayout class="main-hour-post-room" orientation="horizontal" dock="bottom">
                                     <Label text="Pokój: " />
