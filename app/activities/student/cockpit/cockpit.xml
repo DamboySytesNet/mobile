@@ -1,0 +1,40 @@
+<Page class="page" actionBarHidden="true" loaded="pageLoaded">
+    <ActionBar></ActionBar>
+
+    <StackLayout>
+        <DockLayout id="actionbar" stretchLastChild="false">
+            <Image tap="exit" src="~/icons/exit.png" dock="right"/>
+            <DockLayout dock="right" >
+                <Image id="bell" src="~/icons/bell.png" tap="{{ alertNotification }}"/>
+                <AbsoluteLayout id="actionbar-bellLayout">
+                    <Label text="{{ notifications }}"/>
+                </AbsoluteLayout>
+            </DockLayout>
+            
+            <Label text="{{ user }}" dock="left"/>
+        </DockLayout>
+
+        <ScrollView height="100%">
+            <GridLayout class="mainContent" 
+                        columns="*, *" 
+                        rows="auto, auto">
+
+                <DockLayout tap="{{ goToStudentConsultations }}" backgroundColor="#FF8C22" row="0" col="0" class="mainContent-post" stretchLastChild="false" >
+                    <Label dock="bottom" text="Moje konsultacje" />
+                    <Image dock="top" src="~/images/white.png" />
+                </DockLayout>
+
+                <DockLayout backgroundColor="#36C6A3" row="0" col="1" class="mainContent-post" stretchLastChild="false" >
+                    <Label dock="bottom" text="Prowadzący" />
+                    <Image dock="top" src="~/images/white.png" />
+                </DockLayout>
+
+                <DockLayout backgroundColor="#585DCA" row="1" col="0" class="mainContent-post" stretchLastChild="false" >
+                    <Label dock="bottom" text="Przedmioty" />
+                    <Image dock="top" src="~/images/white.png" />
+                </DockLayout>
+            </GridLayout>
+        </ScrollView>
+        
+    </StackLayout>
+</Page> 
