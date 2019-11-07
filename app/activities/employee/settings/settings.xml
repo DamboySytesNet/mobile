@@ -23,12 +23,22 @@
             </StackLayout>
 
             <StackLayout id="main-hours">
-                <StackLayout id="main-defaultRoom" orientation="horizontal">
-                    <Label text="{{ room }}" />
-                    <TextField hint="Domyślny pokój"
-                            text="{{ room }}"
-                            autocorrect="false"/>
-                </StackLayout>
+                <DockLayout class="main-hour-post" orientation="horizontal" stretchLastChild="false">
+                    <StackLayout class="main-hour-post-date" orientation="horizontal" dock="top">
+                        <Label text="8:00" />
+                        <Label text=" - " />
+                        <Label text="8:01 " />
+                        <Label text="Poniedziałek " />
+                    </StackLayout>
+                    <StackLayout class="main-hour-post-room" orientation="horizontal" dock="bottom">
+                        <Label text="Pokój: " />
+                        <Label text="202" />
+                    </StackLayout>
+                    <StackLayout class="main-hour-post-actions" dock="right" orientation="vertical">
+                        <Image src="~/icons/edit.png" />
+                        <Image src="~/icons/delete.png" />
+                    </StackLayout>
+                </DockLayout>
             </StackLayout>
         </StackLayout>
         

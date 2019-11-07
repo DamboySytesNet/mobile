@@ -4,7 +4,6 @@
 #profileImage {
     margin: 40 0;
 }
-
     #profileImage > Image {
         width: 40%;
         border-radius: 100%;
@@ -16,14 +15,35 @@
         font-size: 26;
     }
 
-#main {
-    margin: 0 20;
-}
-    #main-defaultRoom > Label {
-        margin-top: 12;
-        font-size: 18;
+/* #main {} */
+    #main-defaultRoom {
+        padding: 0 20;
     }
-    #main-defaultRoom > TextField {
-        font-size: 18;
-        width:100%;
+        #main-defaultRoom > Label {
+            margin-top: 12;
+            font-size: 18;
+        }
+        #main-defaultRoom > TextField {
+            font-size: 18;
+            width:100%;
+        }
+
+/* #main-hours {} */
+    .main-hour-post {
+        background: #f3f3f3;
+        padding: 10 20;
     }
+        .main-hour-post-date {
+            font-size: 18;
+            margin-bottom: 5;
+        }
+        .main-hour-post-room {
+            font-size: 15;
+        }
+        .main-hour-post-actions {
+            width:30;
+            background: red;
+        }
+        .main-hour-post-actions > Image {
+            width:30;
+        }
