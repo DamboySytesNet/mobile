@@ -17,10 +17,8 @@ exports.backToCockpit = (args) => {
 exports.onPageLoaded = (args) => {
     let page = args.object;
     const context = page.navigationContext;
-    pageData.set('consultations', loadConsultations(context.consultations));
-
-    groupByDayOfTheYear(pageData.consultations);
-
+    pageData.set('consultations', groupByDayOfTheYear(loadConsultations(context.consultations)));
+    // alert(JSON.stringify(pageData.consultations));
     page.bindingContext = pageData;
 }
 
@@ -40,19 +38,14 @@ function groupByDayOfTheYear(arr) {
         uniqueDays.add(a.dayOfTheYear);
     }
 
-    let grouped = {};
+    let grouped = [];
     
     for (day of uniqueDays) {
-        grouped[day] = arr.filter(c => { return c.dayOfTheYear == day});
+        grouped.push({
+            cons: arr.filter(c => { return c.dayOfTheYear == day}),
+            day: day,
+        });
     }
 
     return grouped;
 }
-
-
-var groupBy = function(xs, key) {
-    return xs.reduce(function(rv, x) {
-      (rv[x[key]] = rv[x[key]] || []).push(x);
-      return rv;
-    }, {});
-  };
