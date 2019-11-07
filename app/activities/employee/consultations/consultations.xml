@@ -1,0 +1,40 @@
+<Page class="page" actionBarHidden="true" loaded="pageLoaded">
+    <ActionBar></ActionBar>
+
+    <StackLayout>
+        <DockLayout id="topBarBase" stretchLastChild="false">
+            <Image tap="exit" src="~/icons/exit.png" dock="right"/>
+            <DockLayout dock="right" >
+                <Image id="bell" src="~/icons/bell.png"/>
+                <AbsoluteLayout id="bell_layout">
+                    <Label id="bellNumber" text="{{ numberOfNotifications }}"/>
+                </AbsoluteLayout>
+            </DockLayout>
+            
+            <Label text="Konsultacje" dock="left"/>
+        </DockLayout>
+
+        <StackLayout>
+            <ListView items="{{ consultations }}" itemTap="onItemTap"
+                    separatorColor="silver" 
+                    class="list-group" row="2" id="listView">
+                <ListView.itemTemplate>
+
+                    <StackLayout class="list-group-item" id="list" >
+                        <Label text="{{ 'Kto: ' + student }}" textWrap="true" class="title" />
+                        <Label text="{{  'Pokój: ' + room  }}" textWrap="true" class="title" />
+                        <Label text="{{ 'Godzina: ' + date }}" textWrap="true" class="title" />
+
+                        <DockLayout stretchLastChild="false">
+                         <!-- Walkaround the problem: using labels instead of buttons because when you use buttons, listviews attribute 'itemTap' doesnt work at all
+ -->
+                        <Label text="Akceptuj" id="{{ 'btn_accept_' + id }}" class="acceptButton" dock="left" tap="accept" />
+                        <Label text="Odrzuć" id="{{ 'btn_decline_' id }}" class="declineButton" dock="right" tap="decline" />
+                        </DockLayout>
+                    </StackLayout>
+                    
+                </ListView.itemTemplate>
+            </ListView>
+        </StackLayout>
+    </StackLayout>
+</Page> 

@@ -3,36 +3,13 @@ const frameModule = require('tns-core-modules/ui/frame');
 
 //! TODO: notification cannot exceed 99
 
-// let testConsultation = [
-//     {
-//         id: 1,
-//         student: 'Adrian Adriański',
-//         room: 243,
-//         date: new Date(2019, 10, 30, 10, 30),
-//     },
-//     {
-//         id: 2,
-//         student: 'Damian Kołek',
-//         room: 211,
-//         date: new Date(2019, 11, 22, 8, 15),
-//     }
-// ];
-
-// let employee = {
-//     id: 123456,
-//     name: 'testName',
-//     surname: 'testSurname',
-//     consultations: testConsultation,
-// }
-
 let pageData = new observableModule.fromObject({
     user: '',
-    notifications: 0,
-
+    numberOfNotifications: 69,
 
     // w celach testowych:
     alertNotification() {
-       this.notifications++;
+       this.numberOfNotifications++;
        animateBell();
     },
     goToEmployeeConsultations(){
@@ -40,7 +17,8 @@ let pageData = new observableModule.fromObject({
         const navigationEntry = {
             moduleName: moduleName,
             context: {
-                user: user,
+                user: this.user,
+                numberOfNotifications: this.numberOfNotifications
             }
         };
 

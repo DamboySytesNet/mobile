@@ -1,0 +1,26 @@
+@import '../../../common/style/cockpit.css';
+
+.acceptButton{
+        margin: 20 0 20 0;
+        font: 20 "OpenSans";
+        font-weight: bold;
+        border-radius: 5;
+        height: 50;
+        color: #fff;
+        width: 47%;
+        background: green;
+}   
+.declineButton{
+        margin: 20 0 20 0;
+        font: 20 "OpenSans";
+        font-weight: bold;
+        border-radius: 5;
+        height: 50;
+        color: #fff;
+        width: 47%;
+        background: red;
+}
+#list {
+    font-weight: bold;
+    font: 18 "OpenSans";
+}
