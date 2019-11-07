@@ -29,8 +29,11 @@
         }
 
 /* #main-hours {} */
+    #main-list {
+        height:100%;
+    }
     .main-hour-post {
-        background: #f3f3f3;
+        background: #f9f9f9;
         padding: 10 20;
     }
         .main-hour-post-date {
@@ -38,12 +41,11 @@
             margin-bottom: 5;
         }
         .main-hour-post-room {
-            font-size: 15;
-        }
-        .main-hour-post-actions {
-            width:30;
-            background: red;
+            font-size: 16;
         }
         .main-hour-post-actions > Image {
-            width:30;
+            width:32;
+        }
+        #main-hour-post-edit {
+            margin-right: 7;
         }

@@ -14,7 +14,7 @@
             <Label text="{{ user }}" />
         </StackLayout>
 
-        <StackLayout id="main">
+        <FlexboxLayout id="main" flexDirection="column">
             <StackLayout id="main-defaultRoom" orientation="horizontal">
                 <Label text="Domyślny pokój: " />
                 <TextField hint="Domyślny pokój"
@@ -22,25 +22,32 @@
                            autocorrect="false"/>
             </StackLayout>
 
-            <StackLayout id="main-hours">
-                <DockLayout class="main-hour-post" orientation="horizontal" stretchLastChild="false">
-                    <StackLayout class="main-hour-post-date" orientation="horizontal" dock="top">
-                        <Label text="8:00" />
-                        <Label text=" - " />
-                        <Label text="8:01 " />
-                        <Label text="Poniedziałek " />
-                    </StackLayout>
-                    <StackLayout class="main-hour-post-room" orientation="horizontal" dock="bottom">
-                        <Label text="Pokój: " />
-                        <Label text="202" />
-                    </StackLayout>
-                    <StackLayout class="main-hour-post-actions" dock="right" orientation="vertical">
-                        <Image src="~/icons/edit.png" />
-                        <Image src="~/icons/delete.png" />
-                    </StackLayout>
-                </DockLayout>
-            </StackLayout>
-        </StackLayout>
+            <ScrollView>
+                <ListView id="main-list" items="{{ myHours }}">
+                    <ListView.itemTemplate>
+                        <StackLayout id="main-hours">
+                            <DockLayout class="main-hour-post" orientation="horizontal" stretchLastChild="false">
+                                <StackLayout class="main-hour-post-actions" dock="right" orientation="horizontal">
+                                    <Image tap="{{ edit }}" id="main-hour-post-edit" src="~/icons/pencil.png" />
+                                    <Image tap="{{ remove }}" src="~/icons/delete.png" />
+                                </StackLayout>
+                                <StackLayout class="main-hour-post-date" orientation="horizontal" dock="top">
+                                    <Label text="{{ from }}" />
+                                    <Label text=" - " />
+                                    <Label text="{{ to }} " />
+                                    <Label text="{{ day }} " />
+                                </StackLayout>
+                                <StackLayout class="main-hour-post-room" orientation="horizontal" dock="bottom">
+                                    <Label text="Pokój: " />
+                                    <Label text="{{ room }}" />
+                                </StackLayout>
+                            </DockLayout>
+                        </StackLayout>
+                    </ListView.itemTemplate>
+                </ListView>
+            </ScrollView>
+
+        </FlexboxLayout>
         
     </StackLayout>
 </Page> 
