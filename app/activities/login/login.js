@@ -4,11 +4,11 @@ const frameModule = require('tns-core-modules/ui/frame');
 
 let page;
 const auth = require('~/modules/auth/auth');
+const u = require('~/common/data/user');
 
 let pageData = new observableModule.fromObject({
     username: '216000p',
     password: 'password',
-    confirmPassword: 'password',
     loading: false,
 
     submit() {
@@ -25,22 +25,18 @@ let pageData = new observableModule.fromObject({
             .then((res) => {
                 this.set('loading', false);
 
+                u.user.id = res.id;
+                u.user.name = res.name;
+                u.user.surname = res.surname;
+
                 let moduleName = 'activities/';
                 if (res.student)
                     moduleName += 'student/cockpit/cockpit';
                 else
                     moduleName += 'employee/cockpit/cockpit';
 
-                const navigationEntry = {
-                    moduleName: moduleName,
-                    context: {
-                        id: res.id,
-                        name: res.name,
-                        surname: res.surname
-                    }
-                };
-
-                frameModule.topmost().navigate(navigationEntry);
+                frameModule.topmost()
+                    .navigate({ moduleName: moduleName });
 
             }).catch((msg) => {
                 this.set('loading', false);

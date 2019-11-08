@@ -14,7 +14,9 @@
             <Label text="{{ user }}" />
         </StackLayout>
 
-        <FlexboxLayout id="main" flexDirection="column">
+        <FlexboxLayout id="main" 
+                       flexDirection="column"
+                       visibility="{{ loading ? 'collapse' : 'visible' }}">
             <StackLayout id="main-defaultRoom" orientation="horizontal">
                 <Label text="Domyślny pokój: " />
                 <TextField hint="Domyślny pokój"
@@ -23,7 +25,7 @@
             </StackLayout>
 
             <ScrollView>
-                <ListView id="main-list" items="{{ myHours }}">
+                <ListView id="main-list" items="{{ hours }}">
                     <ListView.itemTemplate>
                         <StackLayout id="main-hours">
                             <DockLayout class="main-hour-post" orientation="horizontal" stretchLastChild="false">
@@ -49,6 +51,8 @@
             </ScrollView>
 
         </FlexboxLayout>
+
+        <ActivityIndicator busy="{{ loading }}"/>
         
     </StackLayout>
 </Page> 

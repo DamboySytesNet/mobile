@@ -49,3 +49,7 @@
         #main-hour-post-edit {
             margin-right: 7;
         }
+
+ActivityIndicator {
+    margin-top: 20;
+}

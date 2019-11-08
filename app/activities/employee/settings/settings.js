@@ -3,6 +3,8 @@ const frameModule = require('tns-core-modules/ui/frame');
 const Hours = require("~/common/dataTypes/EmployeeHours");
 let page;
 
+const u = require('~/common/data/user');
+
 let myHours = [
     {
         id: 1,
@@ -23,7 +25,8 @@ let myHours = [
 let pageData = new observableModule.fromObject({
     user: '',
     room: '213',
-    myHours: []
+    loading: false,
+    hours: []
 });
 
 exports.exit = (args) => {
@@ -32,14 +35,12 @@ exports.exit = (args) => {
 
 exports.pageLoaded = (args) => {
     page = args.object;
-    const context = page.navigationContext;
-    pageData.set('user', `${context.name} ${context.surname}`);
+    pageData.set('user', `${u.user.name} ${u.user.surname}`);
 
-    let hours = [];
-    for (let hour of myHours) {
-        hours.push(new Hours.new(hour.id, hour.from, hour.to, hour.day, hour.room));
-    }
-    pageData.set('myHours', hours);
+    for (let hour of myHours)
+        u.user.hours.push(new Hours.new(hour.id, hour.from, hour.to, hour.day, hour.room));
+    
+    pageData.set('hours', u.user.hours);
 
     // const listView = page.getViewById('main-list');
     // listView.refresh();
