@@ -3,15 +3,8 @@
 
     <StackLayout>
         <DockLayout id="topBarBase" stretchLastChild="false">
-            <Image tap="exit" src="~/icons/exit.png" dock="right"/>
-            <DockLayout dock="right" >
-                <Image id="bell" src="~/icons/bell.png"/>
-                <AbsoluteLayout id="bell_layout">
-                    <Label id="bellNumber" text="{{ numberOfNotifications }}"/>
-                </AbsoluteLayout>
-            </DockLayout>
-            
-            <Label text="Konsultacje" dock="left"/>
+            <Image tap="back" src="~/icons/arrow-left.png" dock="left" tap="exit"/>
+            <Label text="Konsultacje"/>
         </DockLayout>
 
         <StackLayout>
