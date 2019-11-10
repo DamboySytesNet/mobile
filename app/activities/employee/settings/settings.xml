@@ -11,18 +11,26 @@
 
         <StackLayout id="profileImage">
             <Image src="~/images/male.png" />
-            <Label text="{{ user }}" />
+            <Label id="username" />
         </StackLayout>
 
         <FlexboxLayout id="main" 
                        flexDirection="column"
                        visibility="{{ loading ? 'collapse' : 'visible' }}">
-            <StackLayout id="main-defaultRoom" orientation="horizontal">
-                <Label text="Domyślny pokój: " />
-                <TextField hint="Domyślny pokój"
+            <FlexboxLayout id="main-defaultRoom" flexDirection="row">
+                <Label text="Domyślny Pokój: " />
+                <TextField hint="Pokój"
                            text="{{ room }}"
-                           autocorrect="false"/>
-            </StackLayout>
+                           autocorrect="false"
+                           isEnabled="{{ roomEditing }}"
+                           flexGrow="1"/>
+                <StackLayout orientation="horizontal">
+                    <Image tap="editRoom" visibility="{{ roomEditing || roomProcessign ? 'collapse' : 'visible' }}" src="~/icons/pencil.png" />
+                    <Image tap="acceptEditRoom" visibility="{{ roomEditing ? 'visible' : 'collapse' }}" src="~/icons/check.png" />
+                    <Image tap="cancelEditRoom" visibility="{{ roomEditing ? 'visible' : 'collapse' }}" src="~/icons/cross.png" />
+                    <ActivityIndicator visibility="{{ roomProcessign ? 'visible' : 'collapse' }}" busy="{{ roomProcessign }}"/>
+                </StackLayout>
+            </FlexboxLayout>
 
             <ScrollView>
                 <ListView id="main-list" items="{{ hours }}">

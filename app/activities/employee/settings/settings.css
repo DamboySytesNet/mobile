@@ -25,8 +25,17 @@
         }
         #main-defaultRoom > TextField {
             font-size: 18;
-            width:100%;
         }
+        #main-defaultRoom > FlexboxLayout {
+            width: 96;
+        }
+            #main-defaultRoom Image {
+                width: 36;
+            }
+            #main-defaultRoom ActivityIndicator {
+                width: 36;
+                margin: 0;
+            }
 
 /* #main-hours {} */
     #main-list {

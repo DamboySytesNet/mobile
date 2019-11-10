@@ -5,5 +5,6 @@ exports.new = class H {
         this.to = to.substr(0, 5);
         this.day = day;
         this.room = room;
+        this.editing = false;
     }
 };

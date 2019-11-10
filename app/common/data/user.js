@@ -4,5 +4,8 @@ exports.user = {
     surname: null,
     room: null,
     consultations: [],
-    hours: []
+    hours: {
+        loaded: false,
+        data: []
+    }
 };
