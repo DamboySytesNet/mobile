@@ -48,8 +48,11 @@ function groupByDayOfTheYear(arr) {
     }
 
     for (gr of grouped) {
-        gr['date'] = `${gr.cons[0].date.getDay()}.${gr.cons[0].date.getMonth()}.${gr.cons[0].date.getYear() + 1900}`;
+        gr['date'] = `${gr.cons[0].date.getDate()}.${gr.cons[0].date.getMonth() + 1}.${gr.cons[0].date.getYear() + 1900}`;
+        gr.cons.sort((a, b) => (a.date > b.date) ? 1 : -1);
     }
+
+    grouped.sort((a, b) => (a.day > b.day) ? 1 : -1);
 
     return grouped;
 }
