@@ -47,8 +47,19 @@ function groupByDayOfTheYear(arr) {
         });
     }
 
+    let today = new Date();
     for (gr of grouped) {
-        gr['date'] = `${gr.cons[0].date.getDate()}.${gr.cons[0].date.getMonth() + 1}.${gr.cons[0].date.getYear() + 1900}`;
+        let conDay = gr.cons[0].date;
+        let prefix = "xD";
+        if (today.getYear() === conDay.getYear() && today.getMonth() === conDay.getMonth()) {
+            if (today.getDate() === conDay.getDate()) {
+                prefix = "Dziś";
+            }
+            else if(today.getDate() + 1 === conDay.getDate()) {
+                prefix = "Jutro";
+            }
+        }
+        gr['date'] = `${prefix} (${conDay.getDate()}.${conDay.getMonth() + 1}.${conDay.getYear() + 1900})`;
         gr.cons.sort((a, b) => (a.date > b.date) ? 1 : -1);
     }
 
