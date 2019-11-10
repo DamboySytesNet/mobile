@@ -50,7 +50,7 @@ function groupByDayOfTheYear(arr) {
     let today = new Date();
     for (gr of grouped) {
         let conDay = gr.cons[0].date;
-        let prefix = "xD";
+        let prefix = "";
         if (today.getYear() === conDay.getYear() && today.getMonth() === conDay.getMonth()) {
             if (today.getDate() === conDay.getDate()) {
                 prefix = "Dziś";
