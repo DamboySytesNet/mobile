@@ -72,6 +72,9 @@ exports.pageLoaded = (args) => {
 
                 // Hide loading
                 pageData.set('loading', false);
+
+                // Refresh ListView
+                page.getViewById('main-list').refresh();
             })
             .catch(() => {
                 alert('Nie można pobrać ustawień!');
@@ -86,7 +89,7 @@ exports.pageLoaded = (args) => {
     pageData.set('hours', u.user.hours.data);
 
     // Set binding context
-    page.bindingContext = pageData; 
+    page.bindingContext = pageData;
 }
 
 /** Go back */

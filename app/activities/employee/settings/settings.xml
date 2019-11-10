@@ -1,7 +1,7 @@
 <Page class="page" actionBarHidden="true" loaded="pageLoaded">
     <ActionBar></ActionBar>
 
-    <StackLayout>
+    <FlexboxLayout id="whole" flexDirection="column">
         <DockLayout id="actionbar" stretchLastChild="false">
             <StackLayout tap="exit" orientation="horizontal">
                 <Image src="~/icons/arrow-left.png" dock="left"/>
@@ -16,6 +16,7 @@
 
         <FlexboxLayout id="main" 
                        flexDirection="column"
+                       flexGrow="1"
                        visibility="{{ loading ? 'collapse' : 'visible' }}">
             <FlexboxLayout id="main-defaultRoom" flexDirection="row">
                 <Label text="Domyślny Pokój: " />
@@ -32,7 +33,7 @@
                 </StackLayout>
             </FlexboxLayout>
 
-            <ScrollView>
+            <ScrollView flexGrow="1">
                 <ListView id="main-list" items="{{ hours }}">
                     <ListView.itemTemplate>
                         <StackLayout id="main-hours">
@@ -60,7 +61,7 @@
 
         </FlexboxLayout>
 
-        <ActivityIndicator busy="{{ loading }}"/>
+        <ActivityIndicator height="{{ loading ? 64 : 0 }}" busy="{{ loading }}"/>
         
-    </StackLayout>
+    </FlexboxLayout>
 </Page> 

@@ -2,7 +2,7 @@
 @import '../../../common/style/backActionbar.css';
 
 #profileImage {
-    margin: 40 0;
+    margin: 40 0 20 0;
 }
     #profileImage > Image {
         width: 40%;
@@ -25,22 +25,16 @@
         }
         #main-defaultRoom > TextField {
             font-size: 18;
+            margin-right: 8;
         }
-        #main-defaultRoom > FlexboxLayout {
-            width: 96;
-        }
-            #main-defaultRoom Image {
+            #main-defaultRoom > StackLayout > Image {
                 width: 36;
             }
-            #main-defaultRoom ActivityIndicator {
-                width: 36;
-                margin: 0;
+            #main-defaultRoom > StackLayout > ActivityIndicator {
+                width: 35;
             }
 
 /* #main-hours {} */
-    #main-list {
-        height:100%;
-    }
     .main-hour-post {
         background: #f9f9f9;
         padding: 10 20;
@@ -58,7 +52,3 @@
         #main-hour-post-edit {
             margin-right: 7;
         }
-
-ActivityIndicator {
-    margin-top: 20;
-}
