@@ -4,11 +4,15 @@
     font-size: 25;
     background: #9f3b3b;
 }
+    #actionbar > FlexBoxLayout {
+        height:100%;
+    }
     #actionbar Label {
-        margin-top: 10;
+        margin-top: -2;
         color: #fff;
     }
     #actionbar Image {
-        margin: 14 10 14 12;
+        width: 32;
+        margin: 0 10 0 12;
         border-radius: 50%;
     }

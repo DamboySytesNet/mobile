@@ -2,12 +2,12 @@
     <ActionBar></ActionBar>
 
     <FlexboxLayout id="whole" flexDirection="column">
-        <DockLayout id="actionbar" stretchLastChild="false">
-            <StackLayout tap="exit" orientation="horizontal">
+        <StackLayout id="actionbar">
+            <FlexboxLayout tap="exit" orientation="horizontal" alignItems="center">
                 <Image src="~/icons/arrow-left.png" dock="left"/>
                 <Label text="Powrót" dock="left"/>
-            </StackLayout>
-        </DockLayout>
+            </FlexboxLayout>
+        </StackLayout>
 
         <StackLayout id="profileImage">
             <Image src="~/images/male.png" />
@@ -58,10 +58,15 @@
                     </ListView.itemTemplate>
                 </ListView>
             </ScrollView>
-
         </FlexboxLayout>
 
         <ActivityIndicator height="{{ loading ? 64 : 0 }}" busy="{{ loading }}"/>
         
+        <FlexboxLayout id="addHours" justifyContent="center">
+            <FlexboxLayout flexDirection="row" alignItems="center">
+                <Image src="~/icons/plus.png" />
+                <Label text="Dodaj" />
+            </FlexboxLayout>
+        </FlexboxLayout>
     </FlexboxLayout>
 </Page> 

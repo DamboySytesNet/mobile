@@ -52,3 +52,17 @@
         #main-hour-post-edit {
             margin-right: 7;
         }
+
+#addHours {
+    height:64;
+    background: #9f3b3b;
+}
+    #addHours Image {
+        width:32;
+        margin-right: 3;
+    }
+    #addHours Label {
+        margin-top: -2;
+        font-size: 20;
+        color: #fff;
+    }

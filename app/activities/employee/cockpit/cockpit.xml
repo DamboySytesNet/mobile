@@ -21,17 +21,17 @@
 
                 <DockLayout tap="{{ goToEmployeeConsultations }}" backgroundColor="#FF8C22" row="0" col="0" class="mainContent-post" stretchLastChild="false" >
                     <Label dock="bottom" text="Moje konsultacje" />
-                    <Image dock="top" src="~/images/white.png" />
+                    <Image dock="top" src="~/images/book.png" />
                 </DockLayout>
 
                 <DockLayout tap="{{ goToEmployeeSubjects }}" backgroundColor="#36C6A3" row="0" col="1" class="mainContent-post" stretchLastChild="false" >
                     <Label dock="bottom" text="Moje przedmioty" />
-                    <Image dock="top" src="~/images/white.png" />
+                    <Image dock="top" src="~/images/subject.png" />
                 </DockLayout>
 
                 <DockLayout tap="{{ goToEmployeeSettings }}" backgroundColor="#585DCA" row="1" col="0" class="mainContent-post" stretchLastChild="false" >
                     <Label dock="bottom" text="Ustawienia" />
-                    <Image dock="top" src="~/images/white.png" />
+                    <Image dock="top" src="~/images/gear.png" />
                 </DockLayout>
             </GridLayout>
         </ScrollView>
