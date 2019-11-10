@@ -51,6 +51,19 @@ exports.cancelEditRoom = () => {
     pageData.set('room', pageData.get('oldRoom'));
 }
 
+function deleteHour(id) {
+    let it = 0;
+    for (let el of u.user.hours.data) {
+        if (el.id === id) {
+            // TODO
+            u.user.hours.data.splice(it, 1);
+            page.getViewById('main-list').refresh();
+            return;
+        }
+        it++;
+    }
+}
+
 /** Onload */
 exports.pageLoaded = (args) => {
     page = args.object;
@@ -68,7 +81,15 @@ exports.pageLoaded = (args) => {
             .then((res) => {
                 // Push hours to user object
                 for (let hour of res)
-                    u.user.hours.data.push(new Hours.new(hour.id, hour.timeFrom, hour.timeTo, hour.day, hour.room));
+                    u.user.hours.data.push(
+                        new Hours.new(hour.id, hour.timeFrom, hour.timeTo, hour.day, hour.room,
+                            (details) => {
+                                if (details.actionType === 0) {
+                                    deleteHour(details.id);
+                                }
+                            }
+                        )
+                    );
 
                 // Hide loading
                 pageData.set('loading', false);
