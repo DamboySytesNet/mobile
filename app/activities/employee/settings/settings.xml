@@ -1,7 +1,7 @@
 <Page class="page" actionBarHidden="true" loaded="pageLoaded">
     <ActionBar></ActionBar>
 
-    <FlexboxLayout id="whole" flexDirection="column">
+    <FlexboxLayout flexDirection="column">
         <StackLayout id="actionbar">
             <FlexboxLayout tap="exit" orientation="horizontal" alignItems="center">
                 <Image src="~/icons/arrow-left.png" dock="left"/>
@@ -37,7 +37,7 @@
                 <ListView id="main-list" items="{{ hours }}">
                     <ListView.itemTemplate>
                         <StackLayout id="main-hours">
-                            <DockLayout class="main-hour-post" orientation="horizontal" stretchLastChild="false">
+                            <DockLayout class="main-hour-post" stretchLastChild="false">
                                 <StackLayout class="main-hour-post-actions" dock="right" orientation="horizontal">
                                     <Image tap="{{ edit }}" id="main-hour-post-edit" src="~/icons/pencil.png" />
                                     <Image tap="{{ remove }}" src="~/icons/delete.png" />

@@ -1,4 +1,6 @@
 const dialogs = require("tns-core-modules/ui/dialogs");
+const frameModule = require('tns-core-modules/ui/frame');
+
 const Hours = require("~/common/dataTypes/Hours");
 
 exports.new = class eH extends Hours.new {
@@ -9,8 +11,14 @@ exports.new = class eH extends Hours.new {
     }
 
     edit() {
-        console.log(`Edit ${this.id} element`);
-        // this.callback();
+        const navigationEntry = {
+            moduleName: 'activities/employee/hoursForm/hours',
+            context: {
+                id: this.id
+            }
+        };
+
+        frameModule.topmost().navigate(navigationEntry);
     }
 
     remove() {

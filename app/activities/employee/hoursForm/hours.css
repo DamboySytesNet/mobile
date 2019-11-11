@@ -1,0 +1,49 @@
+@import '../../../common/style/backActionbar.css';
+
+#hours {
+    margin:20 0;
+    width:100%;
+}
+    #hours > Label {
+        font-size:24;
+        text-align:center;
+    }
+        .timePicker {
+            margin-bottom: 20;
+        }
+            .timePicker > TextField {
+                font: 32;
+                width: 80;
+                text-align: center;
+            }
+
+            .timePicker > Label {
+                font: 32;
+            }
+    #day {
+        font-size:18;
+        width: 240;
+        padding: 20 10;
+        color: #fff;
+        background: #9f3b3b;
+        margin-bottom: 20;
+    }
+
+    #room {
+        font-size:22;
+        width: 240;
+        padding: 20 10;
+        text-align:center;
+    }
+
+#buttons {
+    margin: 10;
+}
+    #buttons > Button {
+        padding: 18 20;
+    }
+
+    #btn-ok {
+        color: #fff;
+        background: #9f3b3b;
+    }

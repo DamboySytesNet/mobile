@@ -111,6 +111,9 @@ exports.pageLoaded = (args) => {
 
     // Set binding context
     page.bindingContext = pageData;
+
+    // Refresh ListView
+    page.getViewById('main-list').refresh();
 }
 
 /** Go back */
