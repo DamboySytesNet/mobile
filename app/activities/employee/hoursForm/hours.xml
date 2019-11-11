@@ -34,7 +34,7 @@
                 <Button id="day" tap="chooseDay" text="{{ day }}" />
 
                 <Label text="Pokój" />
-                <TextField id="room" text="{{ room }}" />
+                <TextField id="room" hint="Pokój" text="{{ room }}" />
             </StackLayout>
         </ScrollView>
 

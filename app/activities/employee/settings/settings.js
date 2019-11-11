@@ -64,6 +64,14 @@ function deleteHour(id) {
     }
 }
 
+exports.addNewHour = () => {
+    const navigationEntry = {
+        moduleName: 'activities/employee/hoursForm/hours'
+    };
+
+    frameModule.topmost().navigate(navigationEntry);
+}
+
 /** Onload */
 exports.pageLoaded = (args) => {
     page = args.object;

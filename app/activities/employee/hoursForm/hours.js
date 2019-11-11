@@ -1,6 +1,7 @@
 const observableModule = require("tns-core-modules/data/observable");
 const dialogsModule = require("tns-core-modules/ui/dialogs");
 
+const Hours = require("~/common/dataTypes/EmployeeHours");
 const u = require('~/common/data/user');
 const date = require('~/common/data/days');
 
@@ -10,15 +11,19 @@ let el = null;
 
 let pageData = new observableModule.fromObject({
     editing: false,
-    timeFromH: null,
-    timeFromM: null,
-    timeToH: null,
-    timeToM: null,
-    room: null,
+    timeFromH: '',
+    timeFromM: '',
+    timeToH: '',
+    timeToM: '',
+    room: '',
     day: null
 });
 
 exports.validate = () => {
+    console.log(pageData.get('timeFromH'));
+    console.log(typeof pageData.get('timeFromH'));
+    console.log(pageData.get('timeFromH') === '');
+
     let timeFromH = pageData.get('timeFromH');
     if (timeFromH !== '')
         timeFromH = parseInt(timeFromH);
@@ -43,7 +48,6 @@ exports.validate = () => {
     else
         timeToM = 0;
 
-
     let room = pageData.get('room');
 
     if (timeFromH <= 0 || timeFromH > 24) {
@@ -63,16 +67,24 @@ exports.validate = () => {
         return;
     }
 
-    if (room.trim().length === 0) {
+    if (room === null ||
+        room.trim().length === 0)
+    {
         alert('Podany pokój nie jest prawidłowy');
         return;
     }
 
+    if (timeFromH < 10)
+        timeFromH = `0${timeFromH}`;
+
     if (timeFromM < 10)
         timeFromM = `0${timeFromM}`;
 
+    if (timeToH < 10)
+        timeToH = `0${timeToH}`;
+
     if (timeToM < 10)
-        timeToM = `0${timeFromM}`;
+        timeToM = `0${timeToM}`;
 
     if (pageData.get('editing')) {
         if (el) {
@@ -84,6 +96,26 @@ exports.validate = () => {
         } else {
             alert('Wystąpił błąd podczas przetwarzania...');
         }
+    } else {
+        // TODO
+        let maxId = Math.max.apply(Math, u.user.hours.data.map(el => el.id));
+
+        u.user.hours.data.push(
+            new Hours.new(
+                maxId + 1, 
+                `${timeFromH}:${timeFromM}`,
+                `${timeToH}:${timeToM}`,
+                pageData.get('day'),
+                room,
+                (details) => {
+                    if (details.actionType === 0) {
+                        deleteHour(details.id);
+                    }
+                }
+            )
+        );
+
+        page.frame.goBack();
     }
 }
 
@@ -103,8 +135,12 @@ exports.pageLoaded = (args) => {
     page = args.object;
     const context = page.navigationContext;
 
-    if (typeof context.id !== 'undefined')
+    if (typeof context !== 'undefined')
         el = u.user.hours.data.find(el => el.id === context.id)
+    else {
+        pageData.set('editing', false);
+        pageData.set('day', 'poniedziałek');
+    }
 
     if (el) {
         pageData.set('editing', true);
@@ -112,8 +148,15 @@ exports.pageLoaded = (args) => {
         let from = el.from.split(':');
         let to   = el.to.split(':');
 
+        if (from[0].length === 1)
+            from[0] = `0${from[0]}`;
+
+        if (to[0].length === 1)
+            to[0] = `0${to[0]}`;
+
         if (from[1].length === 1)
             from[1] = `0${from[1]}`;
+
         if (to[1].length === 1)
             to[1] = `0${to[1]}`;
 
