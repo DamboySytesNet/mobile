@@ -85,7 +85,7 @@ exports.pageLoaded = (args) => {
         u.user.hours.loaded = true;
 
         // Get hours from databse
-        HoursGetter.get(u.user.id)
+        HoursGetter.get(u.user.id, u.user.token)
             .then((res) => {
                 // Push hours to user object
                 for (let hour of res)

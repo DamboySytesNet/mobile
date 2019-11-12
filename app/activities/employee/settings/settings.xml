@@ -62,7 +62,9 @@
 
         <ActivityIndicator height="{{ loading ? 64 : 0 }}" busy="{{ loading }}"/>
         
-        <FlexboxLayout tap="addNewHour" id="addHours" justifyContent="center">
+        <FlexboxLayout tap="addNewHour" id="addHours" 
+                       justifyContent="center"
+                       visibility="{{ loading ? 'collapse' : 'visible' }}">
             <FlexboxLayout flexDirection="row" alignItems="center">
                 <Image src="~/icons/plus.png" />
                 <Label text="Dodaj" />

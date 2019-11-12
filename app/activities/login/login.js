@@ -46,6 +46,7 @@ let pageData = new observableModule.fromObject({
 
                 // Fill in user data
                 u.user.id = res.id;
+                u.user.token = res.token;
                 u.user.name = res.name;
                 u.user.surname = res.surname;
 

@@ -1,6 +1,6 @@
 const httpModule = require("tns-core-modules/http");
 
-exports.get = (id) => {
+exports.get = (id, token) => {
     return new Promise((revoke, reject) => {
         if (!id) {
             reject('Niepoprawne żądanie');
@@ -8,8 +8,13 @@ exports.get = (id) => {
         }
 
         httpModule.request({
-            url: `https://damboy.sytes.net/mk/getHours.php?user_id=${id}`,
-            method: 'GET'
+            url: `https://damboy.sytes.net/mk/getHours.php`,
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            content: JSON.stringify({
+                user_id: id,
+                token: token
+            })
         }).then((res) => {
             if (res.statusCode === 200) {
                 try {
@@ -30,6 +35,7 @@ exports.get = (id) => {
                 reject('Server error...');
             }
         }, (e) => {
+            console.log(e);
             console.log('hours.js: 0x01');
             reject('Server error...');
         });

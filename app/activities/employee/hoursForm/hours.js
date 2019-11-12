@@ -20,10 +20,6 @@ let pageData = new observableModule.fromObject({
 });
 
 exports.validate = () => {
-    console.log(pageData.get('timeFromH'));
-    console.log(typeof pageData.get('timeFromH'));
-    console.log(pageData.get('timeFromH') === '');
-
     let timeFromH = pageData.get('timeFromH');
     if (timeFromH !== '')
         timeFromH = parseInt(timeFromH);
