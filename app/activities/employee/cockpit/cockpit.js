@@ -1,6 +1,11 @@
 const observableModule = require("tns-core-modules/data/observable");
 const frameModule = require('tns-core-modules/ui/frame');
 
+const u = require('~/common/data/user');
+const logout = require('~/modules/utils/logout');
+
+let page;
+
 //! TODO: notification cannot exceed 99
 
 let pageData = new observableModule.fromObject({
@@ -12,7 +17,8 @@ let pageData = new observableModule.fromObject({
        this.numberOfNotifications++;
        animateBell();
     },
-    goToEmployeeConsultations(){
+    
+    goToEmployeeConsultations() {
         let moduleName = 'activities/employee/consultations/consultations';
         const navigationEntry = {
             moduleName: moduleName,
@@ -24,26 +30,27 @@ let pageData = new observableModule.fromObject({
 
         frameModule.topmost().navigate(navigationEntry);
     },
-    goToEmployeeSubjects(){
+
+    goToEmployeeSubjects() {
         //frameModule.topmost().navigate(navigationEntry);
     },
-    goToEmployeeSettings(){
-        //frameModule.topmost().navigate(navigationEntry);
+
+    goToEmployeeSettings() {
+        frameModule.topmost() .navigate(
+            { moduleName: 'activities/employee/settings/settings' }
+        );
     }
 
 });
 
 exports.exit = (args) => {
-    const button = args.object;
-    const page = button.page;
-    
+    logout.clearUser();
     page.frame.goBack();
 }
 
 exports.pageLoaded = (args) => {
-    let page = args.object;
-    const context = page.navigationContext;
-    pageData.set('user', `${context.name} ${context.surname}`);
+    page = args.object;
+    pageData.set('user', `${u.user.name} ${u.user.surname}`);
     page.bindingContext = pageData; 
     bells = page.getViewById("bell");
 }
@@ -51,7 +58,7 @@ exports.pageLoaded = (args) => {
 
 
 
-function animateBell(){
+function animateBell() {
     bells.animate({
         rotate: 40,
         duration: 270,

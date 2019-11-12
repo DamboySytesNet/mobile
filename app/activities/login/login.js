@@ -1,54 +1,76 @@
+// Import nativescript modules
 const observableModule = require('tns-core-modules/data/observable');
 const dialogsModule = require('tns-core-modules/ui/dialogs');
 const frameModule = require('tns-core-modules/ui/frame');
 
-let page;
+// Import custom modules / datatypes
 const auth = require('~/modules/auth/auth');
+const logout = require('~/modules/utils/logout');
+const u = require('~/common/data/user');
 
+/** Global activity (body) variable */
+let page;
+
+/** Two way binding */
 let pageData = new observableModule.fromObject({
+    /** User login */
     username: '216000p',
+    /** User password */
     password: 'password',
-    confirmPassword: 'password',
+
+    /** State of authentication */
     loading: false,
 
+    /** Start authentication */
     submit() {
+        // Show loading
         this.set('loading', true);
+
+        // Init authentication
         this.login();
     },
 
+    /** Handles authentication */
     login() {
+        // Portable user object
         const userData = {
             username: this.username,
             password: this.password
         }
+
+        // Authenticate
         auth.login(userData)
             .then((res) => {
+                // Hide loading
                 this.set('loading', false);
 
+                // Fill in user data
+                u.user.id = res.id;
+                u.user.name = res.name;
+                u.user.surname = res.surname;
+
+                // Navigate to the right activity
                 let moduleName = 'activities/';
                 if (res.student)
                     moduleName += 'student/cockpit/cockpit';
                 else
                     moduleName += 'employee/cockpit/cockpit';
 
-                const navigationEntry = {
-                    moduleName: moduleName,
-                    context: {
-                        id: res.id,
-                        name: res.name,
-                        surname: res.surname
-                    }
-                };
-
-                frameModule.topmost().navigate(navigationEntry);
+                frameModule.topmost()
+                    .navigate({ moduleName: moduleName });
 
             }).catch((msg) => {
+                // Hide loading
                 this.set('loading', false);
+
+                // Inform user that something went wrong
                 alert(msg);
             });
     },
 
+    /** Handles 'forget password' option */
     forgotPassword() {
+        // Smart email insertion
         let hint = '';
         if (this.username.trim() !== '') {
             if (this.username.indexOf('@') > -1)
@@ -56,6 +78,8 @@ let pageData = new observableModule.fromObject({
             else
                 hint = `${this.username}@edu.p.lodz.pl`;
         }
+
+        // Prompot user for email
         dialogsModule.prompt({
             title: 'Przypominanie hasła',
             message: 'Podaj email',
@@ -64,7 +88,9 @@ let pageData = new observableModule.fromObject({
             okButtonText: 'Ok',
             cancelButtonText: 'Cancel'
         }).then((data) => {
+            // TODO
             if (data.result) {
+                // Send forger request
                 auth.forgotPassword(data.text)
                     .then((mail) => {
                         alert(`E-mail został wysłany na ${mail}`);
@@ -79,7 +105,14 @@ let pageData = new observableModule.fromObject({
     }
 });
 
+/** Onload */
 exports.pageLoaded = (args) => {
+    // Set page object
     page = args.object;
+
+    // Set binding context
     page.bindingContext = pageData;
+
+    // Clear user data
+    logout.clearUser();
 }

@@ -1,6 +1,7 @@
 @import '../../../common/style/cockpit.css';
+@import '../../../common/style/backActionbar.css';
 
-.acceptButton{
+.button{
         margin: 20 0 20 0;
         font: 20 "OpenSans";
         font-weight: bold;
@@ -8,19 +9,17 @@
         height: 50;
         color: #fff;
         width: 47%;
-        background: green;
+        background: #696969;
 }   
-.declineButton{
-        margin: 20 0 20 0;
-        font: 20 "OpenSans";
+        .accepted{
+                background: green;
+        }
+        .declined{
+                background: red;
+        }
+
+#date {
         font-weight: bold;
-        border-radius: 5;
-        height: 50;
-        color: #fff;
-        width: 47%;
-        background: red;
-}
-#list {
-    font-weight: bold;
-    font: 18 "OpenSans";
+        font: 20 "OpenSans";
+        border: 20px solid red;
 }

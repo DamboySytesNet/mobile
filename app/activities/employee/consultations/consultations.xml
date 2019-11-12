@@ -2,32 +2,42 @@
     <ActionBar></ActionBar>
 
     <StackLayout>
-        <DockLayout id="topBarBase" stretchLastChild="false">
-            <Image tap="back" src="~/icons/arrow-left.png" dock="left" tap="exit"/>
-            <Label text="Konsultacje"/>
-        </DockLayout>
+        <StackLayout id="actionbar">
+            <FlexboxLayout orientation="horizontal" alignItems="center">
+                <Image tap="back" src="~/icons/arrow-left.png"/>
+                <Label text="Konsultacje"/>
+            </FlexboxLayout>
+        </StackLayout>
+        <StackLayout>                              
+                <ListView items="{{ consultations }}"
+                        separatorColor="silver" 
+                        class="list-group" row="1">
+                    <ListView.itemTemplate >
 
-        <StackLayout>
-            <ListView items="{{ consultations }}" itemTap="onItemTap"
-                    separatorColor="silver" 
-                    class="list-group" row="2" id="listView">
-                <ListView.itemTemplate>
+                        <StackLayout class="list-group-item">
+                        
+                            <Label text="{{ date }}" textWrap="true" class="title" id="date"/>
+                            
+                            <ListView items="{{ cons }}"
+                                separatorColor="silver" 
+                                class="list-group" row="2" id="listView" >
+                                    <ListView.itemTemplate>
+                                        <StackLayout class="list-group-item">
+                                            <Label text="{{ 'Kto: ' + student }}" textWrap="true" class="title" />
+                                            <Label text="{{  'Pokój' + room  }}" textWrap="true" class="title" />
+                                            <Label text="{{ 'Godzina' + date }}" textWrap="true" class="title" />
+                                            <DockLayout orientation="horizontal" stretchLastChild="false">
+                                                <Button text="Akceptuj" class="button accepted" dock="left" tap="accept"/>
+                                                <Button text="Odrzuć" class="button declined" dock="right" tap="decline"/>
+                                            </DockLayout>
+                                        </StackLayout>
 
-                    <StackLayout class="list-group-item" id="list" >
-                        <Label text="{{ 'Kto: ' + student }}" textWrap="true" class="title" />
-                        <Label text="{{  'Pokój: ' + room  }}" textWrap="true" class="title" />
-                        <Label text="{{ 'Godzina: ' + date }}" textWrap="true" class="title" />
-
-                        <DockLayout stretchLastChild="false">
-                         <!-- Walkaround the problem: using labels instead of buttons because when you use buttons, listviews attribute 'itemTap' doesnt work at all
- -->
-                        <Label text="Akceptuj" id="{{ 'btn_accept_' + id }}" class="acceptButton" dock="left" tap="accept" />
-                        <Label text="Odrzuć" id="{{ 'btn_decline_' id }}" class="declineButton" dock="right" tap="decline" />
-                        </DockLayout>
-                    </StackLayout>
-                    
-                </ListView.itemTemplate>
-            </ListView>
+                                    </ListView.itemTemplate>
+                            </ListView>
+                        
+                        </StackLayout>
+                    </ListView.itemTemplate>
+                </ListView>
         </StackLayout>
     </StackLayout>
 </Page> 
