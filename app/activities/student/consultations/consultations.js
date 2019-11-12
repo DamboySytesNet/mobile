@@ -22,34 +22,34 @@ exports.onPageLoaded = (args) => {
     page.bindingContext = pageData;
 }
 
-function loadConsultations(cons) {
-    const c = []
-    for(con of cons) {
-        c.push(new Consultation.Cons(con.id, con.subject, con.teacher, con.room, con.date, null, null));
+function loadConsultations(consultations) {
+    const consultationObjectsList = []
+    for(con of consultations) {
+        consultationObjectsList.push(new Consultation.Cons(con.id, con.subject, con.teacher, con.room, con.date, null, null));
     }
 
-    return c;
+    return consultationObjectsList;
 }
 
-function groupByDayOfTheYear(arr) {
+function groupByDayOfTheYear(consultations) {
     let uniqueDays = new Set();
 
-    for (a of arr) {
-        uniqueDays.add(a.dayOfTheYear);
+    for (let con of consultations) {
+        uniqueDays.add(con.dayOfTheYear);
     }
 
     let grouped = [];
     
-    for (day of uniqueDays) {
+    for (let day of uniqueDays) {
         grouped.push({
-            cons: arr.filter(c => { return c.dayOfTheYear == day}),
+            cons: consultations.filter(c => c.dayOfTheYear === day),
             day: day,
         });
     }
 
     let today = new Date();
-    for (gr of grouped) {
-        let conDay = gr.cons[0].date;
+    for (let group of grouped) {
+        let conDay = group.cons[0].date;
         let prefix = "";
         if (today.getYear() === conDay.getYear() && today.getMonth() === conDay.getMonth()) {
             if (today.getDate() === conDay.getDate()) {
@@ -59,8 +59,8 @@ function groupByDayOfTheYear(arr) {
                 prefix = "Jutro";
             }
         }
-        gr['date'] = `${prefix} (${conDay.getDate()}.${conDay.getMonth() + 1}.${conDay.getYear() + 1900})`;
-        gr.cons.sort((a, b) => (a.date > b.date) ? 1 : -1);
+        group['date'] = `${prefix} (${conDay.getDate()}.${conDay.getMonth() + 1}.${conDay.getYear() + 1900})`;
+        group.cons.sort((a, b) => (a.date > b.date) ? 1 : -1);
     }
 
     grouped.sort((a, b) => (a.day > b.day) ? 1 : -1);

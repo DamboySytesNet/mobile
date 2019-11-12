@@ -12,10 +12,10 @@
                 <ListView.itemTemplate>
                         <StackLayout>
                                 <Label text="{{ date }}"/>
-                                        <ListView items="{{ cons }}" row="1" height="100">
+                                        <ListView items="{{ cons }}" height="100">
                                         <ListView.itemTemplate> 
                                                         <DockLayout>
-                                                                <Label text="{{ subject }}" dock="right"/>
+                                                                <Label text="{{ timeStr }}" dock="right"/>
                                                                 <Label text="{{ teacher }}" dock="left"/>
                                                         </DockLayout>
                                                 </ListView.itemTemplate>

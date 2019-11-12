@@ -9,7 +9,7 @@ exports.Cons = class Consultation {
         this.state = state;
         this.excuse = excuse;
 
-        this.timeStr = `${this.date.getHours()}:${this.date.getMinutes()}`;
+        this.timeStr = this.getTimeStr();
         this.dayOfTheYear = this.getDayOfTheYear();
         
     }
@@ -28,5 +28,28 @@ exports.Cons = class Consultation {
         var dayOfTheYear = Math.floor(diff / oneDay);
 
         return dayOfTheYear;
+    }
+
+    getTimeStr() {
+        let hour = this.date.getHours();
+        let minute = this.date.getMinutes();
+
+        let timeStr;
+        if (hour < 10) {
+            timeStr = `0${hour}`;
+        }
+        else {
+            timeStr = `${hour}`;
+        }
+
+        if (minute < 10) {
+            timeStr += `:0${minute}`;
+        }
+        else {
+            timeStr += `:${minute}`;
+        }
+
+        return timeStr;
+
     }
 };
