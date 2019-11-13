@@ -24,7 +24,7 @@ exports.onPageLoaded = (args) => {
 
 function loadConsultations(consultations) {
     const consultationObjectsList = []
-    for(con of consultations) {
+    for(let con of consultations) {
         consultationObjectsList.push(new Consultation.Cons(con.id, con.subject, con.teacher, con.room, con.date, null, null));
     }
 
