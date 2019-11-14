@@ -7,9 +7,6 @@ const u = require('~/common/data/user');
 const HoursGetter = require('~/modules/get/hours');
 const Hours = require("~/common/dataTypes/EmployeeHours");
 
-/** Global activity (body) variable */
-let page;
-
 /** Two way binding */
 let pageData = new observableModule.fromObject({
     /** Current default room */
@@ -51,7 +48,7 @@ exports.cancelEditRoom = () => {
     pageData.set('room', pageData.get('oldRoom'));
 }
 
-function deleteHour(id) {
+function deleteHour(page, id) {
     let it = 0;
     for (let el of u.user.hours.data) {
         if (el.id === id) {
@@ -66,7 +63,7 @@ function deleteHour(id) {
 
 exports.addNewHour = () => {
     const navigationEntry = {
-        moduleName: 'activities/employee/hoursForm/hours'
+        moduleName: 'activities/employee/hoursForm/hoursForm'
     };
 
     frameModule.topmost().navigate(navigationEntry);
@@ -74,7 +71,7 @@ exports.addNewHour = () => {
 
 /** Onload */
 exports.pageLoaded = (args) => {
-    page = args.object;
+    let page = args.object;
 
     // Display user name and surname
     page.getViewById('username').text = `${u.user.name} ${u.user.surname}`;
@@ -92,9 +89,8 @@ exports.pageLoaded = (args) => {
                     u.user.hours.data.push(
                         new Hours.new(hour.id, hour.timeFrom, hour.timeTo, hour.day, hour.room,
                             (details) => {
-                                if (details.actionType === 0) {
-                                    deleteHour(details.id);
-                                }
+                                if (details.actionType === 0)
+                                    deleteHour(page, details.id);
                             }
                         )
                     );
@@ -126,5 +122,7 @@ exports.pageLoaded = (args) => {
 
 /** Go back */
 exports.exit = (args) => {
+    let view = args.object;
+    let page = view.page;
     page.frame.goBack();
 }

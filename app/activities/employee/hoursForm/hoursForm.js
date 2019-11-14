@@ -5,7 +5,6 @@ const Hours = require("~/common/dataTypes/EmployeeHours");
 const u = require('~/common/data/user');
 const date = require('~/common/data/days');
 
-let page;
 /** Hours object to be edited */
 let el = null;
 
@@ -128,7 +127,7 @@ exports.chooseDay = () => {
 }
 
 exports.pageLoaded = (args) => {
-    page = args.object;
+    let page = args.object;
     const context = page.navigationContext;
 
     if (typeof context !== 'undefined')
@@ -171,5 +170,7 @@ exports.pageLoaded = (args) => {
 }
 
 exports.exit = (args) => {
+    let view = args.object;
+    let page = view.page;
     page.frame.goBack();
 }
