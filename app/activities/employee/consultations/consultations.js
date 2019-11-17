@@ -61,7 +61,19 @@ exports.pageLoaded = (args) => {
 
 }
 exports.accept = (args) => {
-    alert("Zaakceptowano");
+    // console.log(pageData.get('consultations').find();
+    let id = parseInt(args.object.index, 10);
+    for (let i of pageData.get('consultations')) {
+        let tmp = i.cons.find(el => el.id === id);
+        if (tmp) {
+            tmp.state = 'accepted';
+            alert(tmp.state);
+        }
+   }   
+   // let tmp = pageData.get('consultations')[1].find( el => el.id === parseInt(args.object.index, 10));
+    // if (tmp) {
+    //     tmp.state = 'accepted';
+    // }
 }
 
 
@@ -102,8 +114,8 @@ function addReason(){
 }
 
 function deleteConsultation(){
-    pageData.consultations.splice(pageData.index , 1);
-    listView.refresh();
+    // pageData.consultations.splice(pageData.index , 1);
+    // listView.refresh();
 }
 
 function loadEmployeeConsultations(cons) {
