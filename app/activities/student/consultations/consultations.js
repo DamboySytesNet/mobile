@@ -7,7 +7,7 @@ let pageData = new observableModule.fromObject({
     consultations: []
 })
 
-exports.backToCockpit = (args) => {
+exports.exit = (args) => {
     const button = args.object;
     const page = button.page;
     

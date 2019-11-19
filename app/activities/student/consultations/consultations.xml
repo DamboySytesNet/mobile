@@ -3,8 +3,8 @@
 
     <StackLayout>
         <StackLayout id="actionbar">
-            <FlexboxLayout tap="exit" orientation="horizontal" alignItems="center">
-                <Image src="~/icons/arrow-left.png" dock="left"/>
+            <FlexboxLayout orientation="horizontal" alignItems="center">
+                <Image tap="exit" src="~/icons/arrow-left.png" dock="left"/>
                 <Label text="Moje konsultacje" dock="left"/>
             </FlexboxLayout>
         </StackLayout>
