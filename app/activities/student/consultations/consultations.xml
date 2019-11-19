@@ -2,7 +2,7 @@
     <ActionBar></ActionBar>
 
     <StackLayout>
-            <DockLayout id="topBarBase" stretchLastChild="false">
+            <DockLayout id="actionbar" stretchLastChild="false">
             <!--TODO chenge exit icon to left-arrow icon-->
                     <Image tap="backToCockpit" src="~/icons/exit.png" dock="left" />
                     <Label text="Konsultacje" dock="left" />
