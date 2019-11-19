@@ -52,7 +52,7 @@ exports.pageLoaded = (args) => {
     page = args.object;
     pageData.set('user', `${u.user.name} ${u.user.surname}`);
     page.bindingContext = pageData; 
-    bells = page.getViewById("bell");
+    bells = page.getViewById('bell');
 }
 
 
