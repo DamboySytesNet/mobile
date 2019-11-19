@@ -36,15 +36,19 @@ exports.editRoom = () => {
 exports.acceptEditRoom = () => {
     let room = pageData.get('room');
 
-    if (room !== null)
+    if (room !== null) {
         room = room.trim();
+        if (room === '')
+            room = null;
+    }
 
     if (room === null || room.length <= 64) {
         pageData.set('roomProcessing', true);
         pageData.set('roomEditing', false);
 
-        RoomSetter.set(u.user.id, u.user.room, u.user.token)
+        RoomSetter.set(u.user.id, room, u.user.token)
             .then(() => {
+                u.user.room = room;
                 pageData.set('roomProcessing', false);
             })
             .catch(() => {

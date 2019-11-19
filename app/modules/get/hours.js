@@ -2,7 +2,7 @@ const httpModule = require("tns-core-modules/http");
 
 exports.get = (id, token) => {
     return new Promise((revoke, reject) => {
-        if (!id) {
+        if (!id || !token) {
             reject('Niepoprawne żądanie');
             return;
         }
@@ -23,7 +23,7 @@ exports.get = (id, token) => {
                         let result = JSON.parse(json.msg);
                         revoke(result);
                     } else {
-                        console.log('hours.js: 0x04');
+                        console.log('hours.js: 0x04', json);
                         reject(json.msg);
                     }
                 } catch(e) {
