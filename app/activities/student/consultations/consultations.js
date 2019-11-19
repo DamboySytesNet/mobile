@@ -1,9 +1,11 @@
 const observableModule = require("tns-core-modules/data/observable");
 const listViewModule = require("tns-core-modules/ui/list-view");
 const Consultation = require("~/common/dataTypes/Consultation");
+const u = require('~/common/data/user');
+// only for test purposes
+const test = require('~/common/data/testConsultations');
 
 let pageData = new observableModule.fromObject({
-    user: '',
     consultations: []
 })
 
@@ -15,19 +17,24 @@ exports.exit = (args) => {
 }
 
 exports.onPageLoaded = (args) => {
-    let page = args.object;
-    const context = page.navigationContext;
-    pageData.set('consultations', groupByDayOfTheYear(loadConsultations(context.consultations)));
+    const page = args.object;
+
+    // load only when visit activity for the first time
+    if(!u.user.consultations.loaded) {
+        u.user.consultations.data = loadConsultations();
+        u.user.consultations.loaded = true;
+    }
+
+    pageData.set('consultations', groupByDayOfTheYear(u.user.consultations.data));
     // alert(JSON.stringify(pageData.consultations));
     page.bindingContext = pageData;
 }
 
-function loadConsultations(consultations) {
-    const consultationObjectsList = []
-    for(let con of consultations) {
+function loadConsultations() {
+    let consultationObjectsList = []
+    for(let con of test.testConsultations) {
         consultationObjectsList.push(new Consultation.Cons(con.id, con.subject, con.teacher, con.room, con.date, null, null));
     }
-
     return consultationObjectsList;
 }
 
