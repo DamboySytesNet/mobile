@@ -3,7 +3,6 @@ const frameModule = require('tns-core-modules/ui/frame');
 const listViewModule = require('tns-core-modules/ui/list-view');
 const dialogsModule = require('tns-core-modules/ui/dialogs');
 const EmployeeConsultation = require('~/common/dataTypes/EmployeeConsultation')
-require("nativescript-dom");
      
 let pageData = new observableModule.fromObject({
     user: '',
@@ -66,24 +65,9 @@ exports.pageLoaded = (args) => {
     const context = page.navigationContext;
     pageData.set('user', `${context.user}`);
     pageData.set('consultations', groupByDayOfTheYear(loadEmployeeConsultations(testConsultation))); // insert here function returning cons from db
-    
     page.bindingContext = pageData; 
-
-    var list = page.getElementById('list');
-
-
-    listView = page.getElementById('listView');
-    
-    // var v = listView.getElementsByClassName('test')[0];
-    // v.text += 'dodaje';
-    // v.classList.add(' accepted');
-    // for (let i of v) {
-    //     i.classList.add(' accepted');
-    //     i.text += ' dodaje';
-    // }
-
-
-
+    list = page.getViewById('list');
+    listView = page.getViewById('listView');
 }
 exports.accept = (args) => {
     let id = parseInt(args.object.index, 10);
@@ -103,12 +87,12 @@ exports.decline = (args) => {
     okButtonText: 'Potwierdź',
     cancelButtonText: 'Anuluj',
 }).then(function (result) {
-    if (result){
+    if (result) {
         chooseReason(args);
     }
 });
 }
-function chooseReason(args){
+function chooseReason(args) {
     dialogsModule.action({
     message: 'Wybierz powód',
     cancelButtonText: 'Anuluj',
@@ -124,7 +108,7 @@ function chooseReason(args){
     }
 });
 }
-function addReason(args){
+function addReason(args) {
     dialogsModule.prompt('Dodaj powód', '').then(function (r) {
         console.log('Dialog result: ' + r.result + ', text: ' + r.text);
         if (r.result == true)
@@ -132,7 +116,7 @@ function addReason(args){
     }); 
 }
 
-function deleteConsultation(args){
+function deleteConsultation(args) {
     let id = parseInt(args.object.index, 10);
     for (let i of pageData.get('consultations')) {
         let tmp = i.cons.find(el => el.id === id);
@@ -145,7 +129,7 @@ function deleteConsultation(args){
 
 function loadEmployeeConsultations(cons) {
     const c = []
-    for(con of cons) {
+    for(let con of cons) {
         c.push(new EmployeeConsultation.new(con.id, null, null, con.student, con.room, con.date, 'waiting', null));
     }
 
@@ -154,13 +138,13 @@ function loadEmployeeConsultations(cons) {
 function groupByDayOfTheYear(arr) {
     let uniqueDays = new Set();
 
-    for (a of arr) {
+    for (let a of arr) {
         uniqueDays.add(a.dayOfTheYear);
     }
 
     let grouped = [];
     
-    for (day of uniqueDays) {
+    for (let day of uniqueDays) {
         grouped.push({
             cons: arr.filter(c => { return c.dayOfTheYear == day}),
             day: day,
@@ -169,16 +153,15 @@ function groupByDayOfTheYear(arr) {
     }
 
     let today = new Date();
-    for (gr of grouped) {
+    for (let gr of grouped) {
         let conDay = gr.cons[0].date;
         let prefix = '';
         if (today.getYear() === conDay.getYear() && today.getMonth() === conDay.getMonth()) {
             if (today.getDate() === conDay.getDate()) {
                 prefix = 'Dziś ';
             }
-            else if(today.getDate() + 1 === conDay.getDate()) {
+            else if(today.getDate() + 1 === conDay.getDate())
                 prefix = 'Jutro ';
-            }
         }
         gr['date'] = `${prefix} ${conDay.getDate()}.${conDay.getMonth() + 1}.${conDay.getYear() + 1900}`;
         gr.cons.sort((a, b) => (a.date > b.date) ? 1 : -1);
@@ -186,9 +169,9 @@ function groupByDayOfTheYear(arr) {
 
     grouped.sort((a, b) => (a.day > b.day) ? 1 : -1);
 
-    for (i of grouped) {
+    for (let i of grouped) {
         i.height *= i.cons.length;
-        for (j of i.cons) {
+        for (let j of i.cons) {
             let oldDate = j.date;
             j.date = oldDate.getHours() + ':' + oldDate.getMinutes();
         } 
