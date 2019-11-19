@@ -3,9 +3,8 @@ const frameModule = require('tns-core-modules/ui/frame');
 const listViewModule = require('tns-core-modules/ui/list-view');
 const dialogsModule = require('tns-core-modules/ui/dialogs');
 const EmployeeConsultation = require('~/common/dataTypes/EmployeeConsultation')
-
-// new Date(2019, 11, 12, 10, 30, 0).getFullYear() + '-' + (new Date(2019, 10, 30, 10, 30, 0).getMonth() + 1) + '-' + new Date(2019, 10, 30, 10, 30, 0).getDate() + ' ' + new Date(2019, 10, 30, 10, 30, 0).getHours() + ':' + new Date(2019, 10, 30, 10, 30, 0).getMinutes(),
-        
+require("nativescript-dom");
+     
 let pageData = new observableModule.fromObject({
     user: '',
     consultations: [],
@@ -26,7 +25,7 @@ exports.back = (args) => {
 let testConsultation = [
     {
         id: 1,
-        student: 'Adrian Adriański',
+        student: 'Adrian Adriańsski',
         room: 243,
         date: new Date(2019, 10, 12, 10, 30).toString(),
     },
@@ -43,6 +42,18 @@ let testConsultation = [
         date: new Date(2020, 5, 17, 7, 30).toString(),   
     },
     {
+        id: 22,
+        student: 'Tomasz Dziobak',
+        room: 111,
+        date: new Date(2020, 5, 17, 2, 30).toString(),   
+    },
+    {
+        id: 67,
+        student: 'Artur Yesssss',
+        room: 454,
+        date: new Date(2020, 5, 17, 4, 30).toString(),   
+    },
+    {
         id: 4,
         student: 'Tomasz Chlebss',
         room: 099,
@@ -57,7 +68,21 @@ exports.pageLoaded = (args) => {
     pageData.set('consultations', groupByDayOfTheYear(loadEmployeeConsultations(testConsultation))); // insert here function returning cons from db
     
     page.bindingContext = pageData; 
-    listView = page.getViewById('listView');
+
+    var list = page.getElementById('list');
+
+
+    listView = page.getElementById('listView');
+    
+    // var v = listView.getElementsByClassName('test')[0];
+    // v.text += 'dodaje';
+    // v.classList.add(' accepted');
+    // for (let i of v) {
+    //     i.classList.add(' accepted');
+    //     i.text += ' dodaje';
+    // }
+
+
 
 }
 exports.accept = (args) => {
@@ -139,6 +164,7 @@ function groupByDayOfTheYear(arr) {
         grouped.push({
             cons: arr.filter(c => { return c.dayOfTheYear == day}),
             day: day,
+            height: 175 //height of 1 consulatation
         });
     }
 
@@ -159,6 +185,14 @@ function groupByDayOfTheYear(arr) {
     }
 
     grouped.sort((a, b) => (a.day > b.day) ? 1 : -1);
+
+    for (i of grouped) {
+        i.height *= i.cons.length;
+        for (j of i.cons) {
+            let oldDate = j.date;
+            j.date = oldDate.getHours() + ':' + oldDate.getMinutes();
+        } 
+    }
 
     return grouped;
 }
