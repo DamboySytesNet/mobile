@@ -3,20 +3,26 @@
 
     <StackLayout>
             <DockLayout id="topBarBase" stretchLastChild="false">
-                    <!-- TODO change image to back icon-->
-                    <Image tap="backToCockpit" src="~/images/gray.png" dock="right" />
-                    <Image src="~/icons/bell.png" dock="right" />
+            <!--TODO chenge exit icon to left-arrow icon-->
+                    <Image tap="backToCockpit" src="~/icons/exit.png" dock="left" />
                     <Label text="Konsultacje" dock="left" />
             </DockLayout>
+        <StackLayout>
             <ListView items="{{ consultations }}">
                 <ListView.itemTemplate>
                         <StackLayout>
-                                <DockLayout>
-                                        <Label text="{{ timeStr }}" dock="right"/>
-                                        <Label text="{{ teacher }}" dock="left"/>
-                                </DockLayout>
+                                <Label text="{{ date }}"/>
+                                        <ListView items="{{ cons }}" height="100">
+                                        <ListView.itemTemplate> 
+                                                        <DockLayout>
+                                                                <Label text="{{ timeStr }}" dock="right"/>
+                                                                <Label text="{{ teacher }}" dock="left"/>
+                                                        </DockLayout>
+                                                </ListView.itemTemplate>
+                                        </ListView>
                         </StackLayout>
                 </ListView.itemTemplate>
             </ListView>
+        </StackLayout>
     </StackLayout>
 </Page>
