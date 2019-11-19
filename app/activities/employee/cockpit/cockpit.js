@@ -4,8 +4,6 @@ const frameModule = require('tns-core-modules/ui/frame');
 const u = require('~/common/data/user');
 const logout = require('~/modules/utils/logout');
 
-let page;
-
 //! TODO: notification cannot exceed 99
 
 let pageData = new observableModule.fromObject({
@@ -16,6 +14,8 @@ let pageData = new observableModule.fromObject({
     alertNotification() {
        this.numberOfNotifications++;
        animateBell();
+
+       pageData.consultations[0]
     },
     
     goToEmployeeConsultations() {
@@ -23,8 +23,7 @@ let pageData = new observableModule.fromObject({
         const navigationEntry = {
             moduleName: moduleName,
             context: {
-                user: this.user,
-                numberOfNotifications: this.numberOfNotifications
+                user: this.user
             }
         };
 
@@ -45,11 +44,13 @@ let pageData = new observableModule.fromObject({
 
 exports.exit = (args) => {
     logout.clearUser();
+    let view = args.object;
+    let page = view.page;
     page.frame.goBack();
 }
 
 exports.pageLoaded = (args) => {
-    page = args.object;
+    let page = args.object;
     pageData.set('user', `${u.user.name} ${u.user.surname}`);
     page.bindingContext = pageData; 
     bells = page.getViewById('bell');

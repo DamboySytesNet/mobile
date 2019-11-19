@@ -12,7 +12,7 @@ exports.new = class eH extends Hours.new {
 
     edit() {
         const navigationEntry = {
-            moduleName: 'activities/employee/hoursForm/hours',
+            moduleName: 'activities/employee/hoursForm/hoursForm',
             context: {
                 id: this.id
             }

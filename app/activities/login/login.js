@@ -8,9 +8,6 @@ const auth = require('~/modules/auth/auth');
 const logout = require('~/modules/utils/logout');
 const u = require('~/common/data/user');
 
-/** Global activity (body) variable */
-let page;
-
 /** Two way binding */
 let pageData = new observableModule.fromObject({
     /** User login */
@@ -46,6 +43,7 @@ let pageData = new observableModule.fromObject({
 
                 // Fill in user data
                 u.user.id = res.id;
+                u.user.token = res.token;
                 u.user.name = res.name;
                 u.user.surname = res.surname;
 
@@ -108,7 +106,7 @@ let pageData = new observableModule.fromObject({
 /** Onload */
 exports.pageLoaded = (args) => {
     // Set page object
-    page = args.object;
+    let page = args.object;
 
     // Set binding context
     page.bindingContext = pageData;
