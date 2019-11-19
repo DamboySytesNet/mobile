@@ -3,13 +3,12 @@ const frameModule = require('tns-core-modules/ui/frame');
 
 const u = require('~/common/data/user');
 const Hours = require("~/common/dataTypes/Hours");
-const HoursRemover = require("~/modules/remove/hours");
+const HoursManager = require("~/modules/request/hours");
+
 
 exports.new = class eH extends Hours.new {
-    constructor(id, from, to, day, room, callback) {
-        super(id, from, to, day, room)
-        
-        this.callback = callback;
+    constructor(id, from, to, day, room) {
+        super(id, from, to, day, room);
     }
 
     edit() {
@@ -23,15 +22,23 @@ exports.new = class eH extends Hours.new {
         frameModule.topmost().navigate(navigationEntry);
     }
 
-    remove() {
+    remove(args) {
+        let view = args.view;
+        let page = view.page;
+
         dialogs.confirm('Czy na pewno usunąć te godziny?').then((result) => {
             if (result) {
-                HoursRemover.remove(this.id, u.user.token)
+                HoursManager.remove(this.id, u.user.token)
                     .then(() => {
-                        this.callback({
-                            id: this.id,
-                            actionType: 0
+                        u.user.hours.data.find((el, it) => {
+                            if (el.id === this.id) {
+                                u.user.hours.data.splice(it, 1);
+                                return true;
+                            }
+                            return false;
                         });
+
+                        page.getViewById('main-list').refresh();
                     })
                     .catch((msg) => {
                         alert({

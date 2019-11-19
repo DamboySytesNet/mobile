@@ -8,5 +8,6 @@ exports.user = {
     hours: {
         loaded: false,
         data: []
-    }
+    },
+    page: null
 };

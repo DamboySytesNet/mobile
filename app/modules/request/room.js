@@ -23,20 +23,20 @@ exports.set = (id, room, token) => {
                     if (json.status === 'success') {
                         revoke();
                     } else {
-                        console.log('room.js: 0x14');
+                        console.log('room.js: 0x24');
                         reject(json.msg);
                     }
                 } catch(e) {
-                    console.log('room.js: 0x13');
+                    console.log('room.js: 0x23');
                     reject('Server error...');
                 }
             } else {
-                console.log('room.js: 0x12');
+                console.log('room.js: 0x22');
                 reject('Server error...');
             }
         }, (e) => {
             console.log(e);
-            console.log('room.js: 0x11');
+            console.log('room.js: 0x21');
             reject('Server error...');
         });
     });

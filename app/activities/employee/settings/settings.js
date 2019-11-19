@@ -4,8 +4,8 @@ const frameModule = require('tns-core-modules/ui/frame');
 
 // Import custom modules / datatypes
 const u = require('~/common/data/user');
-const RoomSetter = require('~/modules/set/room');
-const HoursGetter = require('~/modules/get/hours');
+const RoomManager = require('~/modules/request/room');
+const HoursManager = require("~/modules/request/hours");
 const Hours = require("~/common/dataTypes/EmployeeHours");
 
 /** Two way binding */
@@ -25,6 +25,7 @@ let pageData = new observableModule.fromObject({
     /** Loading base data from server */
     loading: true
 });
+let page;
 
 /** Edit default room */
 exports.editRoom = () => {
@@ -46,7 +47,7 @@ exports.acceptEditRoom = () => {
         pageData.set('roomProcessing', true);
         pageData.set('roomEditing', false);
 
-        RoomSetter.set(u.user.id, room, u.user.token)
+        RoomManager.set(u.user.id, room, u.user.token)
             .then(() => {
                 u.user.room = room;
                 pageData.set('roomProcessing', false);
@@ -76,18 +77,20 @@ exports.cancelEditRoom = () => {
     pageData.set('room', pageData.get('oldRoom'));
 }
 
-function deleteHour(page, id) {
-    let it = 0;
-    for (let el of u.user.hours.data) {
-        if (el.id === id) {
-            // TODO
-            u.user.hours.data.splice(it, 1);
-            page.getViewById('main-list').refresh();
-            return;
-        }
-        it++;
-    }
-}
+// function deleteHour(page, id) {
+//     console.log(page);
+//     console.log(id);
+//     let it = 0;
+//     for (let el of u.user.hours.data) {
+//         if (el.id === id) {
+//             // TODO
+//             u.user.hours.data.splice(it, 1);
+//             page.getViewById('main-list').refresh();
+//             return;
+//         }
+//         it++;
+//     }
+// }
 
 exports.addNewHour = () => {
     const navigationEntry = {
@@ -99,7 +102,7 @@ exports.addNewHour = () => {
 
 /** Onload */
 exports.pageLoaded = (args) => {
-    let page = args.object;
+    page = args.object;
 
     // Display user name and surname
     page.getViewById('username').text = `${u.user.name} ${u.user.surname}`;
@@ -110,17 +113,12 @@ exports.pageLoaded = (args) => {
         u.user.hours.loaded = true;
 
         // Get hours from databse
-        HoursGetter.get(u.user.id, u.user.token)
+        HoursManager.get(u.user.id, u.user.token)
             .then((res) => {
                 // Push hours to user object
                 for (let hour of res)
                     u.user.hours.data.push(
-                        new Hours.new(hour.id, hour.timeFrom, hour.timeTo, hour.day, hour.room,
-                            (details) => {
-                                if (details.actionType === 0)
-                                    deleteHour(page, details.id);
-                            }
-                        )
+                        new Hours.new(hour.id, hour.timeFrom, hour.timeTo, hour.day, hour.room)
                     );
 
                 // Hide loading
@@ -150,7 +148,7 @@ exports.pageLoaded = (args) => {
 
 /** Go back */
 exports.exit = (args) => {
-    let view = args.object;
-    let page = view.page;
+    // let view = args.object;
+    // let page = view.page;
     page.frame.goBack();
 }

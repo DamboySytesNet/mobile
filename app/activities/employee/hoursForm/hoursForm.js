@@ -2,11 +2,13 @@ const observableModule = require("tns-core-modules/data/observable");
 const dialogsModule = require("tns-core-modules/ui/dialogs");
 
 const Hours = require("~/common/dataTypes/EmployeeHours");
+const HoursManager = require("~/modules/request/hours");
 const u = require('~/common/data/user');
 const date = require('~/common/data/days');
 
 /** Hours object to be edited */
 let el = null;
+let page;
 
 let pageData = new observableModule.fromObject({
     editing: false,
@@ -19,6 +21,7 @@ let pageData = new observableModule.fromObject({
 });
 
 exports.validate = () => {
+
     let timeFromH = pageData.get('timeFromH');
     if (timeFromH !== '')
         timeFromH = parseInt(timeFromH);
@@ -92,25 +95,43 @@ exports.validate = () => {
             alert('Wystąpił błąd podczas przetwarzania...');
         }
     } else {
-        // TODO
-        let maxId = Math.max.apply(Math, u.user.hours.data.map(el => el.id));
+        let day = pageData.get('day');
+        let dayId = date.daysArray.indexOf(day);
 
-        u.user.hours.data.push(
-            new Hours.new(
-                maxId + 1, 
-                `${timeFromH}:${timeFromM}`,
-                `${timeToH}:${timeToM}`,
-                pageData.get('day'),
-                room,
-                (details) => {
-                    if (details.actionType === 0) {
-                        deleteHour(details.id);
-                    }
-                }
-            )
-        );
+        if (dayId > -1) {
+            HoursManager.add(u.user.id,
+                             room,
+                             dayId + 1, //because index starts from 0, but monday is 1
+                             `${timeFromH}:${timeFromM}`,
+                             `${timeToH}:${timeToM}`,
+                             u.user.token)
+                .then(id => {
+                    u.user.hours.data.push(
+                        new Hours.new(
+                            id, 
+                            `${timeFromH}:${timeFromM}`,
+                            `${timeToH}:${timeToM}`,
+                            pageData.get('day'),
+                            room
+                        )
+                    );
 
-        page.frame.goBack();
+                    page.frame.goBack();
+                })
+                .catch(() => {
+                    alert({
+                        title: 'Uwaga',
+                        message: 'Nie udało się dodać godzin konsultacji!',
+                        okButtonText: 'OK'
+                    });
+                });
+        } else {
+            alert({
+                title: 'Uwaga',
+                message: 'Dzień nie jest poprawny!',
+                okButtonText: 'OK'
+            });
+        }
     }
 }
 
@@ -127,7 +148,7 @@ exports.chooseDay = () => {
 }
 
 exports.pageLoaded = (args) => {
-    let page = args.object;
+    page = args.object;
     const context = page.navigationContext;
 
     if (typeof context !== 'undefined')
@@ -175,7 +196,7 @@ exports.pageLoaded = (args) => {
 }
 
 exports.exit = (args) => {
-    let view = args.object;
-    let page = view.page;
+    // let view = args.object;
+    // let page = view.page;
     page.frame.goBack();
 }
