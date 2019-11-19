@@ -22,9 +22,6 @@ let pageData = new observableModule.fromObject({
         let moduleName = 'activities/employee/consultations/consultations';
         const navigationEntry = {
             moduleName: moduleName,
-            context: {
-                user: this.user
-            }
         };
 
         frameModule.topmost().navigate(navigationEntry);
