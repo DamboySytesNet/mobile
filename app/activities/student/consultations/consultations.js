@@ -17,7 +17,7 @@ exports.backToCockpit = (args) => {
 }
 
 exports.onPageLoaded = (args) => {
-    const page = args.object.page;
+    const page = args.object;
 
     // load only when visit activity for the first time
     if(!u.user.consultations.loaded) {
