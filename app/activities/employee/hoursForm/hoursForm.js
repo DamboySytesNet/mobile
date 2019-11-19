@@ -135,6 +135,11 @@ exports.pageLoaded = (args) => {
     else {
         pageData.set('editing', false);
         pageData.set('day', 'poniedziałek');
+        pageData.set('timeFromH', '');
+        pageData.set('timeFromM', '');
+        pageData.set('timeToH', '');
+        pageData.set('timeToM', '');
+        pageData.set('room', u.user.room);
     }
 
     if (el) {

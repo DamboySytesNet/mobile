@@ -46,6 +46,7 @@ let pageData = new observableModule.fromObject({
                 u.user.token = res.token;
                 u.user.name = res.name;
                 u.user.surname = res.surname;
+                u.user.room = res.room;
 
                 // Navigate to the right activity
                 let moduleName = 'activities/';

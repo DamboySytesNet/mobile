@@ -4,19 +4,20 @@ const frameModule = require('tns-core-modules/ui/frame');
 
 // Import custom modules / datatypes
 const u = require('~/common/data/user');
+const RoomSetter = require('~/modules/set/room');
 const HoursGetter = require('~/modules/get/hours');
 const Hours = require("~/common/dataTypes/EmployeeHours");
 
 /** Two way binding */
 let pageData = new observableModule.fromObject({
     /** Current default room */
-    room: '203',
+    room: u.user.room,
     /** Default room backup */
     oldRoom: '',
     /** Room is being edited */
     roomEditing: false,
     /** Changes are sent to sever */
-    roomProcessign: false,
+    roomProcessing: false,
 
     /** Hours for listview */
     hours: [],
@@ -33,13 +34,36 @@ exports.editRoom = () => {
 
 /** Accept changes to default room */
 exports.acceptEditRoom = () => {
-    pageData.set('roomProcessign', true);
-    pageData.set('roomEditing', false);
+    let room = pageData.get('room');
 
-    // TODO
-    setTimeout(() => {
-        pageData.set('roomProcessign', false);
-    }, 1000);
+    if (room !== null)
+        room = room.trim();
+
+    if (room === null || room.length <= 64) {
+        pageData.set('roomProcessing', true);
+        pageData.set('roomEditing', false);
+
+        RoomSetter.set(u.user.id, u.user.room, u.user.token)
+            .then(() => {
+                pageData.set('roomProcessing', false);
+            })
+            .catch(() => {
+                alert({
+                    title: 'Uwaga',
+                    message: 'Nie udało się zapisać domyślnego pokoju!',
+                    okButtonText: 'OK'
+                });
+
+                pageData.set('roomProcessing', false);
+                pageData.set('roomEditing', true);
+            });
+    } else {
+        alert({
+            title: 'Uwaga',
+            message: 'Pokój nie może przekroczyć 64 znaków!',
+            okButtonText: 'OK'
+        });
+    }
 }
 
 /** Deny changes to default room */
