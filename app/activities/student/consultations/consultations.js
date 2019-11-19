@@ -22,6 +22,7 @@ exports.onPageLoaded = (args) => {
     // load only when visit activity for the first time
     if(!u.user.consultations.loaded) {
         u.user.consultations.data = loadConsultations();
+        u.user.consultations.loaded = true;
     }
 
     pageData.set('consultations', groupByDayOfTheYear(u.user.consultations.data));
