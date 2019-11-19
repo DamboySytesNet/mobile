@@ -69,6 +69,7 @@ exports.pageLoaded = (args) => {
     list = page.getViewById('list');
     listView = page.getViewById('listView');
 }
+
 exports.accept = (args) => {
     let id = parseInt(args.object.index, 10);
     for (let i of pageData.get('consultations')) {
@@ -92,26 +93,25 @@ exports.decline = (args) => {
     }
 });
 }
+
 function chooseReason(args) {
     dialogsModule.action({
     message: 'Wybierz powód',
     cancelButtonText: 'Anuluj',
     actions: pageData.reasons
 }).then(function (result) {
-    if (result == '+ Dodaj własny powód'){
+    if (result === '+ Dodaj własny powód'){
         addReason(args);
-    }else if (result != 'Anuluj'){
-        console.log(result);
+    }else if (result === 'Anuluj'){
+        return;
+    }else
         deleteConsultation(args);
-    }else{
-        console.log(result);
-    }
 });
 }
+
 function addReason(args) {
     dialogsModule.prompt('Dodaj powód', '').then(function (r) {
-        console.log('Dialog result: ' + r.result + ', text: ' + r.text);
-        if (r.result == true)
+        if (r.result)
             deleteConsultation(args);
     }); 
 }
@@ -120,9 +120,8 @@ function deleteConsultation(args) {
     let id = parseInt(args.object.index, 10);
     for (let i of pageData.get('consultations')) {
         let tmp = i.cons.find(el => el.id === id);
-        if (tmp) {
+        if (tmp) 
             tmp.state = 'declined';
-        }
    }
    listView.refresh();
 }
@@ -132,9 +131,9 @@ function loadEmployeeConsultations(cons) {
     for(let con of cons) {
         c.push(new EmployeeConsultation.new(con.id, null, null, con.student, con.room, con.date, 'waiting', null));
     }
-
     return c;
 }
+
 function groupByDayOfTheYear(arr) {
     let uniqueDays = new Set();
 
