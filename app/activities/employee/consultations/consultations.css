@@ -19,7 +19,11 @@
     }
 
 #date {
-    font-weight: bold;
+    color: black;
     font: 20 "OpenSans";
-    border: 20px solid red;
+    font-weight: bold;
+    margin: 0 0 15 0;
 }
+    #listUnderDate {
+        background: #ebebeb;
+    }

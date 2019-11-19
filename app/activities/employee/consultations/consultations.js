@@ -71,7 +71,6 @@ exports.accept = (args) => {
    listView.refresh();
 }
 
-
 exports.decline = (args) => {
     dialogsModule.confirm({
     title: 'Odrzuć',
@@ -149,13 +148,13 @@ function groupByDayOfTheYear(arr) {
         let prefix = '';
         if (today.getYear() === conDay.getYear() && today.getMonth() === conDay.getMonth()) {
             if (today.getDate() === conDay.getDate()) {
-                prefix = 'Dziś';
+                prefix = 'Dziś ';
             }
             else if(today.getDate() + 1 === conDay.getDate()) {
-                prefix = 'Jutro';
+                prefix = 'Jutro ';
             }
         }
-        gr['date'] = `${prefix} (${conDay.getDate()}.${conDay.getMonth() + 1}.${conDay.getYear() + 1900})`;
+        gr['date'] = `${prefix} ${conDay.getDate()}.${conDay.getMonth() + 1}.${conDay.getYear() + 1900}`;
         gr.cons.sort((a, b) => (a.date > b.date) ? 1 : -1);
     }
 

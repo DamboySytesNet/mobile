@@ -11,7 +11,7 @@
         <StackLayout>                              
                 <ListView items="{{ consultations }}"
                         separatorColor="silver" 
-                        class="list-group" row="1" rowHeight="1500" id="listView">
+                        class="list-group" row="1" rowHeight="500" id="listView">
                     <ListView.itemTemplate >
 
                         <StackLayout class="list-group-item">
@@ -22,10 +22,10 @@
                                 separatorColor="silver" 
                                 class="list-group" row="2">
                                     <ListView.itemTemplate>
-                                        <StackLayout class="list-group-item" >
+                                        <StackLayout class="list-group-item" id="listUnderDate">
                                             <Label text="{{ 'Kto: ' + student }}" textWrap="true" class="title" />
-                                            <Label text="{{  'Pokój' + room  }}" textWrap="true" class="title" />
-                                            <Label text="{{ 'Godzina' + date }}" textWrap="true" class="title" />
+                                            <Label text="{{  'Pokój: ' + room  }}" textWrap="true" class="title" />
+                                            <Label text="{{ date }}" textWrap="true" class="title" id="dateLabel"/>
                                             <DockLayout orientation="horizontal" stretchLastChild="false">
                                                 <Button text="Akceptuj" index="{{ id }}" class="{{state === 'accepted' ? 'button accepted' : 'button'}}" dock="left" tap="accept"/>
                                                 <Button text="Odrzuć" index="{{ id }}" class="{{state === 'declined' ? 'button declined' : 'button'}}" dock="right" tap="decline"/>
