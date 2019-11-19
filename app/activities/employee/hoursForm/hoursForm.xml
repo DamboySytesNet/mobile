@@ -1,0 +1,46 @@
+<Page class="page" actionBarHidden="true" loaded="pageLoaded">
+    <ActionBar></ActionBar>
+
+    <FlexboxLayout flexDirection="column">>
+        <StackLayout id="actionbar">
+            <FlexboxLayout tap="exit" orientation="horizontal" alignItems="center">
+                <Image src="~/icons/arrow-left.png" dock="left"/>
+                <Label text="Powrót" dock="left"/>
+            </FlexboxLayout>
+        </StackLayout>
+
+        <ScrollView flexGrow="1">
+            <StackLayout id="hours">
+                <Label text="Czas rozpoczęcia" />
+                <FlexboxLayout class="timePicker" 
+                               orientation="horizontal" 
+                               justifyContent="center"
+                               alignItems="center">
+                    <TextField hint="8" keyboardType="number" maxLength="2" text="{{ timeFromH }}" />
+                    <Label text=":" />
+                    <TextField hint="00" keyboardType="number" maxLength="2" text="{{ timeFromM }}" />
+                </FlexboxLayout>
+
+                <Label text="Czas zakończenia" />
+                <FlexboxLayout class="timePicker" 
+                               orientation="horizontal" 
+                               justifyContent="center"
+                               alignItems="center">
+                    <TextField hint="9" keyboardType="number" maxLength="2" text="{{ timeToH }}" />
+                    <Label text=":" />
+                    <TextField hint="00" keyboardType="number" maxLength="2" text="{{ timeToM }}" />
+                </FlexboxLayout>
+
+                <Button id="day" tap="chooseDay" text="{{ day }}" />
+
+                <Label text="Pokój" />
+                <TextField id="room" hint="Pokój" text="{{ room }}" />
+            </StackLayout>
+        </ScrollView>
+
+        <DockLayout id="buttons" stretchLastChild="false">
+            <Button tap="validate" id="btn-ok" dock="right" text="Zatwierdź"/>
+            <Button tap="exit" id="btn-cancel" dock="right" text="Anuluj"/>
+        </DockLayout>
+    </FlexboxLayout>
+</Page> 

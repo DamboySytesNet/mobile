@@ -1,0 +1,68 @@
+@import '../../../common/style/cockpit.css';
+@import '../../../common/style/backActionbar.css';
+
+#profileImage {
+    margin: 40 0 20 0;
+}
+    #profileImage > Image {
+        width: 40%;
+        border-radius: 100%;
+    }
+
+    #profileImage > Label {
+        text-align: center;
+        margin-top: 18;
+        font-size: 26;
+    }
+
+/* #main {} */
+    #main-defaultRoom {
+        padding: 0 20;
+    }
+        #main-defaultRoom > Label {
+            margin-top: 12;
+            font-size: 18;
+        }
+        #main-defaultRoom > TextField {
+            font-size: 18;
+            margin-right: 8;
+        }
+            #main-defaultRoom > StackLayout > Image {
+                width: 36;
+            }
+            #main-defaultRoom > StackLayout > ActivityIndicator {
+                width: 35;
+            }
+
+/* #main-hours {} */
+    .main-hour-post {
+        background: #f9f9f9;
+        padding: 10 20;
+    }
+        .main-hour-post-date {
+            font-size: 18;
+            margin-bottom: 5;
+        }
+        .main-hour-post-room {
+            font-size: 16;
+        }
+        .main-hour-post-actions > Image {
+            width:32;
+        }
+        #main-hour-post-edit {
+            margin-right: 7;
+        }
+
+#addHours {
+    height:64;
+    background: #9f3b3b;
+}
+    #addHours Image {
+        width:32;
+        margin-right: 3;
+    }
+    #addHours Label {
+        margin-top: -2;
+        font-size: 20;
+        color: #fff;
+    }
