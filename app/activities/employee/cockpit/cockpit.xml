@@ -7,7 +7,7 @@
             <DockLayout dock="right" >
                 <Image id="bell" src="~/icons/bell.png" tap="{{ alertNotification }}"/>
                 <AbsoluteLayout id="actionbar-bellLayout">
-                    <Label text="{{ notifications }}"/>
+                    <Label id="bellNumber" text="{{ numberOfNotifications }}"/>
                 </AbsoluteLayout>
             </DockLayout>
             

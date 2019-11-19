@@ -1,0 +1,43 @@
+<Page class="page" actionBarHidden="true" loaded="pageLoaded">
+    <ActionBar></ActionBar>
+
+    <StackLayout>
+        <StackLayout id="actionbar">
+            <FlexboxLayout orientation="horizontal" alignItems="center">
+                <Image tap="back" src="~/icons/arrow-left.png"/>
+                <Label text="Konsultacje"/>
+            </FlexboxLayout>
+        </StackLayout>
+        <StackLayout>                              
+                <ListView items="{{ consultations }}"
+                        separatorColor="silver" 
+                        class="list-group" row="1" id="listView">
+                    <ListView.itemTemplate >
+
+                        <StackLayout class="list-group-item">
+                        
+                            <Label text="{{ date }}" textWrap="true" class="title" id="date"/>
+                            
+                            <ListView items="{{ cons }}"
+                                separatorColor="silver" 
+                                class="list-group" row="2" height="{{ height }}">
+                                    <ListView.itemTemplate>
+                                        <StackLayout class="list-group-item" id="listUnderDate">
+                                            <Label text="{{ 'Kto: ' + student }}" textWrap="true" class="title" />
+                                            <Label text="{{  'Pokój: ' + room  }}" textWrap="true" class="title" />
+                                            <Label text="{{ 'Godzina: ' + date }}" textWrap="true" class="title" id="dateLabel"/>
+                                            <DockLayout orientation="horizontal" stretchLastChild="false">
+                                                <Button text="Akceptuj" index="{{ id }}" class="{{state === 'accepted' ? 'button accepted' : 'button'}}" dock="left" tap="accept"/>
+                                                <Button text="Odrzuć" index="{{ id }}" class="{{state === 'declined' ? 'button declined' : 'button'}}" dock="right" tap="decline"/>
+                                            </DockLayout>
+                                        </StackLayout>
+
+                                    </ListView.itemTemplate>
+                            </ListView>
+                        
+                        </StackLayout>
+                    </ListView.itemTemplate>
+                </ListView>
+        </StackLayout>
+    </StackLayout>
+</Page> 

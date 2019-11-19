@@ -1,0 +1,29 @@
+@import '../../../common/style/cockpit.css';
+@import '../../../common/style/backActionbar.css';
+
+.button {
+    margin: 20 0;
+    font: 18 "OpenSans";
+    font-weight: bold;
+    border-radius: 5;
+    height: 50;
+    color: #fff;
+    width: 47%;
+    background: #696969;
+}   
+    .accepted {
+        background: green;
+    }
+    .declined {
+        background: red;
+    }
+
+#date {
+    color: black;
+    font: 20 "OpenSans";
+    font-weight: bold;
+    margin: 0 0 15 0;
+}
+    #listUnderDate {
+        background: #ebebeb;
+    }

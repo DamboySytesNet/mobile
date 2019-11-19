@@ -1,4 +1,5 @@
-<Page class="page" actionBarHidden="true" loaded="pageLoaded">
+<Page class="page" actionBarHidden="true" loaded="pageLoaded"
+    androidStatusBarBackground="#9F3B3B">
     <ActionBar title="Login"></ActionBar>
 
     <FlexboxLayout>

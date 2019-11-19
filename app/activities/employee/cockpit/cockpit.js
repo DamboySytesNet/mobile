@@ -8,11 +8,11 @@ const logout = require('~/modules/utils/logout');
 
 let pageData = new observableModule.fromObject({
     user: '',
-    notifications: 0,
+    numberOfNotifications: 69,
 
     // w celach testowych:
     alertNotification() {
-       this.notifications++;
+       this.numberOfNotifications++;
        animateBell();
 
        pageData.consultations[0]
@@ -23,7 +23,7 @@ let pageData = new observableModule.fromObject({
         const navigationEntry = {
             moduleName: moduleName,
             context: {
-                user: user,
+                user: this.user
             }
         };
 
@@ -53,7 +53,7 @@ exports.pageLoaded = (args) => {
     let page = args.object;
     pageData.set('user', `${u.user.name} ${u.user.surname}`);
     page.bindingContext = pageData; 
-    bells = page.getViewById("bell");
+    bells = page.getViewById('bell');
 }
 
 
