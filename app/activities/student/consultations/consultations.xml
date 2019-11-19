@@ -2,11 +2,13 @@
     <ActionBar></ActionBar>
 
     <StackLayout>
-            <DockLayout id="topBarBase" stretchLastChild="false">
-            <!--TODO chenge exit icon to left-arrow icon-->
-                    <Image tap="backToCockpit" src="~/icons/exit.png" dock="left" />
-                    <Label text="Konsultacje" dock="left" />
-            </DockLayout>
+        <StackLayout id="actionbar">
+            <FlexboxLayout tap="exit" orientation="horizontal" alignItems="center">
+                <Image src="~/icons/arrow-left.png" dock="left"/>
+                <Label text="Moje konsultacje" dock="left"/>
+            </FlexboxLayout>
+        </StackLayout>
+
         <StackLayout>
             <ListView items="{{ consultations }}">
                 <ListView.itemTemplate>
