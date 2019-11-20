@@ -15,5 +15,5 @@ exports.user = {
     subjects: {
         loaded: false,
         data: []
-    }
+    },
 };

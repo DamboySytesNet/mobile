@@ -30,6 +30,11 @@ let testSubjects = [
         title: 'Fizyka 1',
         desc: 'blavlbalal fasfa faf'
     },
+    {
+        id: 5,
+        title: 'Fizyka 2',
+        desc: 'blavlbalal fasfa faf'
+    },
 ]
 
 exports.back = (args) => {
@@ -41,15 +46,14 @@ exports.back = (args) => {
 
 exports.pageLoaded = (args) => {
     let page = args.object;
-    alert(u.user.subjects.loaded);
-    // if(!u.user.subjects.loaded) {
-    //     u.user.subjects.data = loadEmployeeSubjects(testSubjects);
-    //     u.user.subjects.loaded = true;
-    // }
-    // pageData.set('subjects', u.user.subjects.data);
-    // page.bindingContext = pageData; 
-    // list = page.getViewById('list');
-    // listView = page.getViewById('listView');
+    if(!u.user.subjects.loaded) {
+        u.user.subjects.data = loadEmployeeSubjects(testSubjects);
+        u.user.subjects.loaded = true;
+    }
+    pageData.set('subjects', u.user.subjects.data);
+    page.bindingContext = pageData;
+    list = page.getViewById('list');
+    listView = page.getViewById('listView');
 }
 
 function loadEmployeeSubjects(subjects) {
@@ -58,4 +62,21 @@ function loadEmployeeSubjects(subjects) {
         tmp.push(new Subject.new(it.id, it.title, it.desc));
     }
     return tmp;
+}
+
+exports.edit = (args) => {
+
+}
+
+exports.delete = (args) => {
+    let id = parseInt(args.object.index, 10);
+
+    for (let i = 0; i < pageData.subjects.length; i++) {
+        if (pageData.subjects[i].id === id) {
+            pageData.subjects.splice(i, 1);
+            break;
+        }
+      }
+
+    listView.refresh();
 }

@@ -5,7 +5,7 @@
         <StackLayout id="actionbar">
             <FlexboxLayout orientation="horizontal" alignItems="center">
                 <Image tap="back" src="~/icons/arrow-left.png"/>
-                <Label text="Przedmiotys"/>
+                <Label text="Przedmioty"/>
             </FlexboxLayout>
         </StackLayout>
         <StackLayout>                              
@@ -16,8 +16,8 @@
                         <DockLayout orientation="horizontal"  class="list-group-item" stretchLastChild="false">
                             <Label text="{{ title }}" textWrap="true" class="title"/>
                             <StackLayout orientation="horizontal" dock="right">
-                                <Image tap="{{ edit }}" class="image" src="~/icons/pencil.png" />
-                                <Image tap="{{ remove }}" class="image" src="~/icons/delete.png" />
+                                <Image tap="edit" index ="{{ id }}" class="image" src="~/icons/pencil.png" />
+                                <Image tap="delete" index ="{{ id }}" class="image" src="~/icons/delete.png" />
                             </StackLayout>
                         </DockLayout>
 
