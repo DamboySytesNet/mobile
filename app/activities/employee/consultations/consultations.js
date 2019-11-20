@@ -133,7 +133,7 @@ function deleteConsultation(args, excuse) {
 }
 
 function loadEmployeeConsultations(cons) {
-    const c = []
+    const c = [];
     for(let con of cons) {
         c.push(new EmployeeConsultation.new(con.id, null, null, con.student, con.room, con.date, 'waiting', null));
     }

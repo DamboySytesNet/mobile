@@ -11,5 +11,9 @@ exports.user = {
     hours: {
         loaded: false,
         data: []
+    },
+    subjects: {
+        loaded: false,
+        data: []
     }
 };

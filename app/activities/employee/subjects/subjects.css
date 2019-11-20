@@ -1,0 +1,6 @@
+@import '../../../common/style/cockpit.css';
+@import '../../../common/style/backActionbar.css';
+
+.image {
+    width: 36;
+}

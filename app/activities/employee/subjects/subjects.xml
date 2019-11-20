@@ -1,0 +1,28 @@
+<Page class="page" actionBarHidden="true" loaded="pageLoaded">
+    <ActionBar></ActionBar>
+
+    <StackLayout>
+        <StackLayout id="actionbar">
+            <FlexboxLayout orientation="horizontal" alignItems="center">
+                <Image tap="back" src="~/icons/arrow-left.png"/>
+                <Label text="Przedmiotys"/>
+            </FlexboxLayout>
+        </StackLayout>
+        <StackLayout>                              
+                <ListView items="{{ subjects }}"
+                        separatorColor="silver" 
+                        class="list-group" row="1" id="listView" height="100%">
+                    <ListView.itemTemplate >
+                        <DockLayout orientation="horizontal"  class="list-group-item" stretchLastChild="false">
+                            <Label text="{{ title }}" textWrap="true" class="title"/>
+                            <StackLayout orientation="horizontal" dock="right">
+                                <Image tap="{{ edit }}" class="image" src="~/icons/pencil.png" />
+                                <Image tap="{{ remove }}" class="image" src="~/icons/delete.png" />
+                            </StackLayout>
+                        </DockLayout>
+
+                    </ListView.itemTemplate>
+                </ListView>
+        </StackLayout>
+    </StackLayout>
+</Page> 

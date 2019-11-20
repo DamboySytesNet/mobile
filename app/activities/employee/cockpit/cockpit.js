@@ -19,16 +19,15 @@ let pageData = new observableModule.fromObject({
     },
     
     goToEmployeeConsultations() {
-        let moduleName = 'activities/employee/consultations/consultations';
-        const navigationEntry = {
-            moduleName: moduleName,
-        };
-
-        frameModule.topmost().navigate(navigationEntry);
+        frameModule.topmost() .navigate(
+            { moduleName: 'activities/employee/consultations/consultations'}
+        );
     },
 
     goToEmployeeSubjects() {
-        //frameModule.topmost().navigate(navigationEntry);
+        frameModule.topmost() .navigate(
+            { moduleName: 'activities/employee/subjects/subjects'}
+        );
     },
 
     goToEmployeeSettings() {
