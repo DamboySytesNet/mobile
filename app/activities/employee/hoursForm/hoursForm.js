@@ -52,15 +52,16 @@ exports.validate = () => {
         alert('Godzina rozpoczęcia nie jest prawidłowa');
         return;
     }
-    if (timeFromM < 0 || timeFromM > 60) {
+    if (timeFromM < 0 || timeFromM >= 60) {
         alert('Minuty rozpoczęcia nie są prawidłowe');
         return;
     }
-    if (timeToH <= 0 || timeToH > 24) {
+    if (timeToH < 0 || timeToH > 24) {
         alert('Godzina zakończenia nie jest prawidłowa');
         return;
     }
-    if (timeToM < 0 || timeToM > 60) {
+
+    if (timeToM < 0 || timeToM >= 60) {
         alert('Minuty zakończenia nie są prawidłowe');
         return;
     }
@@ -86,11 +87,41 @@ exports.validate = () => {
 
     if (pageData.get('editing')) {
         if (el) {
-            el.from = `${timeFromH}:${timeFromM}`;
-            el.to = `${timeToH}:${timeToM}`;
-            el.room = room;
-            el.day = pageData.get('day');
-            page.frame.goBack();
+            let day = pageData.get('day');
+            let dayId = date.daysArray.indexOf(day);
+
+            if (el.from === `${timeFromH}:${timeFromM}` && 
+                el.to === `${timeToH}:${timeToM}` &&
+                el.room === room &&
+                el.day === day
+            ) {
+                page.frame.goBack();
+                return;
+            }
+
+            if (dayId > -1) {
+                HoursManager.set(el.id,
+                                 room,
+                                 dayId + 1, //because index starts from 0, but monday is 1
+                                 `${timeFromH}:${timeFromM}`,
+                                 `${timeToH}:${timeToM}`,
+                                 u.user.token)
+                    .then(() => {
+                        el.from = `${timeFromH}:${timeFromM}`;
+                        el.to = `${timeToH}:${timeToM}`;
+                        el.room = room;
+                        el.day = day;
+
+                        page.frame.goBack();
+                    })
+                    .catch(() => {
+                        alert({
+                            title: 'Uwaga',
+                            message: 'Nie udało się zaktualizować godzin konsultacji!',
+                            okButtonText: 'OK'
+                        });
+                    });
+            }
         } else {
             alert('Wystąpił błąd podczas przetwarzania...');
         }

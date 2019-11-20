@@ -26,20 +26,20 @@ exports.add = (user_id, room, day, timeFrom, timeTo, token) => {
                     if (json.status === 'success') {
                         revoke(json.msg);
                     } else {
-                        console.log('hours.js: 0x34', json);
+                        console.log('hours.js: 0x04', json);
                         reject(json.msg);
                     }
                 } catch(e) {
-                    console.log('hours.js: 0x33');
+                    console.log('hours.js: 0x03');
                     reject('Server error...');
                 }
             } else {
-                console.log('hours.js: 0x32');
+                console.log('hours.js: 0x02');
                 reject('Server error...');
             }
         }, (e) => {
             console.log(e);
-            console.log('hours.js: 0x31');
+            console.log('hours.js: 0x01');
             reject('Server error...');
         });
     });
@@ -87,8 +87,49 @@ exports.get = (id, token) => {
     });
 };
 
-exports.set = (id, room, day, timeFrom, timeTo, token) => {
+exports.set = (id, room, dayId, timeFrom, timeTo, token) => {
+    return new Promise((revoke, reject) => {
+        if (!id || !dayId || !token || !timeFrom || !timeTo) {
+            reject('Niepoprawne żądanie');
+            return;
+        }
 
+        httpModule.request({
+            url: `https://damboy.sytes.net/mk/setHours.php`,
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            content: JSON.stringify({
+                id: id,
+                room: room,
+                day: dayId,
+                timeFrom: timeFrom,
+                timeTo: timeTo,
+                token: token
+            })
+        }).then((res) => {
+            if (res.statusCode === 200) {
+                try {
+                    let json = JSON.parse(res.content);
+                    if (json.status === 'success') {
+                        revoke(json.msg);
+                    } else {
+                        console.log('hours.js: 0x24', json);
+                        reject(json.msg);
+                    }
+                } catch(e) {
+                    console.log('hours.js: 0x23');
+                    reject('Server error...');
+                }
+            } else {
+                console.log('hours.js: 0x22');
+                reject('Server error...');
+            }
+        }, (e) => {
+            console.log(e);
+            console.log('hours.js: 0x21');
+            reject('Server error...');
+        });
+    });
 }
 
 exports.remove = (id, token) => {
