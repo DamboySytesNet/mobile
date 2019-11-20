@@ -9,7 +9,9 @@ const date = require('~/common/data/days');
 /** Hours object to be edited */
 let el = null;
 let page;
+let queue = false;
 
+/** All new data that is to be inserted into object */
 let pageData = new observableModule.fromObject({
     editing: false,
     timeFromH: '',
@@ -20,8 +22,11 @@ let pageData = new observableModule.fromObject({
     day: null
 });
 
-exports.validate = () => {
-
+/**
+ * Validates the user input and
+ * returns object with validated data, or false otherwise
+ */
+function validate() {
     let timeFromH = pageData.get('timeFromH');
     if (timeFromH !== '')
         timeFromH = parseInt(timeFromH);
@@ -50,27 +55,27 @@ exports.validate = () => {
 
     if (timeFromH <= 0 || timeFromH > 24) {
         alert('Godzina rozpoczęcia nie jest prawidłowa');
-        return;
+        return false;
     }
     if (timeFromM < 0 || timeFromM >= 60) {
         alert('Minuty rozpoczęcia nie są prawidłowe');
-        return;
+        return false;
     }
     if (timeToH < 0 || timeToH > 24) {
         alert('Godzina zakończenia nie jest prawidłowa');
-        return;
+        return false;
     }
 
     if (timeToM < 0 || timeToM >= 60) {
         alert('Minuty zakończenia nie są prawidłowe');
-        return;
+        return false;
     }
 
     if (room === null ||
         room.trim().length === 0)
     {
         alert('Podany pokój nie jest prawidłowy');
-        return;
+        return false;
     }
 
     if (timeFromH < 10)
@@ -85,34 +90,58 @@ exports.validate = () => {
     if (timeToM < 10)
         timeToM = `0${timeToM}`;
 
-    if (pageData.get('editing')) {
-        if (el) {
-            let day = pageData.get('day');
-            let dayId = date.daysArray.indexOf(day);
+    let day = pageData.get('day');
+    let dayId = date.daysArray.indexOf(day);
 
-            if (el.from === `${timeFromH}:${timeFromM}` && 
-                el.to === `${timeToH}:${timeToM}` &&
-                el.room === room &&
-                el.day === day
-            ) {
-                page.frame.goBack();
-                return;
-            }
+    if (dayId < 0) {
+        alert('Dzień tygodnia nie jest prawidłowy!');
+        return false;
+    }
 
-            if (dayId > -1) {
+    return {
+        room: room,
+        from: `${timeFromH}:${timeFromM}`,
+        to: `${timeToH}:${timeToM}`,
+        day: day,
+        dayId: dayId + 1 // (+ 1) because index starts from 0, but monday is 1
+    };
+}
+
+/** Add new hours or edit existing ones */
+exports.accept = () => {
+    if (queue)
+        return;
+
+    queue = true;
+    const validated = validate();
+
+    if (validated) {
+        if (pageData.get('editing')) {
+            if (el) {
+                if (el.from === validated.from && 
+                    el.to === validated.to &&
+                    el.room === validated.room &&
+                    el.day === validated.day
+                ) {
+                    page.frame.goBack();
+                    queue = false;
+                    return;
+                }
+
                 HoursManager.set(el.id,
-                                 room,
-                                 dayId + 1, //because index starts from 0, but monday is 1
-                                 `${timeFromH}:${timeFromM}`,
-                                 `${timeToH}:${timeToM}`,
+                                 validated.room,
+                                 validated.dayId,
+                                 validated.from,
+                                 validated.to,
                                  u.user.token)
                     .then(() => {
-                        el.from = `${timeFromH}:${timeFromM}`;
-                        el.to = `${timeToH}:${timeToM}`;
-                        el.room = room;
-                        el.day = day;
+                        el.from = validated.from;
+                        el.to = validated.to;
+                        el.room = validated.room;
+                        el.day = validated.day;
 
                         page.frame.goBack();
+                        queue = false;
                     })
                     .catch(() => {
                         alert({
@@ -120,34 +149,32 @@ exports.validate = () => {
                             message: 'Nie udało się zaktualizować godzin konsultacji!',
                             okButtonText: 'OK'
                         });
+
+                        queue = false;
                     });
+            } else {
+                alert('Wystąpił błąd podczas przetwarzania...');
             }
         } else {
-            alert('Wystąpił błąd podczas przetwarzania...');
-        }
-    } else {
-        let day = pageData.get('day');
-        let dayId = date.daysArray.indexOf(day);
-
-        if (dayId > -1) {
             HoursManager.add(u.user.id,
-                             room,
-                             dayId + 1, //because index starts from 0, but monday is 1
-                             `${timeFromH}:${timeFromM}`,
-                             `${timeToH}:${timeToM}`,
+                             validated.room,
+                             validated.dayId,
+                             validated.from,
+                             validated.to,
                              u.user.token)
                 .then(id => {
                     u.user.hours.data.push(
                         new Hours.new(
                             id, 
-                            `${timeFromH}:${timeFromM}`,
-                            `${timeToH}:${timeToM}`,
-                            pageData.get('day'),
-                            room
+                            validated.from,
+                            validated.to,
+                            validated.day,
+                            validated.room
                         )
                     );
 
                     page.frame.goBack();
+                    queue = false;
                 })
                 .catch(() => {
                     alert({
@@ -155,17 +182,13 @@ exports.validate = () => {
                         message: 'Nie udało się dodać godzin konsultacji!',
                         okButtonText: 'OK'
                     });
+                    queue = false;
                 });
-        } else {
-            alert({
-                title: 'Uwaga',
-                message: 'Dzień nie jest poprawny!',
-                okButtonText: 'OK'
-            });
         }
     }
 }
 
+/** Choosing day dialog */
 exports.chooseDay = () => {
     dialogsModule.action({
         message: "Wybierz dzień",
@@ -178,23 +201,20 @@ exports.chooseDay = () => {
     });
 }
 
+/** 
+ * Fill forms if editing object,
+ * clears everyting if creating new object
+ */
 exports.pageLoaded = (args) => {
     page = args.object;
     const context = page.navigationContext;
 
     if (typeof context !== 'undefined')
         el = u.user.hours.data.find(el => el.id === context.id)
-    else {
-        pageData.set('editing', false);
-        pageData.set('day', 'poniedziałek');
-        pageData.set('timeFromH', '');
-        pageData.set('timeFromM', '');
-        pageData.set('timeToH', '');
-        pageData.set('timeToM', '');
-        pageData.set('room', u.user.room);
-    }
+    else
+        el = null;
 
-    if (el) {
+    if (el !== null) {
         pageData.set('editing', true);
 
         let from = el.from.split(':');
@@ -221,11 +241,20 @@ exports.pageLoaded = (args) => {
         pageData.set('day', el.day);
 
         pageData.set('room', el.room);
+    } else {
+        pageData.set('editing', false);
+        pageData.set('day', 'poniedziałek');
+        pageData.set('timeFromH', '');
+        pageData.set('timeFromM', '');
+        pageData.set('timeToH', '');
+        pageData.set('timeToM', '');
+        pageData.set('room', u.user.room);
     }
     
     page.bindingContext = pageData; 
 }
 
+/** Exit current frame */
 exports.exit = (args) => {
     // let view = args.object;
     // let page = view.page;

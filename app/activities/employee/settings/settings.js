@@ -37,12 +37,14 @@ exports.editRoom = () => {
 exports.acceptEditRoom = () => {
     let room = pageData.get('room');
 
+    // Trim room, if empty set to null
     if (room !== null) {
         room = room.trim();
         if (room === '')
             room = null;
     }
 
+    // Update room
     if (room === null || room.length <= 64) {
         pageData.set('roomProcessing', true);
         pageData.set('roomEditing', false);
@@ -77,21 +79,7 @@ exports.cancelEditRoom = () => {
     pageData.set('room', pageData.get('oldRoom'));
 }
 
-// function deleteHour(page, id) {
-//     console.log(page);
-//     console.log(id);
-//     let it = 0;
-//     for (let el of u.user.hours.data) {
-//         if (el.id === id) {
-//             // TODO
-//             u.user.hours.data.splice(it, 1);
-//             page.getViewById('main-list').refresh();
-//             return;
-//         }
-//         it++;
-//     }
-// }
-
+/** Navigate to 'hoursForm' to add new hour */
 exports.addNewHour = () => {
     const navigationEntry = {
         moduleName: 'activities/employee/hoursForm/hoursForm'
@@ -109,7 +97,6 @@ exports.pageLoaded = (args) => {
 
     // Load data if it is first time opening this activity
     if (!u.user.hours.loaded) {
-        // Set up cache flag
         u.user.hours.loaded = true;
 
         // Get hours from databse
@@ -121,10 +108,8 @@ exports.pageLoaded = (args) => {
                         new Hours.new(hour.id, hour.timeFrom, hour.timeTo, hour.day, hour.room)
                     );
 
-                // Hide loading
                 pageData.set('loading', false);
 
-                // Refresh ListView
                 page.getViewById('main-list').refresh();
             })
             .catch(() => {
@@ -132,23 +117,16 @@ exports.pageLoaded = (args) => {
                 page.frame.goBack();
             });
     } else { // Use cache otherwise
-        //Hide loading
         pageData.set('loading', false);
     }
 
-    // Set up two way binding on hours
     pageData.set('hours', u.user.hours.data);
-
-    // Set binding context
     page.bindingContext = pageData;
-
-    // Refresh ListView
+    
     page.getViewById('main-list').refresh();
 }
 
 /** Go back */
-exports.exit = (args) => {
-    // let view = args.object;
-    // let page = view.page;
+exports.exit = () => {
     page.frame.goBack();
 }
