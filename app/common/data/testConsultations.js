@@ -16,14 +16,14 @@ exports.testConsultations = [
     {
         id: 2,
         subject: 'Podstawy sieci komputerowych',
-        teacher: 'Bł Dziuba',
+        teacher: 'Błażej Dziuba',
         room: 270,
         date: new Date(2019, 9, 25, 10, 30).toString(),
     },
     {
         id: 4,
-        subject: 'Podstawy grafiki komputerowej',
-        teacher: 'Napieralski',
+        subject: 'Analiza danych',
+        teacher: 'Piotr Szczepaniak',
         room: 270,
         date: new Date(2019, 9, 26, 8, 30).toString(),
         
@@ -31,7 +31,7 @@ exports.testConsultations = [
     {
         id: 5,
         subject: 'Inżynieria oprogramowania',
-        teacher: 'Chyba Nowak',
+        teacher: 'Michał Pawlak',
         room: 271,
         date: new Date(2019, 10, 4, 11, 0).toString(),
         
