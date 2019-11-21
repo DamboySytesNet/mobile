@@ -29,6 +29,7 @@
                 <Label text="Status: " />
                 <Label text="{{ consultation.state }}" />
             </DockLayout>
+            <Button tap="deleteConsultation" text="Wypisz się z Konsultacji"/>
         </StackLayout>
 
     </StackLayout>
