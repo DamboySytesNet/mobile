@@ -23,8 +23,7 @@ exports.new = class eH extends Hours.new {
     }
 
     remove(args) {
-        let view = args.view;
-        let page = view.page;
+        let page = args.view.page;
 
         dialogs.confirm('Czy na pewno usunąć te godziny?').then((result) => {
             if (result) {
