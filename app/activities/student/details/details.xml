@@ -4,7 +4,7 @@
         <StackLayout id="actionbar">
             <FlexboxLayout tap="exit" orientation="horizontal" alignItems="center">
                 <Image src="~/icons/arrow-left.png" dock="left" />
-                <Label text="Konsultacje" dock="left" />
+                <Label text="Konsultacja" dock="left" />
             </FlexboxLayout>
         </StackLayout>
 
@@ -23,7 +23,7 @@
                 </DockLayout>
             <DockLayout>
                 <Label text="Zapisano dnia: " />
-                <Label text="{{ consultation.date }}" />
+                <Label text="{{ consultation.dateStr }}" />
             </DockLayout>
             <DockLayout>
                 <Label text="Status: " />

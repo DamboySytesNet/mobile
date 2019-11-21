@@ -49,7 +49,7 @@ exports.onPageLoaded = (args) => {
 function loadConsultations() {
     let consultationObjectsList = []
     for(let con of test.testConsultations) {
-        consultationObjectsList.push(new Consultation.Cons(con.id, con.subject, con.teacher, con.room, con.date, null, null));
+        consultationObjectsList.push(new Consultation.Cons(con.id, con.subject, con.teacher, con.room, con.date, 'oczekujący', null));
     }
     return consultationObjectsList;
 }
