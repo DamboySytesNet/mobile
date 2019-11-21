@@ -5,7 +5,7 @@
         <StackLayout id="actionbar">
             <FlexboxLayout tap="exit" orientation="horizontal" alignItems="center">
                 <Image src="~/icons/arrow-left.png" dock="left"/>
-                <Label text="Powrót" dock="left"/>
+                <Label text="Ustawienia" dock="left"/>
             </FlexboxLayout>
         </StackLayout>
 
@@ -26,10 +26,10 @@
                            isEnabled="{{ roomEditing }}"
                            flexGrow="1"/>
                 <StackLayout orientation="horizontal">
-                    <Image tap="editRoom" visibility="{{ roomEditing || roomProcessign ? 'collapse' : 'visible' }}" src="~/icons/pencil.png" />
+                    <Image tap="editRoom" visibility="{{ roomEditing || roomProcessing ? 'collapse' : 'visible' }}" src="~/icons/pencil.png" />
                     <Image tap="acceptEditRoom" visibility="{{ roomEditing ? 'visible' : 'collapse' }}" src="~/icons/check.png" />
                     <Image tap="cancelEditRoom" visibility="{{ roomEditing ? 'visible' : 'collapse' }}" src="~/icons/cross.png" />
-                    <ActivityIndicator visibility="{{ roomProcessign ? 'visible' : 'collapse' }}" busy="{{ roomProcessign }}"/>
+                    <ActivityIndicator visibility="{{ roomProcessing ? 'visible' : 'collapse' }}" busy="{{ roomProcessing }}"/>
                 </StackLayout>
             </FlexboxLayout>
 

@@ -16,4 +16,5 @@ exports.user = {
         loaded: false,
         data: []
     },
+    page: null
 };

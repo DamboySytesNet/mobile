@@ -39,7 +39,7 @@
         </ScrollView>
 
         <DockLayout id="buttons" stretchLastChild="false">
-            <Button tap="validate" id="btn-ok" dock="right" text="Zatwierdź"/>
+            <Button tap="accept" id="btn-ok" dock="right" text="Zatwierdź"/>
             <Button tap="exit" id="btn-cancel" dock="right" text="Anuluj"/>
         </DockLayout>
     </FlexboxLayout>
