@@ -3,7 +3,7 @@ const frameModule = require('tns-core-modules/ui/frame');
 const listViewModule = require('tns-core-modules/ui/list-view');
 const dialogsModule = require('tns-core-modules/ui/dialogs');
 const u = require('~/common/data/user');
-const Subject = require('~/common/dataTypes/Subject');
+const esubject = require('~/common/dataTypes/EmployeeSubject');
 
 let pageData = new observableModule.fromObject({
     subjects: []
@@ -16,13 +16,13 @@ let testSubjects = [
         semester: 1,
         employees: [{
             id: 2,
-            name: 'Kowalski',
-            surname: 'Jan'
+            name: 'Jan',
+            surname: 'Kowalski'
         },
         {
             id: 3,
-            name: 'aaa',
-            surname: 'Jabbbn'
+            name: 'Tomasz',
+            surname: 'Grela'
         }
     ],
     },
@@ -30,13 +30,32 @@ let testSubjects = [
         id: 2,
         title: 'Analiza danych',
         semester: 3,
-        employees: []
+        employees: [
+        {
+            id: 3,
+            name: 'Andrzej',
+            surname: 'Andrzejewski'
+        }]
     },
     {
         id: 3,
         title: 'Matematyka dyskretna',
         semester: 2,
-        employees: []
+        employees: [{
+            id: 2,
+            name: 'Jan',
+            surname: 'Kowalski'
+        },
+        {
+            id: 3,
+            name: 'Tomasz',
+            surname: 'Grela'
+        },
+        {
+            id: 5,
+            name: 'Ewa',
+            surname: 'Jabłoń'
+        }]
     },
     {
         id: 4,
@@ -48,7 +67,11 @@ let testSubjects = [
         id: 5,
         title: 'Fizyka 2',
         semester: 2,
-        employees: []
+        employees: [        {
+            id: 5,
+            name: 'Ewa',
+            surname: 'Jabłoń'
+        }]
     },
 ]
 
@@ -67,31 +90,20 @@ exports.pageLoaded = (args) => {
     }
     pageData.set('subjects', u.user.subjects.data);
     page.bindingContext = pageData;
-    list = page.getViewById('list');
     listView = page.getViewById('listView');
 }
 
 function loadEmployeeSubjects(subjects) {
     const tmp = [];
     for(let it of subjects) {
-        tmp.push(new Subject.new(it.id, it.title, it.semester, it.employees));
+        tmp.push(new esubject.new(it.id, it.title, it.semester, it.employees, false, 54 * it.employees.length));
     }
     return tmp;
 }
 
-// exports.edit = (args) => {
-
-// }
-
-// exports.delete = (args) => {
-//     let id = parseInt(args.object.index, 10);
-
-//     for (let i = 0; i < pageData.subjects.length; i++) {
-//         if (pageData.subjects[i].id === id) {
-//             pageData.subjects.splice(i, 1);
-//             break;
-//         }
-//       }
-
-//     listView.refresh();
-// }
+exports.changeIsOpen = (args) => {
+    let id = parseInt(args.object.index, 10);
+    let tmp = pageData.subjects.find(el => el.id === id);
+    if (tmp) tmp.isOpen = !tmp.isOpen;
+    listView.refresh();
+}

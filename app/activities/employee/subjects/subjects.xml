@@ -14,21 +14,24 @@
                     class="list-group" row="1" id="listView">
                     <ListView.itemTemplate >
                         <StackLayout class="list-group-item">
-                            <DockLayout orientation="horizontal">
+                            <DockLayout class="listHeader" orientation="horizontal" stretchLastChild="false" tap="changeIsOpen" index="{{ id }}">
+                                <Image class="imgList" src="~/icons/arrow-down.png " visibility="{{ !isOpen ? 'visible' : 'collapse'}}"/>
+                                <Image class="imgList" src="~/icons/arrow-up.png"  visibility="{{ isOpen ? 'visible' : 'collapse'}}"/>
                                 <Label text="{{ title }}" textWrap="true" class="title"/>
-                                <Image tap="delete" id="expandImg" src="~/icons/cross.png" dock="right"/>
                             </DockLayout>
-                            <ListView items="{{ employees }}" visibility="{{ isOpen ? 'visible' : collapse}}"
-                                    separatorColor="silver" 
-                                    row="2" height="120">
+                            <StackLayout visibility="{{ isOpen ? 'visible' : 'collapse'}}" >
+                                <ListView items="{{ employees }}" separatorColor="silver" 
+                                    row="2" height="{{ height }}" class="employeesList">
+                                    
                                     <ListView.itemTemplate>
                                         <StackLayout class="list-group-item">
-                                            <Label text="{{ 'Kto: ' + name + ' '+ surname }}" textWrap="true" class="title"/>
+                                             <Label text="{{ name + ' '+ surname }}" textWrap="true" class="title"/>
                                         </StackLayout>
 
-                                    </ListView.itemTemplate>
-                            </ListView>
-                            <Image tap="delete" id="plusImg" index ="{{ id }}" src="~/icons/plus.png"/>
+                                     </ListView.itemTemplate>
+                                </ListView>
+                                <Button tap="sign" class="signButton" index ="{{ id }}" text="Zapisz się na przedmiot" />
+                            </StackLayout>
                         </StackLayout>
                     </ListView.itemTemplate>
                 </ListView>
