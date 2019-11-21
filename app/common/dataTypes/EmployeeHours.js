@@ -3,7 +3,7 @@ const frameModule = require('tns-core-modules/ui/frame');
 
 const u = require('~/common/data/user');
 const Hours = require("~/common/dataTypes/Hours");
-const HoursManager = require("~/modules/request/hours");
+const HoursManager = require("~/modules/request/hoursHttpRequests");
 
 
 exports.new = class eH extends Hours.new {

@@ -2,7 +2,7 @@ const observableModule = require("tns-core-modules/data/observable");
 const dialogsModule = require("tns-core-modules/ui/dialogs");
 
 const Hours = require("~/common/dataTypes/EmployeeHours");
-const HoursManager = require("~/modules/request/hours");
+const HoursManager = require("~/modules/request/hoursHttpRequests");
 const u = require('~/common/data/user');
 const date = require('~/common/data/days');
 
@@ -123,8 +123,8 @@ exports.accept = () => {
                     el.room === validated.room &&
                     el.day === validated.day
                 ) {
-                    page.frame.goBack();
                     queue = false;
+                    page.frame.goBack();
                     return;
                 }
 
@@ -140,8 +140,8 @@ exports.accept = () => {
                         el.room = validated.room;
                         el.day = validated.day;
 
-                        page.frame.goBack();
                         queue = false;
+                        page.frame.goBack();
                     })
                     .catch(() => {
                         alert({
@@ -173,8 +173,8 @@ exports.accept = () => {
                         )
                     );
 
-                    page.frame.goBack();
                     queue = false;
+                    page.frame.goBack();
                 })
                 .catch(() => {
                     alert({
@@ -185,7 +185,8 @@ exports.accept = () => {
                     queue = false;
                 });
         }
-    }
+    } else
+        queue = false;
 }
 
 /** Choosing day dialog */

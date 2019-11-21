@@ -4,8 +4,8 @@ const frameModule = require('tns-core-modules/ui/frame');
 
 // Import custom modules / datatypes
 const u = require('~/common/data/user');
-const RoomManager = require('~/modules/request/room');
-const HoursManager = require("~/modules/request/hours");
+const RoomManager = require('~/modules/request/roomHttpRequests');
+const HoursManager = require("~/modules/request/hoursHttpRequests");
 const Hours = require("~/common/dataTypes/EmployeeHours");
 
 /** Two way binding */
