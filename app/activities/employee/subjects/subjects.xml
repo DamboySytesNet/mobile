@@ -30,7 +30,7 @@
 
                                      </ListView.itemTemplate>
                                 </ListView>
-                                <Button tap="sign" class="signButton" index ="{{ id }}" text="Zapisz się na przedmiot" />
+                                <Button tap="sign" class="signButton" index ="{{ id }}" text="Zapisz się" />
                             </StackLayout>
                         </StackLayout>
                     </ListView.itemTemplate>
