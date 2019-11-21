@@ -13,27 +13,42 @@ let testSubjects = [
     {
         id: 1,
         title: 'Podstawy programowania',
-        desc: 'blavlbalal'
+        semester: 1,
+        employees: [{
+            id: 2,
+            name: 'Kowalski',
+            surname: 'Jan'
+        },
+        {
+            id: 3,
+            name: 'aaa',
+            surname: 'Jabbbn'
+        }
+    ],
     },
     {
         id: 2,
         title: 'Analiza danych',
-        desc: 'blavlbalal fasfa faf'
+        semester: 3,
+        employees: []
     },
     {
         id: 3,
         title: 'Matematyka dyskretna',
-        desc: 'blavlbalal'
+        semester: 2,
+        employees: []
     },
     {
         id: 4,
         title: 'Fizyka 1',
-        desc: 'blavlbalal fasfa faf'
+        semester: 1,
+        employees: []
     },
     {
         id: 5,
         title: 'Fizyka 2',
-        desc: 'blavlbalal fasfa faf'
+        semester: 2,
+        employees: []
     },
 ]
 
@@ -59,24 +74,24 @@ exports.pageLoaded = (args) => {
 function loadEmployeeSubjects(subjects) {
     const tmp = [];
     for(let it of subjects) {
-        tmp.push(new Subject.new(it.id, it.title, it.desc));
+        tmp.push(new Subject.new(it.id, it.title, it.semester, it.employees));
     }
     return tmp;
 }
 
-exports.edit = (args) => {
+// exports.edit = (args) => {
 
-}
+// }
 
-exports.delete = (args) => {
-    let id = parseInt(args.object.index, 10);
+// exports.delete = (args) => {
+//     let id = parseInt(args.object.index, 10);
 
-    for (let i = 0; i < pageData.subjects.length; i++) {
-        if (pageData.subjects[i].id === id) {
-            pageData.subjects.splice(i, 1);
-            break;
-        }
-      }
+//     for (let i = 0; i < pageData.subjects.length; i++) {
+//         if (pageData.subjects[i].id === id) {
+//             pageData.subjects.splice(i, 1);
+//             break;
+//         }
+//       }
 
-    listView.refresh();
-}
+//     listView.refresh();
+// }

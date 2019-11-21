@@ -1,6 +1,15 @@
 @import '../../../common/style/cockpit.css';
 @import '../../../common/style/backActionbar.css';
 
-.image {
-    width: 36;
+#plusImg {
+    background: #9f3b3b;
+    border-radius: 100%;
+    width: 80%;
+    height: 40;
+    padding: 4 4;
+    margin-top: 20;
+    margin-bottom: 10;
+}
+#expandImg {
+    width: 23;
 }

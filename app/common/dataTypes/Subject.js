@@ -1,7 +1,8 @@
 exports.new = class Subject {
-    constructor(id, title, desc) {
+    constructor(id, title, semester, employees) {
         this.id = id;
         this.title = title;
-        this.desc = desc;
+        this.semester = semester;
+        this.employees = employees;
     };
 }
