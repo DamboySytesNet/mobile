@@ -17,7 +17,7 @@
                         
                         <ListView items="{{ cons }}" height="100">
                             <ListView.itemTemplate> 
-                                <DockLayout>
+                                <DockLayout index="{{ id }}" tap="goToDetails">
                                     <Label text="{{ timeStr }}" dock="right"/>
                                     <Label text="{{ teacher }}" dock="left"/>
                                 </DockLayout>

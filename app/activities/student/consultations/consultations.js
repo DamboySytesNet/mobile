@@ -1,5 +1,6 @@
 const observableModule = require("tns-core-modules/data/observable");
 const listViewModule = require("tns-core-modules/ui/list-view");
+const frameModule = require('tns-core-modules/ui/frame');
 const Consultation = require("~/common/dataTypes/Consultation");
 const u = require('~/common/data/user');
 // only for test purposes
@@ -15,6 +16,21 @@ exports.exit = (args) => {
     
     page.frame.goBack();
 }
+
+exports.goToDetails = (args) => {
+    const page = args.object.page;
+    const moduleName = 'activities/student/details/details';
+    const id = args.object.index;
+    // alert(args.object.index);
+    const navigationEntry = {
+        moduleName: moduleName,
+        context: {
+            consultationId: id
+        }
+    }
+
+    page.frame.navigate(navigationEntry);
+} 
 
 exports.onPageLoaded = (args) => {
     const page = args.object;

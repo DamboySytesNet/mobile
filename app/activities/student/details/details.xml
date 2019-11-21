@@ -1,0 +1,35 @@
+<Page class="page" actionBarHidden="true" loaded="onPageLoaded">
+    <ActionBar></ActionBar>
+    <StackLayout>
+        <StackLayout id="actionbar">
+            <FlexboxLayout tap="exit" orientation="horizontal" alignItems="center">
+                <Image src="~/icons/arrow-left.png" dock="left" />
+                <Label text="Konsultacje" dock="left" />
+            </FlexboxLayout>
+        </StackLayout>
+
+        <StackLayout>
+            <DockLayout>
+                <Label text="Prowadzący: " />
+                <Label text="{{ consultation.teacher }}" />
+            </DockLayout>
+            <DockLayout>
+                <Label text="Godzina: " />
+                <Label text="{{ consultation.timeStr }}" />
+            </DockLayout>
+            <DockLayout>
+                    <Label text="Pokój: " />
+                    <Label text="{{ consultation.room }}" />
+                </DockLayout>
+            <DockLayout>
+                <Label text="Zapisano dnia: " />
+                <Label text="{{ consultation.date }}" />
+            </DockLayout>
+            <DockLayout>
+                <Label text="Status: " />
+                <Label text="{{ consultation.state }}" />
+            </DockLayout>
+        </StackLayout>
+
+    </StackLayout>
+</Page>
