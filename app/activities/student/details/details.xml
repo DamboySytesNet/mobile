@@ -1,36 +1,38 @@
 <Page class="page" actionBarHidden="true" loaded="onPageLoaded">
     <ActionBar></ActionBar>
-    <StackLayout>
-        <StackLayout id="actionbar">
+    <DockLayout>
+        <StackLayout id="actionbar" dock="top">
             <FlexboxLayout tap="exit" orientation="horizontal" alignItems="center">
-                <Image src="~/icons/arrow-left.png" dock="left" />
-                <Label text="Konsultacja" dock="left" />
+                <Image src="~/icons/arrow-left.png" />
+                <Label text="Konsultacja" />
             </FlexboxLayout>
         </StackLayout>
 
-        <StackLayout>
-            <DockLayout>
-                <Label text="Prowadzący: " />
-                <Label text="{{ consultation.teacher }}" />
-            </DockLayout>
-            <DockLayout>
-                <Label text="Godzina: " />
-                <Label text="{{ consultation.timeStr }}" />
-            </DockLayout>
-            <DockLayout>
-                    <Label text="Pokój: " />
-                    <Label text="{{ consultation.room }}" />
-                </DockLayout>
-            <DockLayout>
-                <Label text="Zapisano dnia: " />
-                <Label text="{{ consultation.dateStr }}" />
-            </DockLayout>
-            <DockLayout>
-                <Label text="Status: " />
-                <Label text="{{ consultation.state }}" />
-            </DockLayout>
-            <Button tap="deleteConsultation" text="Wypisz się z Konsultacji"/>
-        </StackLayout>
-
-    </StackLayout>
+        <ScrollView dock="top" orientation="vertical" height="80%">
+            <StackLayout>
+                <StackLayout class="labelGroup">
+                    <Label text="Prowadzący: " />
+                    <Label class="info" text="{{ consultation.teacher }}" />
+                </StackLayout>
+                <StackLayout class="labelGroup">
+                    <Label text="Godzina: " />
+                    <Label class="info" text="{{ consultation.timeStr }}" />
+                </StackLayout>
+                <StackLayout class="labelGroup">
+                        <Label text="Pokój: " />
+                        <Label class="info" text="{{ consultation.room }}" />
+                </StackLayout>
+                <StackLayout class="labelGroup">
+                    <Label text="Zapisano dnia: " />
+                    <Label class="info" text="{{ consultation.dateStr }}" />
+                </StackLayout>
+                <StackLayout class="labelGroup">
+                    <Label text="Status: " />
+                    <!--Tutaj później można zrobić różne kolory w zależności od stanu-->
+                    <Label class="info" text="{{ consultation.state }}" />
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+        <Button class="signOutButton" tap="deleteConsultation" text="Wypisz się z Konsultacji"/>
+    </DockLayout>
 </Page>

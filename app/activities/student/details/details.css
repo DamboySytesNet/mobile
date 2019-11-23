@@ -1,1 +1,29 @@
 @import '../../../common/style/backActionbar.css';
+
+.info {
+    font-weight: bold;
+}
+
+.labelGroup {
+    padding-top: 10;
+    padding-bottom: 10;
+    border-style: dotted;
+    border-width: 3;
+    /* Work-around - display only bottom border line*/
+    border-color: white white gray white;
+}
+
+.labelGroup > Label {
+    font: 24 "OpenSans";
+    text-align: center;
+}
+
+.signOutButton {
+    font: 24 "OpenSans";
+    font-weight: bold;
+    background-color: #9f3b3b;
+    color: aliceblue;
+    height: 20%;
+    vertical-align: bottom;
+    border-radius: 1;
+}
