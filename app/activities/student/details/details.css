@@ -1,9 +1,5 @@
 @import '../../../common/style/backActionbar.css';
 
-.info {
-    font-weight: bold;
-}
-
 .labelGroup {
     padding-top: 10;
     padding-bottom: 10;
@@ -13,10 +9,14 @@
     border-color: white white gray white;
 }
 
-.labelGroup > Label {
-    font: 24 "OpenSans";
-    text-align: center;
-}
+    .labelGroup > Label {
+        font: 24 "OpenSans";
+        text-align: center;
+    }
+
+    .info {
+        font-weight: bold;
+    }
 
 .signOutButton {
     font: 24 "OpenSans";
