@@ -1,0 +1,41 @@
+<Page class="page" actionBarHidden="true" loaded="onPageLoaded">
+    <ActionBar></ActionBar>
+    <FlexboxLayout flexDirection="column">
+        <StackLayout id="actionbar">
+            <FlexboxLayout tap="exit" orientation="horizontal" alignItems="center">
+                <Image src="~/icons/arrow-left.png" />
+                <Label text="Konsultacja" />
+            </FlexboxLayout>
+        </StackLayout>
+
+        <ScrollView flexGrow="1" orientation="vertical">
+            <FlexboxLayout flexDirection="column"
+                           alignItems="center"
+                           justifyContent="center">
+                <StackLayout class="labelGroup">
+                    <Label class="title" text="Prowadzący" />
+                    <Label class="info" text="{{ consultation.teacher }}" />
+                </StackLayout>
+                <StackLayout class="labelGroup">
+                    <Label class="title" text="Godzina" />
+                    <Label class="info" text="{{ consultation.timeStr }}" />
+                </StackLayout>
+                <StackLayout class="labelGroup">
+                    <Label class="title" text="Pokój" />
+                    <Label class="info" text="{{ consultation.room }}" />
+                </StackLayout>
+                <StackLayout class="labelGroup">
+                    <Label class="title" text="Zapisano dnia: " />
+                    <Label class="info" text="{{ consultation.dateStr }}" />
+                </StackLayout>
+                <StackLayout class="labelGroup">
+                    <Label class="title" text="Status" />
+                    <!--Tutaj później można zrobić różne kolory w zależności od stanu-->
+                    <Label class="info" text="{{ consultation.state }}" />
+                </StackLayout>
+            </FlexboxLayout>
+        </ScrollView>
+
+        <Button class="signOutButton" tap="deleteConsultation" text="Wypisz się"/>
+    </FlexboxLayout>
+</Page>

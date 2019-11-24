@@ -1,0 +1,29 @@
+@import '../../../common/style/backActionbar.css';
+
+.labelGroup {
+    padding-top: 10;
+    padding-bottom: 20;
+}
+
+    .labelGroup > Label {
+        text-align: center;
+        font-family: "OpenSans";
+    }
+
+    .title {
+        font-size: 16;
+    }
+    .info {
+        font-size: 28;
+        font-weight: 800;
+    }
+
+.signOutButton {
+    font: 22 "OpenSans";
+    font-weight: bold;
+    background-color: #9f3b3b;
+    color: aliceblue;
+    height: 60;
+    vertical-align: bottom;
+    border-radius: 1;
+}
