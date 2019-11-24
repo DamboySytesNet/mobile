@@ -1,38 +1,41 @@
 <Page class="page" actionBarHidden="true" loaded="onPageLoaded">
     <ActionBar></ActionBar>
-    <DockLayout>
-        <StackLayout id="actionbar" dock="top">
+    <FlexboxLayout flexDirection="column">
+        <StackLayout id="actionbar">
             <FlexboxLayout tap="exit" orientation="horizontal" alignItems="center">
                 <Image src="~/icons/arrow-left.png" />
                 <Label text="Konsultacja" />
             </FlexboxLayout>
         </StackLayout>
 
-        <ScrollView dock="top" orientation="vertical" height="80%">
-            <StackLayout>
+        <ScrollView flexGrow="1" orientation="vertical">
+            <FlexboxLayout flexDirection="column"
+                           alignItems="center"
+                           justifyContent="center">
                 <StackLayout class="labelGroup">
-                    <Label text="Prowadzący: " />
+                    <Label class="title" text="Prowadzący" />
                     <Label class="info" text="{{ consultation.teacher }}" />
                 </StackLayout>
                 <StackLayout class="labelGroup">
-                    <Label text="Godzina: " />
+                    <Label class="title" text="Godzina" />
                     <Label class="info" text="{{ consultation.timeStr }}" />
                 </StackLayout>
                 <StackLayout class="labelGroup">
-                        <Label text="Pokój: " />
-                        <Label class="info" text="{{ consultation.room }}" />
+                    <Label class="title" text="Pokój" />
+                    <Label class="info" text="{{ consultation.room }}" />
                 </StackLayout>
                 <StackLayout class="labelGroup">
-                    <Label text="Zapisano dnia: " />
+                    <Label class="title" text="Zapisano dnia: " />
                     <Label class="info" text="{{ consultation.dateStr }}" />
                 </StackLayout>
                 <StackLayout class="labelGroup">
-                    <Label text="Status: " />
+                    <Label class="title" text="Status" />
                     <!--Tutaj później można zrobić różne kolory w zależności od stanu-->
                     <Label class="info" text="{{ consultation.state }}" />
                 </StackLayout>
-            </StackLayout>
+            </FlexboxLayout>
         </ScrollView>
-        <Button class="signOutButton" tap="deleteConsultation" text="Wypisz się z Konsultacji"/>
-    </DockLayout>
+
+        <Button class="signOutButton" tap="deleteConsultation" text="Wypisz się"/>
+    </FlexboxLayout>
 </Page>
