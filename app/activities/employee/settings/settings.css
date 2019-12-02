@@ -20,7 +20,6 @@
         padding: 0 20;
     }
         #main-defaultRoom > Label {
-            margin-top: 12;
             font-size: 18;
         }
         #main-defaultRoom > TextField {
