@@ -12,10 +12,16 @@ let pageData = new observableModule.fromObject({
         const navigationEntry = {
             moduleName: moduleName
         };
-        // alert("alert!");
+        frameModule.topmost().navigate(navigationEntry);
+    },
+
+    goToSearch() {
+        let moduleName = 'activities/student/search/search';
+        const navigationEntry = {
+            moduleName: moduleName
+        };
         frameModule.topmost().navigate(navigationEntry);
     }
-
 });
 
 exports.exit = (args) => {

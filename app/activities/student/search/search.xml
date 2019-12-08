@@ -1,0 +1,22 @@
+<Page class="page" actionBarHidden="true" loaded="onPageLoaded">
+    <ActionBar title="Search"></ActionBar>
+    <StackLayout>
+        <StackLayout id="actionbar">
+            <FlexboxLayout tap="exit" orientation="horizontal" alignItems="center">
+                    <Image src="~/icons/arrow-left.png" dock="left"/>
+                    <Label text="Prowadzący" dock="left"/>
+            </FlexboxLayout>
+        </StackLayout>
+
+        <StackLayout>
+            <ListView items="{{ teachers }}">
+                <ListView.itemTemplate>
+                    <DockLayout>
+                            <Label text="{{ timeStr }}" dock="right"/>
+                            <Label text="{{ name }}" dock="left"/>
+                    </DockLayout>
+                </ListView.itemTemplate>
+            </ListView>
+        </StackLayout>
+    </StackLayout>
+</Page>

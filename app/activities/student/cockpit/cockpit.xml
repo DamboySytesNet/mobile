@@ -24,7 +24,7 @@
                     <Image dock="top" src="~/images/book.png" />
                 </DockLayout>
 
-                <DockLayout backgroundColor="#36C6A3" row="0" col="1" class="mainContent-post" stretchLastChild="false" >
+                <DockLayout tap="{{ goToSearch }}" backgroundColor="#36C6A3" row="0" col="1" class="mainContent-post" stretchLastChild="false" >
                     <Label dock="bottom" text="Prowadzący" />
                     <Image dock="top" src="~/images/person.png" />
                 </DockLayout>
