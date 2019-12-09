@@ -4,14 +4,14 @@
         <StackLayout id="actionbar">
             <FlexboxLayout tap="exit" orientation="horizontal" alignItems="center">
                     <Image src="~/icons/arrow-left.png" dock="left"/>
-                    <Label text="Prowadzący" dock="left"/>
+                    <Label text="Prowadzącyy" dock="left"/>
             </FlexboxLayout>
         </StackLayout>
 
         <StackLayout>
             <ListView items="{{ teachers }}">
                 <ListView.itemTemplate>
-                    <DockLayout>
+                    <DockLayout class="teacher" tap="goToTeacherDetails" hourId="{{ id }}">
                             <Label text="{{ timeStr }}" dock="right"/>
                             <Label text="{{ name }}" dock="left"/>
                     </DockLayout>

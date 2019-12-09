@@ -1,0 +1,37 @@
+<Page class="page" actionBarHidden="true" loaded="onPageLoaded">
+    <ActionBar title="teacher"></ActionBar>
+    <StackLayout>
+        <StackLayout id="actionbar">
+            <FlexboxLayout tap="exit" orientation="horizontal" alignItems="center">
+                    <Image src="~/icons/arrow-left.png" dock="left"/>
+                    <Label text="Zapisz się" dock="left"/>
+            </FlexboxLayout>
+        </StackLayout>
+
+    <ScrollView flexGrow="1" orientation="vertical">
+            <FlexboxLayout flexDirection="column"
+                           alignItems="center"
+                           justifyContent="center">
+                <StackLayout class="labelGroup">
+                    <Label class="title" text="Prowadzący" />
+                    <Label class="info" text="{{ data.name }}" />
+                </StackLayout>
+                <StackLayout class="labelGroup">
+                    <Label class="title" text="Godzina" />
+                    <Label class="info" text="{{ data.timeStr }}" />
+                </StackLayout>
+                <StackLayout class="labelGroup">
+                    <Label class="title" text="Pokój" />
+                    <Label class="info" text="{{ data.room }}" />
+                </StackLayout>
+                <StackLayout class="labelGroup">
+                    <Label class="title" text="Dzień tygodnia: " />
+                    <Label class="info" text="{{ data.time.day }}" />
+                </StackLayout>
+            </FlexboxLayout>
+        </ScrollView>
+
+        <Button class="signOutButton" text="Zapisz się"/>
+
+    </StackLayout>
+</Page>

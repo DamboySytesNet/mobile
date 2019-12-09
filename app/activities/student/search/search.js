@@ -19,3 +19,16 @@ exports.onPageLoaded = (args) => {
 exports.exit = (args) => {
     page.frame.goBack();
 }
+
+exports.goToTeacherDetails = (args) => {
+    const moduleName = 'activities/student/search/teacherDetails/teacherDetails';
+    const hour = test.testTeachers.find(teacher => teacher.id === args.object.hourId);
+
+    const navigationEntry = {
+        moduleName: moduleName,
+        context: {
+            data: hour
+        }
+    }
+    page.frame.navigate(navigationEntry);
+}

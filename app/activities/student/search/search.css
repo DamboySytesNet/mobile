@@ -1,1 +1,8 @@
 @import '../../../common/style/backActionbar.css';
+
+.teacher {
+    background-color: gainsboro;
+    font: 20;
+    font-family: "OpenSans";
+    margin: 10 10 10 10;
+}
