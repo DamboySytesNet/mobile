@@ -22,8 +22,7 @@ exports.onPageLoaded = (args) => {
         }
         consultationList.push(...consultations);
     }
-
-    alert(JSON.stringify(consultationList));
+    // alert(JSON.stringify(consultationList));
 
     pageData.set('consultations', consultationList);
     page.bindingContext = pageData;
@@ -35,12 +34,22 @@ exports.exit = (args) => {
 
 exports.goToTeacherDetails = (args) => {
     const moduleName = 'activities/student/search/teacherDetails/teacherDetails';
-    const hour = test.testTeachers.find(teacher => teacher.id === args.object.hourId);
+    const hour = pageData.get("consultations").find(el => el.id == args.object.hourId);
+    let emp = null;
+    for (let t of test.testTeachers) {
+       for (let ct of t.consultationTimes) {
+           if (ct.id === hour.id) {
+               emp = t;
+               break;
+           }
+       }
+    }
 
     const navigationEntry = {
         moduleName: moduleName,
         context: {
-            data: hour
+            data: hour,
+            employee: emp
         }
     }
     page.frame.navigate(navigationEntry);

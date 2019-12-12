@@ -1,4 +1,4 @@
-<Page class="page" actionBarHidden="true" loaded="onPageLoaded">
+<Page class="page" actionBarHidden="true" loaded="onPageLoaded" xmlns:dd="nativescript-drop-down">
     <ActionBar title="teacher"></ActionBar>
     <StackLayout>
         <StackLayout id="actionbar">
@@ -14,24 +14,29 @@
                            justifyContent="center">
                 <StackLayout class="labelGroup">
                     <Label class="title" text="Prowadzący" />
-                    <Label class="info" text="{{ data.name }}" />
+                    <Label class="info" text="{{ data.employee.name }}" />
                 </StackLayout>
                 <StackLayout class="labelGroup">
                     <Label class="title" text="Godzina" />
-                    <Label class="info" text="{{ data.timeStr }}" />
+                    <Label class="info" text="{{ data.hour.timeStr }}" />
                 </StackLayout>
                 <StackLayout class="labelGroup">
                     <Label class="title" text="Pokój" />
-                    <Label class="info" text="{{ data.room }}" />
+                    <Label class="info" text="{{ data.employee.room }}" />
                 </StackLayout>
                 <StackLayout class="labelGroup">
                     <Label class="title" text="Dzień tygodnia: " />
-                    <Label class="info" text="{{ data.time.day }}" />
+                    <Label class="info" text="{{ data.hour.day }}" />
+                </StackLayout>
+                <StackLayout class="labelGroup"> 
+                    <Label class="title" text="Przedmiot "/>
+                    <Button text="Wybierz przedmiot" tap="chooseSubject"/>
+                    <Label class="info" text="{{ chosenSubject }} "/>
                 </StackLayout>
             </FlexboxLayout>
         </ScrollView>
 
-        <Button class="signOutButton" text="Zapisz się"/>
+        <Button class="signOutButton" text="Zapisz się" tap="signToConsulation"/>
 
     </StackLayout>
 </Page>
