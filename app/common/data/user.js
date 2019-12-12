@@ -14,7 +14,10 @@ exports.user = {
     },
     subjects: {
         loaded: false,
-        data: []
+        data: {
+            withoutUserSubjects: [],
+            userSubjects: []
+        }
     },
     page: null
 };

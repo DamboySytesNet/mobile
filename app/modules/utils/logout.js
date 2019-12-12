@@ -17,7 +17,10 @@ exports.clearUser = () => {
         },
         subjects: {
             loaded: false,
-            data: []
+            data: {
+                subjectsWithoutUser: [],
+                userSubjects: []
+            }
         }
     };
 }
