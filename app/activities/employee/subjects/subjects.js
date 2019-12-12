@@ -152,6 +152,8 @@ exports.back = (args) => {
 exports.pageLoaded = (args) => {
     let page = args.object;
     if(!u.user.subjects.loaded) {
+        sortByTitle(testSubjects);
+        sortByTitle(testUserSubjects);
         u.user.subjects.data.withoutUserSubjects = loadEmployeeSubjects(testSubjects);
         u.user.subjects.data.userSubjects = loadEmployeeSubjects(testUserSubjects);
         u.user.subjects.loaded = true;
@@ -159,7 +161,6 @@ exports.pageLoaded = (args) => {
     pageData.set('withoutUserSubjects', u.user.subjects.data.withoutUserSubjects);
     pageData.set('userSubjects', u.user.subjects.data.userSubjects)
     page.bindingContext = pageData;
-    
     withoutUserListView = page.getViewById('withoutUserListView');
     userListView = page.getViewById('userListView');
 }
@@ -186,24 +187,31 @@ exports.changeIsOpen = (args) => {
 
 exports.addToUserSubjects = (args) => {
     let id = parseInt(args.object.index, 10);
-    let tmp = pageData.withoutUserSubjects.find(el => el.id === id);
-    tmp.isOpen = false;
-    let index = pageData.withoutUserSubjects.indexOf(tmp);
-    pageData.userSubjects.push(tmp);
-    pageData.withoutUserSubjects.splice(index, 1);
-
-    userListView.refresh()
+    let item = pageData.withoutUserSubjects.find(el => el.id === id);
+    moveItemFromListToOtherList(item, pageData.withoutUserSubjects, pageData.userSubjects);
+    sortByTitle(pageData.userSubjects);
+    sortByTitle(pageData.withoutUserSubjects);
+    userListView.refresh();
     withoutUserListView.refresh();
 }
 
 exports.removeFromUserSubjects = (args) => {
     let id = parseInt(args.object.index, 10);
-    let tmp = pageData.userSubjects.find(el => el.id === id);
-    tmp.isOpen = false;
-    let index = pageData.userSubjects.indexOf(tmp);
-    pageData.withoutUserSubjects.push(tmp);
-    pageData.userSubjects.splice(index, 1);
-
-    userListView.refresh()
+    let item = pageData.userSubjects.find(el => el.id === id);
+    moveItemFromListToOtherList(item, pageData.userSubjects, pageData.withoutUserSubjects);
+    sortByTitle(pageData.userSubjects);
+    sortByTitle(pageData.withoutUserSubjects);
+    userListView.refresh();
     withoutUserListView.refresh();
+}
+
+function moveItemFromListToOtherList(item, from, to) {
+    item.isOpen = false;
+    let index = from.indexOf(item);
+    to.push(item);
+    from.splice(index, 1);
+}
+
+function sortByTitle(list){
+    list.sort((a, b) => a.title.localeCompare(b.title))
 }

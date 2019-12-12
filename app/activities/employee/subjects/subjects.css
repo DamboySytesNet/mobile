@@ -22,7 +22,7 @@ Tabs TabStripItem {
 }
 
 Tabs TabStripItem:active {
-    color: #FFFFFF;
+    color: white;
 }
 
 
