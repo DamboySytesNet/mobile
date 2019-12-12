@@ -10,7 +10,7 @@ Tabs TabStrip
 }
 
 Tabs TabStripItem Label {
-    font-size: 14;
+    font-size: 16;
     font-weight: bold;
     text-transform: uppercase;
 }
@@ -38,32 +38,40 @@ Tabs TabStripItem:active {
     font-weight: bold;
 }
 
-Button {
-    font: 18 "OpenSans";
-    font-weight: bold;
-    color: #fff;
-    width: 90%;
-    height: 50;
-    border-radius: 100%;
-    margin: 20 0 10 0;
+ListView {
+    margin-top: 10;
+    color: black;
+    font-size: 16;
 }
-    .signButton {
-        background: green;
-    }
 
-    .quitButton {
-        background: red;
-    }
 
 .dockList {
-    padding: 12 0 12 0;
+    padding: 24 0 24 0;
 }
 
     .dockList > Image {
         width: 23;
         margin-right: 10;
+        margin-left: 20;
     }
 
     .employeesList {
         background: #ebebeb;
     }
+
+    Button {
+        font: 18 "OpenSans";
+        font-weight: bold;
+        color: #fff;
+        width: 90%;
+        height: 50;
+        border-radius: 100%;
+        margin: 20 0 20 0;
+    }
+        .signButton {
+            background: green;
+        }
+
+        .quitButton {
+            background: red;
+        }

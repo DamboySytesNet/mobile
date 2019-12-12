@@ -23,9 +23,9 @@
                 <StackLayout id="body">
                     <ListView items="{{ userSubjects }}"
                     separatorColor="silver"
-                    class="list-group" row="1" id="userListView" height="100%"> 
+                    row="1" id="userListView" class="list-group" height="100%"> 
                         <ListView.itemTemplate >
-                            <StackLayout class="list-group-item">
+                            <StackLayout>
                                 <DockLayout class="dockList" id="userSubjectsDock" tap="changeIsOpen" orientation="horizontal" stretchLastChild="false" index="{{ id }}">
                                     <Image src="~/icons/arrow-down.png " visibility="{{ !isOpen ? 'visible' : 'collapse'}}"/>
                                     <Image src="~/icons/arrow-up.png"  visibility="{{ isOpen ? 'visible' : 'collapse'}}"/>
@@ -56,7 +56,7 @@
                         separatorColor="silver" 
                         class="list-group" row="1" id="withoutUserListView" height="100%">
                         <ListView.itemTemplate >
-                            <StackLayout class="list-group-item">
+                            <StackLayout>
                                 <DockLayout class="dockList" id="withoutUserSubjectsDock" tap="changeIsOpen" orientation="horizontal" stretchLastChild="false" index="{{ id }}">
                                     <Image src="~/icons/arrow-down.png " visibility="{{ !isOpen ? 'visible' : 'collapse'}}"/>
                                     <Image src="~/icons/arrow-up.png"  visibility="{{ isOpen ? 'visible' : 'collapse'}}"/>
