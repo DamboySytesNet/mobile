@@ -1,24 +1,7 @@
-const Hours = require("~/common/dataTypes/EmployeeHours");
+const Employee = require('~/common/dataTypes/Employee');
+const Hours = require('~/common/dataTypes/Hours');
 
 exports.testTeachers = [
-    {
-        name: 'Gabriela Omiecińska',
-        room: 243,
-        time: {
-            day: "pt",
-            from: "8.30",
-            to: "9.00"
-        },
-        timeStr: "pt. 8:30 - 9.00"
-    },
-    {
-        name: 'Marcin Kwapisz',
-        room: 244,
-        time: {
-            day: "pn",
-            from: "10.30",
-            to: "11.30"
-        },
-        timeStr: "pn. 10:30 - 11.30"
-    }
+    new Employee.employee(1, "Gabriela Omiecińska", 243, ["Podstawy programowania"], [new Hours.new(1, "10:30", "11:30", "Poniedziałek", 243), new Hours.new(1, "10:30", "11:30", "Wtorek", 243)]),
+    new Employee.employee(2, "Marcin Kwapisz", 244, ["Programowanie obiektowe", "Programowanie komponentowe"], [new Hours.new(1, "12:45", "13:30", "Czwartek", 244)]),
 ]

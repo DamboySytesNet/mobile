@@ -4,7 +4,7 @@ const test = require('~/common/data/testTeachers');
 
 
 let pageData = new observableModule.fromObject({
-    teachers: []
+    consultations: []
 })
 
 let page;
@@ -12,7 +12,20 @@ let page;
 exports.onPageLoaded = (args) => {
     page = args.object;
 
-    pageData.set('teachers', test.testTeachers);
+    const teachers = test.testTeachers;
+    let consultationList = [];
+
+    for (let t of teachers) {
+        let consultations = t.consultationTimes;
+        for (let c of consultations) {
+            c.teacher = t.name;
+        }
+        consultationList.push(...consultations);
+    }
+
+    alert(JSON.stringify(consultationList));
+
+    pageData.set('consultations', consultationList);
     page.bindingContext = pageData;
 }
 
