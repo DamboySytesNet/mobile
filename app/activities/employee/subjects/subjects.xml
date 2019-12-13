@@ -37,7 +37,7 @@
                                         
                                         <ListView.itemTemplate>
                                             <StackLayout class="list-group-item">
-                                                <Label text="{{ name + ' '+ surname }}" textWrap="true" class="title"/>
+                                                <Label text="{{ name + ' '+ surname }}" textWrap="true"/>
                                             </StackLayout>
 
                                             </ListView.itemTemplate>

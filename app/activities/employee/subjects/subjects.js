@@ -16,7 +16,7 @@ let testSubjects = [
         title: 'Podstawy programowania',
         semester: 1,
         employees: [{
-            id: 2,
+            id: 4,
             name: 'Jan',
             surname: 'Kowalski'
         },
@@ -43,7 +43,7 @@ let testSubjects = [
         title: 'Matematyka dyskretna',
         semester: 2,
         employees: [{
-            id: 2,
+            id: 4,
             name: 'Jan',
             surname: 'Kowalski'
         },
@@ -82,7 +82,7 @@ let testUserSubjects = [
     title: 'Programowanie obiektowe',
     semester: 1,
     employees: [{
-        id: 2,
+        id: 4,
         name: 'Jan',
         surname: 'Kowalski'
     },
@@ -126,7 +126,7 @@ let testUserSubjects = [
         surname: u.user.surname
     },    
     {
-        id: 2,
+        id: 4,
         name: 'Jan',
         surname: 'Kowalski'
     },
@@ -188,6 +188,19 @@ exports.changeIsOpen = (args) => {
 exports.addToUserSubjects = (args) => {
     let id = parseInt(args.object.index, 10);
     let item = pageData.withoutUserSubjects.find(el => el.id === id);
+
+    let userData = {
+        id: u.user.id,
+        name: u.user.name,
+        surname: u.user.surname
+    };
+    let emp = item.employees.find(el => el.id === u.user.id);
+    let indexEmp = item.employees.indexOf(emp);
+    if (indexEmp === -1){
+        item.employees.push(userData);
+        item.height += 54;
+    }
+
     moveItemFromListToOtherList(item, pageData.withoutUserSubjects, pageData.userSubjects);
     sortByTitle(pageData.userSubjects);
     sortByTitle(pageData.withoutUserSubjects);
@@ -198,6 +211,14 @@ exports.addToUserSubjects = (args) => {
 exports.removeFromUserSubjects = (args) => {
     let id = parseInt(args.object.index, 10);
     let item = pageData.userSubjects.find(el => el.id === id);
+
+    let emp = item.employees.find(el => el.id === u.user.id);
+    let indexEmp = item.employees.indexOf(emp);
+    if (indexEmp >= 0){
+        item.employees.splice(indexEmp, 1);
+        item.height -= 54;
+    }
+
     moveItemFromListToOtherList(item, pageData.userSubjects, pageData.withoutUserSubjects);
     sortByTitle(pageData.userSubjects);
     sortByTitle(pageData.withoutUserSubjects);
