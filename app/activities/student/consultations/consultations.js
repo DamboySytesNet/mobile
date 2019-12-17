@@ -48,7 +48,7 @@ exports.onPageLoaded = (args) => {
 
     // load only when visit activity for the first time
     if(!u.user.consultations.loaded) {
-        u.user.consultations.data = loadConsultations();
+        u.user.consultations.data.push(...loadConsultations());
         u.user.consultations.loaded = true;
     }
 
@@ -58,7 +58,8 @@ exports.onPageLoaded = (args) => {
 }
 
 function loadConsultations() {
-    let consultationObjectsList = []
+    // potrzebne jeśli student przed chwilą zapisał się na konsultacje
+    let consultationObjectsList = [];
     for(let con of test.testConsultations) {
         consultationObjectsList.push(new Consultation.Cons(con.id, con.subject, con.teacher, con.room, con.date, 'oczekujący', null));
     }

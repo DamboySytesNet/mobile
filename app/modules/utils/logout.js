@@ -7,7 +7,10 @@ exports.clearUser = () => {
         name: null,
         surname: null,
         room: null,
-        consultations: [],
+        consultations: {
+            loaded: false,
+            data: [],
+        },
         hours: {
             loaded: false,
             data: []

@@ -1,4 +1,4 @@
-<Page class="page" actionBarHidden="true" loaded="onPageLoaded" xmlns:dd="nativescript-drop-down">
+<Page class="page" actionBarHidden="true" loaded="onPageLoaded">
     <ActionBar title="teacher"></ActionBar>
     <StackLayout>
         <StackLayout id="actionbar">

@@ -20,12 +20,13 @@ exports.onPageLoaded = (args) => {
         employee: employee
     }
     pageData.set("data", info);
+    pageData.set("chosenSubject", "Nie wybrano przedmiotu");
 
     page.bindingContext = pageData;
 }
 
 exports.exit = (args) => {
-    goback();
+    goBack();
 }
 
 exports.chooseSubject = args => {
