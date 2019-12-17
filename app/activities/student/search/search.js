@@ -4,7 +4,8 @@ const test = require('~/common/data/testTeachers');
 
 
 let pageData = new observableModule.fromObject({
-    consultations: []
+    all: [],
+    consultations: [],
 })
 
 let page;
@@ -24,7 +25,8 @@ exports.onPageLoaded = (args) => {
     }
     // alert(JSON.stringify(consultationList));
 
-    pageData.set('consultations', consultationList);
+    pageData.set('all', consultationList);
+    pageData.set('consultations', pageData.get('all'));
     page.bindingContext = pageData;
 }
 
@@ -53,4 +55,16 @@ exports.goToTeacherDetails = (args) => {
         }
     }
     page.frame.navigate(navigationEntry);
+}
+
+exports.onTextChange = (args) => {
+    const pattern = args.object.text;
+
+    if (pattern !== null && pattern !== '' && pattern !== ' ') {
+        const refreshed = pageData.get('all').filter(e => e.teacher.includes(pattern))
+        pageData.set('consultations', refreshed);
+    } 
+    else {
+        pageData.set('consultations', pageData.get('all'));
+    }
 }

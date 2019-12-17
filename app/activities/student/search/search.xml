@@ -9,6 +9,10 @@
         </StackLayout>
 
         <StackLayout>
+            <TextField hint="Wyszukaj"
+                        textChange="onTextChange"/>
+        </StackLayout>
+        <StackLayout>
             <ListView items="{{ consultations }}">
                 <ListView.itemTemplate>
                     <DockLayout class="teacher" tap="goToTeacherDetails" hourId="{{ id }}">
