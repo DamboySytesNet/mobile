@@ -26,17 +26,18 @@
                 </StackLayout>
                 <StackLayout class="labelGroup">
                     <Label class="title" text="Dzień tygodnia: " />
-                    <Label class="info" text="{{ data.hour.day }}" />
+                    <Label class="info" text="{{ data.hour.day.name }}" />
                 </StackLayout>
                 <StackLayout class="labelGroup"> 
                     <Label class="title" text="Przedmiot "/>
                     <Button text="Wybierz przedmiot" tap="chooseSubject"/>
                     <Label class="info" text="{{ chosenSubject }} "/>
                 </StackLayout>
+                <Button class="signOutButton" text="Zapisz się" tap="signToConsulation"/>
             </FlexboxLayout>
         </ScrollView>
+            
 
-        <Button class="signOutButton" text="Zapisz się" tap="signToConsulation"/>
 
     </StackLayout>
 </Page>
