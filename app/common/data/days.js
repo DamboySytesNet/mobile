@@ -1,11 +1,11 @@
 exports.daysObjects = [
-    {id: 1, name: 'poniedziałek'},
-    {id: 2, name: 'wtorek'},
-    {id: 3, name: 'środa'},
-    {id: 4, name: 'czwartek'},
-    {id: 5, name: 'piątek'},
-    {id: 6, name: 'sobota'},
-    {id: 7, name: 'niedziela'}
+    {id: 1, name: 'poniedziałek', short: 'pn'},
+    {id: 2, name: 'wtorek', short: 'wt'},
+    {id: 3, name: 'środa', short: 'śr'},
+    {id: 4, name: 'czwartek', short: 'czw'},
+    {id: 5, name: 'piątek', short: 'pt'},
+    {id: 6, name: 'sobota', short: 'sob'},
+    {id: 7, name: 'niedziela', short: 'nd'}
 ];
 
 exports.daysArray = [

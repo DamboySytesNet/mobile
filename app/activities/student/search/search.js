@@ -23,7 +23,7 @@ exports.onPageLoaded = (args) => {
         }
         consultationList.push(...consultations);
     }
-    // alert(JSON.stringify(consultationList));
+    alert(JSON.stringify(consultationList));
 
     pageData.set('all', consultationList);
     pageData.set('consultations', pageData.get('all'));
