@@ -1,8 +1,7 @@
 const observableModule = require("tns-core-modules/data/observable");
-const listViewModule = require("tns-core-modules/ui/list-view");
-const frameModule = require('tns-core-modules/ui/frame');
 const Consultation = require("~/common/dataTypes/Consultation");
 const u = require('~/common/data/user');
+const ConsultationsHttpRequest = require('~/modules/request/consultationsHttpRequest');
 // only for test purposes
 const test = require('~/common/data/testConsultations');
 
@@ -13,7 +12,7 @@ let pageData = new observableModule.fromObject({
 exports.exit = (args) => {
     const button = args.object;
     const page = button.page;
-    
+
     page.frame.goBack();
 }
 
@@ -30,27 +29,47 @@ exports.goToDetails = (args) => {
     }
 
     page.frame.navigate(navigationEntry);
-} 
+}
+
+exports.goToSearch = (args) => {
+    const page = args.object.page;
+    const moduleName = 'activities/student/search/search';
+    // alert(args.object.index);
+    const navigationEntry = {
+        moduleName: moduleName
+    }
+
+    page.frame.navigate(navigationEntry);
+}
 
 exports.onPageLoaded = (args) => {
     const page = args.object;
 
     // load only when visit activity for the first time
-    if(!u.user.consultations.loaded) {
-        u.user.consultations.data = loadConsultations();
+    if (!u.user.consultations.loaded) {
+        u.user.consultations.data.push(...loadConsultations());
         u.user.consultations.loaded = true;
     }
 
     pageData.set('consultations', groupByDayOfTheYear(u.user.consultations.data));
-    // alert(JSON.stringify(pageData.consultations));
     page.bindingContext = pageData;
 }
 
 function loadConsultations() {
-    let consultationObjectsList = []
-    for(let con of test.testConsultations) {
-        consultationObjectsList.push(new Consultation.Cons(con.id, con.subject, con.teacher, con.room, con.date, 'oczekujący', null));
-    }
+    let consultationObjectsList = [];
+    ConsultationsHttpRequest.get(u.user.id, u.user.token)
+        .then(res => {
+            for (let con of res) {
+                u.user.consultations.data.push(new Consultation.Cons(
+                    con.id,
+                    con.subject,
+                    con.teacher,
+                    con.room,
+                    `${con.date} ${con.timeFrom}`,
+                    con.state,
+                    con.excuse));
+            }
+        });
     return consultationObjectsList;
 }
 
@@ -62,7 +81,7 @@ function groupByDayOfTheYear(consultations) {
     }
 
     let grouped = [];
-    
+
     for (let day of uniqueDays) {
         grouped.push({
             cons: consultations.filter(c => c.dayOfTheYear === day),
@@ -78,7 +97,7 @@ function groupByDayOfTheYear(consultations) {
             if (today.getDate() === conDay.getDate()) {
                 prefix = "Dziś";
             }
-            else if(today.getDate() + 1 === conDay.getDate()) {
+            else if (today.getDate() + 1 === conDay.getDate()) {
                 prefix = "Jutro";
             }
         }
