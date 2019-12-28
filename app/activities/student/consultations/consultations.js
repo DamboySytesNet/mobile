@@ -5,7 +5,7 @@ const ConsultationsHttpRequest = require('~/modules/request/consultationsHttpReq
 // only for test purposes
 const test = require('~/common/data/testConsultations');
 
-let pageData = new observableModule.fromObject({
+let pageData = new observableModule.Observable({
     consultations: []
 })
 
@@ -42,22 +42,12 @@ exports.goToSearch = (args) => {
     page.frame.navigate(navigationEntry);
 }
 
-exports.onPageLoaded = (args) => {
+exports.onPageLoaded = async (args) => {
     const page = args.object;
 
     // load only when visit activity for the first time
     if (!u.user.consultations.loaded) {
-        u.user.consultations.data.push(...loadConsultations());
-        u.user.consultations.loaded = true;
-    }
-
-    pageData.set('consultations', groupByDayOfTheYear(u.user.consultations.data));
-    page.bindingContext = pageData;
-}
-
-function loadConsultations() {
-    let consultationObjectsList = [];
-    ConsultationsHttpRequest.get(u.user.id, u.user.token)
+        ConsultationsHttpRequest.get(u.user.id, u.user.token)
         .then(res => {
             for (let con of res) {
                 u.user.consultations.data.push(new Consultation.Cons(
@@ -69,8 +59,15 @@ function loadConsultations() {
                     con.state,
                     con.excuse));
             }
+            pageData.set('consultations', groupByDayOfTheYear(u.user.consultations.data));
+            page.bindingContext = pageData;    
         });
-    return consultationObjectsList;
+        u.user.consultations.loaded = true;
+    }
+    else {
+        pageData.set('consultations', groupByDayOfTheYear(u.user.consultations.data));
+        page.bindingContext = pageData;
+    }
 }
 
 function groupByDayOfTheYear(consultations) {
