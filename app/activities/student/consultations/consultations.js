@@ -5,7 +5,7 @@ const ConsultationsHttpRequest = require('~/modules/request/consultationsHttpReq
 // only for test purposes
 const test = require('~/common/data/testConsultations');
 
-let pageData = new observableModule.Observable({
+let pageData = new observableModule.fromObject({
     consultations: []
 })
 
@@ -42,7 +42,7 @@ exports.goToSearch = (args) => {
     page.frame.navigate(navigationEntry);
 }
 
-exports.onPageLoaded = async (args) => {
+exports.onPageLoaded = (args) => {
     const page = args.object;
 
     // load only when visit activity for the first time
