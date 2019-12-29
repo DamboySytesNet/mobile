@@ -10,6 +10,7 @@ const AppData = require('~/common/data/AppData')
 let pageData = new observableModule.fromObject({
     all: [],
     consultations: [],
+    loading: true
 })
 
 let page;
@@ -28,12 +29,14 @@ exports.onPageLoaded = (args) => {
                 AppData.hours.data.push(hourData);
             }
             pageData.set('all', AppData.hours.data);
+            pageData.set('loading', false);
             pageData.set('consultations', pageData.get('all'));
             page.bindingContext = pageData;    
         })
     }
     else{
         pageData.set('all', AppData.hours.data);
+        pageData.set('loading', false);
         pageData.set('consultations', pageData.get('all'));
         page.bindingContext = pageData;
     }
@@ -44,6 +47,7 @@ exports.exit = (args) => {
     page.frame.goBack();
 }
 
+// TODO load data from database
 exports.goToTeacherDetails = (args) => {
     const moduleName = 'activities/student/search/teacherDetails/teacherDetails';
     const hour = pageData.get("consultations").find(el => el.id == args.object.hourId);

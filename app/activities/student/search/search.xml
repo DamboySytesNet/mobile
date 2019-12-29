@@ -12,7 +12,7 @@
             <TextField hint="Wyszukaj"
                         textChange="onTextChange"/>
         </StackLayout>
-        <StackLayout>
+        <StackLayout visibility="{{ loading ? 'collapsed' : 'visible' }}">
             <ListView items="{{ consultations }}">
                 <ListView.itemTemplate>
                     <DockLayout class="teacher" tap="goToTeacherDetails" hourId="{{ id }}">
@@ -22,6 +22,7 @@
                     </DockLayout>
                 </ListView.itemTemplate>
             </ListView>
+            <ActivityIndicator busy="{{ loading }}"/>
         </StackLayout>
     </StackLayout>
 </Page>
