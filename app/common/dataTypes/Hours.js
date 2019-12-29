@@ -6,6 +6,6 @@ exports.new = class H {
         this.day = day;
         this.room = room;
         this.editing = false;
-        this.timeStr = `${from} - ${to}`;
+        this.timeStr = `${this.from} - ${this.to}`;
     }
 };

@@ -1,5 +1,8 @@
 const observableModule = require("tns-core-modules/data/observable");
+const TeachersHttpRequest = require('~/modules/request/teachersHttpRequests');
 const test = require('~/common/data/testTeachers');
+const u = require('~/common/data/user');
+const Hours = require("~/common/dataTypes/Hours");
 
 
 
@@ -16,17 +19,28 @@ exports.onPageLoaded = (args) => {
     const teachers = test.testTeachers;
     let consultationList = [];
 
-    for (let t of teachers) {
+    TeachersHttpRequest.get(u.user.token)
+    .then( res => {
+      for (let t of res) {
+          let hourData = new Hours.new(t.id, t.timeFrom, t.timeTo, t.day, t.room);
+          hourData.teacher = t.teacher;
+          consultationList.push(hourData);
+        }
+        alert(JSON.stringify(consultationList));
+        pageData.set('all', consultationList);
+        pageData.set('consultations', pageData.get('all'));
+        page.bindingContext = pageData;    
+    })
+    
+    // alert(JSON.stringify(consultationList));
+    /* for (let t of teachers) {
         let consultations = t.consultationTimes;
         for (let c of consultations) {
             c.teacher = t.name;
         }
         consultationList.push(...consultations);
     }
-
-    pageData.set('all', consultationList);
-    pageData.set('consultations', pageData.get('all'));
-    page.bindingContext = pageData;
+    */
 }
 
 exports.exit = (args) => {
