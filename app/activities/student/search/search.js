@@ -40,6 +40,7 @@ exports.onPageLoaded = (args) => {
         pageData.set('consultations', pageData.get('all'));
         page.bindingContext = pageData;
     }
+    alert(JSON.stringify(AppData.hours.data));
     
 }
 
