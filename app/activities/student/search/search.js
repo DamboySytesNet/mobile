@@ -1,7 +1,5 @@
 const observableModule = require("tns-core-modules/data/observable");
 const TeachersHttpRequest = require('~/modules/request/teachersHttpRequests');
-const LectuerersHttpRequests = require('~/modules/request/lectuerersHttpRequests');
-const test = require('~/common/data/testTeachers');
 const u = require('~/common/data/user');
 const Hours = require("~/common/dataTypes/Hours");
 const AppData = require('~/common/data/AppData')
@@ -26,7 +24,10 @@ exports.onPageLoaded = (args) => {
         .then( res => {
             for (let t of res) {
                 let hourData = new Hours.new(t.id, t.timeFrom, t.timeTo, t.day, t.room);
-                hourData.teacher = t.teacher;
+                hourData.teacher = {
+                    id: t.lecturerId,
+                    name: t.teacher
+                }
                 AppData.hours.data.push(hourData);
             }
             pageData.set('all', AppData.hours.data);
@@ -52,15 +53,11 @@ exports.exit = (args) => {
 exports.goToTeacherDetails = (args) => {
     const moduleName = 'activities/student/search/teacherDetails/teacherDetails';
     const hour = pageData.get("consultations").find(el => el.id == args.object.hourId);
-    
-    const teacherId = 2;
-    // LectuerersHttpRequests.getLectuererSubjects(1, u.user.token);
 
     const navigationEntry = {
         moduleName: moduleName,
         context: {
             data: hour,
-            id: teacherId
         }
     }
     page.frame.navigate(navigationEntry);

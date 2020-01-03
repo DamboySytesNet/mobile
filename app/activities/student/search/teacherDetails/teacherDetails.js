@@ -15,8 +15,9 @@ let page = null;
 exports.onPageLoaded = (args) => {
     page = args.object;
     const consultationInfo = page.navigationContext.data;
-    const lectuererId = page.navigationContext.id;
-    let subjects = [];
+    
+    const lectuererId = consultationInfo.teacher.id;
+    const subjects = [];
     LectuerersHttpRequests.getLectuererSubjects(lectuererId, u.user.token)
     .then(res => {
        for (let s of res) {

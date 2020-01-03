@@ -14,7 +14,7 @@
                            justifyContent="center">
                 <StackLayout class="labelGroup">
                     <Label class="title" text="Prowadzący" />
-                    <Label class="info" text="{{ data.hour.teacher }}" />
+                    <Label class="info" text="{{ data.hour.teacher.name }}" />
                 </StackLayout>
                 <StackLayout class="labelGroup">
                     <Label class="title" text="Godzina" />
@@ -27,7 +27,7 @@
                 <StackLayout class="labelGroup">
                     <Label class="title" text="Dzień tygodnia: " />
                     <Label class="info" text="{{ data.hour.day }}" />
-                    
+
                 </StackLayout>
                 <StackLayout class="labelGroup"> 
                     <Label class="title" text="Przedmiot "/>
