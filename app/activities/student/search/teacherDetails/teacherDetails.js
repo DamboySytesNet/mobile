@@ -2,6 +2,7 @@ const observableModule = require("tns-core-modules/data/observable");
 const u = require('~/common/data/user');
 const Consultation = require("~/common/dataTypes/Consultation");
 const dialogsModule = require('tns-core-modules/ui/dialogs');
+const LectuerersHttpRequests = require('~/modules/request/lectuerersHttpRequests');
 
 let pageData = observableModule.fromObject({
     data: {},
@@ -14,10 +15,18 @@ let page = null;
 exports.onPageLoaded = (args) => {
     page = args.object;
     const consultationInfo = page.navigationContext.data;
-    const employee = page.navigationContext.employee;
+    const lectuererId = page.navigationContext.id;
+    let subjects = [];
+    LectuerersHttpRequests.getLectuererSubjects(lectuererId, u.user.token)
+    .then(res => {
+       for (let s of res) {
+           subjects.push(s.name);
+       }
+       pageData.set('subjects', subjects); 
+    })
+
     const info = {
         hour: consultationInfo,
-        employee: employee
     }
     pageData.set("data", info);
     pageData.set("chosenSubject", "Nie wybrano przedmiotu");
@@ -33,7 +42,7 @@ exports.chooseSubject = args => {
     dialogsModule.action({
         message: 'Wybierz przedmiot',
         cancelButtonText: 'Anuluj',
-        actions: pageData.data.employee.subjects
+        actions: pageData.subjects
     }).then(function (result) {
         if (result === 'Anuluj'){
             return;

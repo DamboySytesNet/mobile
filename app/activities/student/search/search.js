@@ -1,5 +1,6 @@
 const observableModule = require("tns-core-modules/data/observable");
 const TeachersHttpRequest = require('~/modules/request/teachersHttpRequests');
+const LectuerersHttpRequests = require('~/modules/request/lectuerersHttpRequests');
 const test = require('~/common/data/testTeachers');
 const u = require('~/common/data/user');
 const Hours = require("~/common/dataTypes/Hours");
@@ -40,7 +41,6 @@ exports.onPageLoaded = (args) => {
         pageData.set('consultations', pageData.get('all'));
         page.bindingContext = pageData;
     }
-    alert(JSON.stringify(AppData.hours.data));
     
 }
 
@@ -48,25 +48,19 @@ exports.exit = (args) => {
     page.frame.goBack();
 }
 
-// TODO load data from database
+
 exports.goToTeacherDetails = (args) => {
     const moduleName = 'activities/student/search/teacherDetails/teacherDetails';
     const hour = pageData.get("consultations").find(el => el.id == args.object.hourId);
-    let emp = null;
-    for (let t of test.testTeachers) {
-       for (let ct of t.consultationTimes) {
-           if (ct.id === hour.id) {
-               emp = t;
-               break;
-           }
-       }
-    }
+    
+    const teacherId = 2;
+    // LectuerersHttpRequests.getLectuererSubjects(1, u.user.token);
 
     const navigationEntry = {
         moduleName: moduleName,
         context: {
             data: hour,
-            employee: emp
+            id: teacherId
         }
     }
     page.frame.navigate(navigationEntry);
