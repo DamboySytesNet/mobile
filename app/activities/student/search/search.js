@@ -2,7 +2,7 @@ const observableModule = require("tns-core-modules/data/observable");
 const TeachersHttpRequest = require('~/modules/request/teachersHttpRequests');
 const u = require('~/common/data/user');
 const Hours = require("~/common/dataTypes/Hours");
-const AppData = require('~/common/data/AppData')
+const AppData = require('~/common/data/AppData');
 
 
 

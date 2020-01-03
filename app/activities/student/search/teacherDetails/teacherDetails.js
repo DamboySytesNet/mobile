@@ -3,6 +3,7 @@ const u = require('~/common/data/user');
 const Consultation = require("~/common/dataTypes/Consultation");
 const dialogsModule = require('tns-core-modules/ui/dialogs');
 const LectuerersHttpRequests = require('~/modules/request/lectuerersHttpRequests');
+const ConsultationsHttpRequests = require('~/modules/request/consultationsHttpRequests');
 
 let pageData = observableModule.fromObject({
     data: {},
@@ -54,7 +55,13 @@ exports.chooseSubject = args => {
 
 exports.signToConsulation = (args) => {
     const info = pageData.get("data");
-    const consultation = new Consultation.Cons(123, pageData.get("chosenSubject"), info.employee.name, info.employee.room, new Date().toString(), "Oczekujący");
+    // TODO ustal date
+    const consultation = new Consultation.Cons(123,
+                                               pageData.get("chosenSubject"),
+                                               info.hour.teacher.name, 
+                                               info.hour.room, 
+                                               new Date().toString(), 
+                                               "Oczekujący");
     dialogsModule.confirm({
         title: 'Potwierdź',
         message: 'Czy na pewno chcesz się zapisać na tę konsultację?',
@@ -62,8 +69,19 @@ exports.signToConsulation = (args) => {
         cancelButtonText: 'Nie',
     }).then(result => {
             if(result) {
-                u.user.consultations.data.push(consultation);
-                goBack();
+                // TODO get proper date
+                // TODO get subject id
+                ConsultationsHttpRequests.add(u.user.id,
+                                              info.hour.teacher.id,
+                                              info.hour.id,
+                                              '2020-01-03',
+                                              1,
+                                              'Oczekujący',
+                                              u.user.token)
+                .then(() => {
+                    u.user.consultations.data.push(consultation);
+                    goBack();
+                })
             }
     })
 }
