@@ -89,6 +89,7 @@ function groupByDayOfTheYear(consultations) {
     let today = new Date();
     for (let group of grouped) {
         let conDay = group.cons[0].date;
+        const dateStr = group.cons[0].dateStr;
         let prefix = "";
         if (today.getYear() === conDay.getYear() && today.getMonth() === conDay.getMonth()) {
             if (today.getDate() === conDay.getDate()) {
@@ -98,8 +99,10 @@ function groupByDayOfTheYear(consultations) {
                 prefix = "Jutro";
             }
         }
+
         group['date'] = `${prefix} (${conDay.getDate()}.${conDay.getMonth() + 1}.${conDay.getYear() + 1900})`;
         group.cons.sort((a, b) => (a.date > b.date) ? 1 : -1);
+        group['dateStr'] = dateStr;
     }
 
     grouped.sort((a, b) => (a.day > b.day) ? 1 : -1);

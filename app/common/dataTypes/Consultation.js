@@ -55,8 +55,8 @@ exports.Cons = class Consultation {
     }
 
     getDateStr() {
-        const day = this.date.getDate();
-        const month = this.date.getMonth() + 1;
+        let day = this.date.getDate();
+        let month = this.date.getMonth() + 1;
 
         if (day < 10) {
             day = `0${day}`;

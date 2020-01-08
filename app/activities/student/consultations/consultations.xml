@@ -13,7 +13,7 @@
             <ListView items="{{ consultations }}">
                 <ListView.itemTemplate>
                     <StackLayout>
-                        <Label text="{{ date }}"/>
+                        <Label text="{{ dateStr }}"/>
                         
                         <ListView items="{{ cons }}" height="100">
                             <ListView.itemTemplate> 
