@@ -6,7 +6,8 @@ const ConsultationsHttpRequest = require('~/modules/request/consultationsHttpReq
 const test = require('~/common/data/testConsultations');
 
 let pageData = new observableModule.fromObject({
-    consultations: []
+    consultations: [],
+    loading: false
 })
 
 exports.exit = (args) => {
@@ -20,7 +21,6 @@ exports.goToDetails = (args) => {
     const page = args.object.page;
     const moduleName = 'activities/student/details/details';
     const id = args.object.index;
-    // alert(args.object.index);
     const navigationEntry = {
         moduleName: moduleName,
         context: {
@@ -31,43 +31,37 @@ exports.goToDetails = (args) => {
     page.frame.navigate(navigationEntry);
 }
 
-exports.goToSearch = (args) => {
-    const page = args.object.page;
-    const moduleName = 'activities/student/search/search';
-    // alert(args.object.index);
-    const navigationEntry = {
-        moduleName: moduleName
-    }
-
-    page.frame.navigate(navigationEntry);
-}
-
 exports.onPageLoaded = (args) => {
     const page = args.object;
 
+    pageData.set('loading', true);
     // load only when visit activity for the first time
     if (!u.user.consultations.loaded) {
         ConsultationsHttpRequest.get(u.user.id, u.user.token)
-        .then(res => {
-            for (let con of res) {
-                u.user.consultations.data.push(new Consultation.Cons(
-                    con.id,
-                    con.subject,
-                    con.teacher,
-                    con.room,
-                    `${con.date} ${con.timeFrom}`,
-                    con.state,
-                    con.excuse));
-            }
-            pageData.set('consultations', groupByDayOfTheYear(u.user.consultations.data));
-            page.bindingContext = pageData;    
-        });
-        u.user.consultations.loaded = true;
+            .then(res => {
+                for (const con of res) {
+                    u.user.consultations.data.push(new Consultation.Cons(
+                        con.id,
+                        con.subject,
+                        con.teacher,
+                        con.room,
+                        `${con.date} ${con.timeFrom}`,
+                        con.state,
+                        con.excuse));
+                    }
+                    pageData.set('consultations', groupByDayOfTheYear(u.user.consultations.data));
+                    page.bindingContext = pageData;    
+                    u.user.consultations.loaded = true;
+            }).catch( () => {
+                alert('Nie udało sie pobrać konsultacji!');
+                page.frame.goBack();
+            });
     }
     else {
         pageData.set('consultations', groupByDayOfTheYear(u.user.consultations.data));
         page.bindingContext = pageData;
     }
+    pageData.set('loading', false);
 }
 
 function groupByDayOfTheYear(consultations) {

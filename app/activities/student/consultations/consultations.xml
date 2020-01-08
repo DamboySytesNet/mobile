@@ -9,7 +9,7 @@
             </FlexboxLayout>
         </StackLayout>
 
-        <StackLayout>
+        <StackLayout isEnabled="{{ !loading }}">
             <ListView items="{{ consultations }}">
                 <ListView.itemTemplate>
                     <StackLayout>
@@ -26,6 +26,7 @@
                     </StackLayout>
                 </ListView.itemTemplate>
             </ListView>
+            <ActivityIndicator busy="{{ loading }}"/>
         </StackLayout>
     </StackLayout>
 </Page>
