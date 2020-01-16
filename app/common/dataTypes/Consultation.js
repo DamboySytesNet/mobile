@@ -55,6 +55,17 @@ exports.Cons = class Consultation {
     }
 
     getDateStr() {
-        return `${this.date.getDate()}.${this.date.getMonth() + 1}.${this.date.getYear() + 1900}`;
+        let day = this.date.getDate();
+        let month = this.date.getMonth() + 1;
+
+        if (day < 10) {
+            day = `0${day}`;
+        }
+        
+        if (month < 10) {
+            month = `0${month}`;
+        }
+
+        return `${day}.${month}.${this.date.getYear() + 1900}`;
     }
 };

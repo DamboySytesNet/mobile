@@ -56,12 +56,7 @@ exports.chooseSubject = args => {
 exports.signToConsulation = (args) => {
     const info = pageData.get("data");
     // TODO ustal date
-    const consultation = new Consultation.Cons(123,
-                                               pageData.get("chosenSubject"),
-                                               info.hour.teacher.name, 
-                                               info.hour.room, 
-                                               new Date().toString(), 
-                                               "Oczekujący");
+    
     dialogsModule.confirm({
         title: 'Potwierdź',
         message: 'Czy na pewno chcesz się zapisać na tę konsultację?',
@@ -78,8 +73,21 @@ exports.signToConsulation = (args) => {
                                               1,
                                               'Oczekujący',
                                               u.user.token)
-                .then(() => {
+                .then((res) => {
+                    console.log(res);
+                    /*
+                    const consultation = new Consultation.Cons(res.msg,
+                        pageData.get("chosenSubject"),
+                        info.hour.teacher.name, 
+                        info.hour.room, 
+                        new Date().toString(), 
+                        "Oczekujący", 
+                        null);
+                    console.log(consultation.id);
+                    // consultation.id = res.msg;
                     u.user.consultations.data.push(consultation);
+                    */
+                   u.user.consultations.loaded = false;
                     goBack();
                 })
             }

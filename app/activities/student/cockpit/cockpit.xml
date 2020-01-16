@@ -33,6 +33,11 @@
                     <Label dock="bottom" text="Przedmioty" />
                     <Image dock="top" src="~/images/subject.png" />
                 </DockLayout>
+
+                <DockLayout tap="" backgroundColor="#b53bfd" row="1" col="1" class="mainContent-post" stretchLastChild="false" >
+                    <Label dock="bottom" text="Powiadomienia" />
+                    <Image dock="top" src="~/images/bell.png" />
+                </DockLayout>
             </GridLayout>
         </ScrollView>
         

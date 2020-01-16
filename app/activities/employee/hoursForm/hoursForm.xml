@@ -5,7 +5,7 @@
         <StackLayout id="actionbar">
             <FlexboxLayout tap="exit" orientation="horizontal" alignItems="center">
                 <Image src="~/icons/arrow-left.png" dock="left"/>
-                <Label text="Powrót" dock="left"/>
+                <Label text="Godziny" dock="left"/>
             </FlexboxLayout>
         </StackLayout>
 
