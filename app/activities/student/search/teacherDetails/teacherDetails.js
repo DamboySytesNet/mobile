@@ -69,29 +69,36 @@ exports.signToConsulation = (args) => {
                 ConsultationsHttpRequests.add(u.user.id,
                                               info.hour.teacher.id,
                                               info.hour.id,
-                                              '2020-01-03',
+                                              formatDateString(getClosestDate(info.hour.dayObject.id)),
                                               1,
                                               'Oczekujący',
                                               u.user.token)
                 .then((res) => {
                     console.log(res);
-                    /*
-                    const consultation = new Consultation.Cons(res.msg,
-                        pageData.get("chosenSubject"),
-                        info.hour.teacher.name, 
-                        info.hour.room, 
-                        new Date().toString(), 
-                        "Oczekujący", 
-                        null);
-                    console.log(consultation.id);
-                    // consultation.id = res.msg;
-                    u.user.consultations.data.push(consultation);
-                    */
-                   u.user.consultations.loaded = false;
+                    u.user.consultations.loaded = false;
                     goBack();
                 })
             }
     })
+}
+
+function formatDateString(date) {
+    return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+}
+
+function getClosestDate(weekDayNumber) {
+    const today = new Date();
+    let dayDiff;
+    if (weekDayNumber > today.getDay()) {
+        dayDiff = weekDayNumber - today.getDay();
+    }
+    else {
+        dayDiff = 7 + weekDayNumber - today.getDay();
+    }
+    let closestDate = new Date();
+    closestDate.setDate(today.getDate() + dayDiff);
+    console.log(closestDate);
+    return closestDate;
 }
 
 function goBack() {
