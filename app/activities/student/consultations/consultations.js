@@ -1,19 +1,19 @@
 const observableModule = require("tns-core-modules/data/observable");
-const listViewModule = require("tns-core-modules/ui/list-view");
-const frameModule = require('tns-core-modules/ui/frame');
 const Consultation = require("~/common/dataTypes/Consultation");
 const u = require('~/common/data/user');
+const ConsultationsHttpRequest = require('~/modules/request/consultationsHttpRequest');
 // only for test purposes
 const test = require('~/common/data/testConsultations');
 
 let pageData = new observableModule.fromObject({
-    consultations: []
+    consultations: [],
+    loading: false
 })
 
 exports.exit = (args) => {
     const button = args.object;
     const page = button.page;
-    
+
     page.frame.goBack();
 }
 
@@ -21,7 +21,6 @@ exports.goToDetails = (args) => {
     const page = args.object.page;
     const moduleName = 'activities/student/details/details';
     const id = args.object.index;
-    // alert(args.object.index);
     const navigationEntry = {
         moduleName: moduleName,
         context: {
@@ -30,28 +29,39 @@ exports.goToDetails = (args) => {
     }
 
     page.frame.navigate(navigationEntry);
-} 
+}
 
 exports.onPageLoaded = (args) => {
     const page = args.object;
 
+    pageData.set('loading', true);
     // load only when visit activity for the first time
-    if(!u.user.consultations.loaded) {
-        u.user.consultations.data = loadConsultations();
-        u.user.consultations.loaded = true;
+    if (!u.user.consultations.loaded) {
+        ConsultationsHttpRequest.get(u.user.id, u.user.token)
+            .then(res => {
+                for (const con of res) {
+                    u.user.consultations.data.push(new Consultation.Cons(
+                        con.id,
+                        con.subject,
+                        con.teacher,
+                        con.room,
+                        `${con.date} ${con.timeFrom}`,
+                        con.state,
+                        con.excuse));
+                    }
+                    pageData.set('consultations', groupByDayOfTheYear(u.user.consultations.data));
+                    page.bindingContext = pageData;    
+                    u.user.consultations.loaded = true;
+            }).catch( () => {
+                alert('Nie udało sie pobrać konsultacji!');
+                page.frame.goBack();
+            });
     }
-
-    pageData.set('consultations', groupByDayOfTheYear(u.user.consultations.data));
-    // alert(JSON.stringify(pageData.consultations));
-    page.bindingContext = pageData;
-}
-
-function loadConsultations() {
-    let consultationObjectsList = []
-    for(let con of test.testConsultations) {
-        consultationObjectsList.push(new Consultation.Cons(con.id, con.subject, con.teacher, con.room, con.date, 'oczekujący', null));
+    else {
+        pageData.set('consultations', groupByDayOfTheYear(u.user.consultations.data));
+        page.bindingContext = pageData;
     }
-    return consultationObjectsList;
+    pageData.set('loading', false);
 }
 
 function groupByDayOfTheYear(consultations) {
@@ -62,7 +72,7 @@ function groupByDayOfTheYear(consultations) {
     }
 
     let grouped = [];
-    
+
     for (let day of uniqueDays) {
         grouped.push({
             cons: consultations.filter(c => c.dayOfTheYear === day),
@@ -73,17 +83,20 @@ function groupByDayOfTheYear(consultations) {
     let today = new Date();
     for (let group of grouped) {
         let conDay = group.cons[0].date;
+        const dateStr = group.cons[0].dateStr;
         let prefix = "";
         if (today.getYear() === conDay.getYear() && today.getMonth() === conDay.getMonth()) {
             if (today.getDate() === conDay.getDate()) {
                 prefix = "Dziś";
             }
-            else if(today.getDate() + 1 === conDay.getDate()) {
+            else if (today.getDate() + 1 === conDay.getDate()) {
                 prefix = "Jutro";
             }
         }
+
         group['date'] = `${prefix} (${conDay.getDate()}.${conDay.getMonth() + 1}.${conDay.getYear() + 1900})`;
         group.cons.sort((a, b) => (a.date > b.date) ? 1 : -1);
+        group['dateStr'] = dateStr;
     }
 
     grouped.sort((a, b) => (a.day > b.day) ? 1 : -1);
