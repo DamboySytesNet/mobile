@@ -8,7 +8,10 @@ const ConsultationsHttpRequests = require('~/modules/request/consultationsHttpRe
 let pageData = observableModule.fromObject({
     data: {},
     subjects: [],
-    chosenSubject: "Nie wybrano przedmiotu"
+    chosenSubject: {
+        id: null,
+        name: 'Nie wybrano przedmiotu'
+    }
 });
 
 let page = null;
@@ -22,7 +25,7 @@ exports.onPageLoaded = (args) => {
     LectuerersHttpRequests.getLectuererSubjects(lectuererId, u.user.token)
     .then(res => {
        for (let s of res) {
-           subjects.push(s.name);
+           subjects.push(s);
        }
        pageData.set('subjects', subjects); 
     })
@@ -44,18 +47,18 @@ exports.chooseSubject = args => {
     dialogsModule.action({
         message: 'Wybierz przedmiot',
         cancelButtonText: 'Anuluj',
-        actions: pageData.subjects
+        actions: pageData.subjects.map(s => s.name),
     }).then(function (result) {
         if (result === 'Anuluj'){
             return;
         }else
-            pageData.set("chosenSubject", result);
+            chosenSubjectObj = pageData.subjects.find(s => s.name === result);
+            pageData.set("chosenSubject", chosenSubjectObj);
     });
 }
 
 exports.signToConsulation = (args) => {
     const info = pageData.get("data");
-    // TODO ustal date
     
     dialogsModule.confirm({
         title: 'Potwierdź',
@@ -64,19 +67,20 @@ exports.signToConsulation = (args) => {
         cancelButtonText: 'Nie',
     }).then(result => {
             if(result) {
-                // TODO get proper date
-                // TODO get subject id
                 ConsultationsHttpRequests.add(u.user.id,
                                               info.hour.teacher.id,
                                               info.hour.id,
                                               formatDateString(getClosestDate(info.hour.dayObject.id)),
-                                              1,
+                                              pageData.get('chosenSubject').id,
                                               'Oczekujący',
                                               u.user.token)
                 .then((res) => {
                     console.log(res);
                     u.user.consultations.loaded = false;
                     goBack();
+                })
+                .catch(() => {
+                    alert('Nie udało się zapisać na konsultacje :(');
                 })
             }
     })

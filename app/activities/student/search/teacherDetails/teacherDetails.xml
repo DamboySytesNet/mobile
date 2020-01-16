@@ -32,7 +32,7 @@
                 <StackLayout class="labelGroup"> 
                     <Label class="title" text="Przedmiot "/>
                     <Button text="Wybierz przedmiot" tap="chooseSubject"/>
-                    <Label class="info" text="{{ chosenSubject }} "/>
+                    <Label class="info" text="{{ chosenSubject.name }} "/>
                 </StackLayout>
                 <Button class="signOutButton" text="Zapisz się" tap="signToConsulation"/>
             </FlexboxLayout>
