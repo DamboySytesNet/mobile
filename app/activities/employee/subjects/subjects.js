@@ -5,152 +5,26 @@ const dialogsModule = require('tns-core-modules/ui/dialogs');
 const u = require('~/common/data/user');
 const esubject = require('~/common/dataTypes/EmployeeSubject');
 
+let testSubjects = [];
+let testUserSubjects = [];
+
+let page; 
+
 let pageData = new observableModule.fromObject({
     withoutUserSubjects: [],
     userSubjects: []
 });
 
-let testSubjects = [
-    {
-        id: 1,
-        title: 'Podstawy programowania',
-        semester: 1,
-        employees: [{
-            id: 4,
-            name: 'Jan',
-            surname: 'Kowalski'
-        },
-        {
-            id: 3,
-            name: 'Tomasz',
-            surname: 'Grela'
-        }
-    ],
-    },
-    {
-        id: 2,
-        title: 'Analiza danych',
-        semester: 3,
-        employees: [
-        {
-            id: 3,
-            name: 'Andrzej',
-            surname: 'Andrzejewski'
-        }]
-    },
-    {
-        id: 3,
-        title: 'Matematyka dyskretna',
-        semester: 2,
-        employees: [{
-            id: 4,
-            name: 'Jan',
-            surname: 'Kowalski'
-        },
-        {
-            id: 3,
-            name: 'Tomasz',
-            surname: 'Grela'
-        },
-        {
-            id: 5,
-            name: 'Ewa',
-            surname: 'Jabłoń'
-        }]
-    },
-    {
-        id: 4,
-        title: 'Fizyka 1',
-        semester: 1,
-        employees: []
-    },
-    {
-        id: 5,
-        title: 'Fizyka 2',
-        semester: 2,
-        employees: [        {
-            id: 5,
-            name: 'Ewa',
-            surname: 'Jabłoń'
-        }]
-    },
-]
-
-let testUserSubjects = [    
-{
-    id: 11,
-    title: 'Programowanie obiektowe',
-    semester: 1,
-    employees: [{
-        id: 4,
-        name: 'Jan',
-        surname: 'Kowalski'
-    },
-    {
-        id: u.user.id,
-        name: u.user.name,
-        surname: u.user.surname
-    },
-    {
-        id: 3,
-        name: 'Tomasz',
-        surname: 'Grela'
-    }
-],
-},
-{
-    id: 12,
-    title: 'Chmury',
-    semester: 3,
-    employees: [
-    {
-        id: 3,
-        name: 'Andrzej',
-        surname: 'Andrzejewski'
-    },
-    {
-        id: u.user.id,
-        name: u.user.name,
-        surname: u.user.surname
-    },
-]
-},
-{
-    id: 13,
-    title: 'Systemy wbudowane',
-    semester: 2,
-    employees: [
-    {
-        id: u.user.id,
-        name: u.user.name,
-        surname: u.user.surname
-    },    
-    {
-        id: 4,
-        name: 'Jan',
-        surname: 'Kowalski'
-    },
-    {
-        id: 3,
-        name: 'Tomasz',
-        surname: 'Grela'
-    },
-    {
-        id: 5,
-        name: 'Ewa',
-        surname: 'Jabłoń'
-    }]
-}]
 
 exports.back = (args) => {
     const button = args.object;
-    const page = button.page;
+    page = button.page;
     
     page.frame.goBack();
 }
 
 exports.pageLoaded = (args) => {
-    let page = args.object;
+    page = args.object;
     if(!u.user.subjects.loaded) {
         sortByTitle(testSubjects);
         sortByTitle(testUserSubjects);
@@ -174,7 +48,7 @@ function loadEmployeeSubjects(subjects) {
 }
 
 exports.changeIsOpen = (args) => {
-    let id = parseInt(args.object.index, 10);
+    let id = args.object.index;
     let tmp;
     if (args.object.id === 'withoutUserSubjectsDock') 
         tmp = pageData.withoutUserSubjects.find(el => el.id === id);
@@ -186,7 +60,7 @@ exports.changeIsOpen = (args) => {
 }
 
 exports.addToUserSubjects = (args) => {
-    let id = parseInt(args.object.index, 10);
+    let id = args.object.index;
     let item = pageData.withoutUserSubjects.find(el => el.id === id);
 
     let userData = {

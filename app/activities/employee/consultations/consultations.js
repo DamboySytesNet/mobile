@@ -4,7 +4,9 @@ const listViewModule = require('tns-core-modules/ui/list-view');
 const dialogsModule = require('tns-core-modules/ui/dialogs');
 const EmployeeConsultation = require('~/common/dataTypes/EmployeeConsultation');
 const u = require('~/common/data/user');
-     
+
+let page;
+
 let pageData = new observableModule.fromObject({
     consultations: [],
     reasons: [
@@ -56,13 +58,13 @@ let testConsultation = [
 
 exports.back = (args) => {
     const button = args.object;
-    const page = button.page;
+    page = button.page;
     
     page.frame.goBack();
 }
 
 exports.pageLoaded = (args) => {
-    let page = args.object;
+    page = args.object;
     if(!u.user.consultations.loaded) {
         u.user.consultations.data = loadEmployeeConsultations(testConsultation);
         u.user.consultations.loaded = true;
@@ -178,5 +180,5 @@ function groupByDayOfTheYear(arr) {
         i.height *= i.cons.length;
     }
 
-    return grouped;
+    return grouped; 
 }
