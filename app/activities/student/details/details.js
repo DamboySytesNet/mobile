@@ -1,6 +1,7 @@
 const observableModule = require("tns-core-modules/data/observable");
 const dialogsModule = require('tns-core-modules/ui/dialogs');
 const u = require('~/common/data/user');
+const ConsultationsHttpRequest = require('~/modules/request/consultationsHttpRequest');
 
 let pageData = new observableModule.fromObject({
     id: -1,
@@ -33,8 +34,15 @@ exports.deleteConsultation = (args) => {
         cancelButtonText: 'Anuluj',
     }).then(function (result) {
         if (result) {
-            u.user.consultations.data = u.user.consultations.data.filter(cons => cons.id !== pageData.get('id'));
-            goBack();
+            ConsultationsHttpRequest.delete(pageData.get('id'), u.user.token)
+                .then(() => {
+                    u.user.consultations.loaded = false;
+                    goBack();
+                })
+                .catch(() => {
+                    alert('Nie udało się usunąć konsultacji :(');
+                })
+            // u.user.consultations.data = u.user.consultations.data.filter(cons => cons.id !== pageData.get('id'));
         }
     });
 
