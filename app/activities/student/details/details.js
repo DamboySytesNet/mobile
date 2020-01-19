@@ -34,7 +34,7 @@ exports.deleteConsultation = (args) => {
         cancelButtonText: 'Anuluj',
     }).then(function (result) {
         if (result) {
-            ConsultationsHttpRequest.delete(pageData.get('id'), u.user.token)
+            ConsultationsHttpRequest.delete(pageData.get('id'), u.user.id, u.user.token)
                 .then(() => {
                     u.user.consultations.loaded = false;
                     goBack();
