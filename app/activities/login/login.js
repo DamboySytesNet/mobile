@@ -87,12 +87,11 @@ let pageData = new observableModule.fromObject({
             okButtonText: 'Ok',
             cancelButtonText: 'Cancel'
         }).then((data) => {
-            // TODO
             if (data.result) {
                 // Send forger request
                 auth.forgotPassword(data.text)
-                    .then((mail) => {
-                        alert(`E-mail został wysłany na ${mail}`);
+                    .then((msg) => {
+                        alert(msg);
                     })
                     .catch((msg) => {
                         alert(msg);

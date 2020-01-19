@@ -4,9 +4,7 @@ const listViewModule = require('tns-core-modules/ui/list-view');
 const dialogsModule = require('tns-core-modules/ui/dialogs');
 const u = require('~/common/data/user');
 const esubject = require('~/common/dataTypes/EmployeeSubject');
-
-let testSubjects = [];
-let testUserSubjects = [];
+const SubjectsEmployeeHttpRequest = require('~/modules/request/subjectsEmployeeHttpRequest');
 
 let page; 
 
@@ -24,19 +22,32 @@ exports.back = (args) => {
 }
 
 exports.pageLoaded = (args) => {
+    console.log(u.user.token);
     page = args.object;
-    if(!u.user.subjects.loaded) {
-        sortByTitle(testSubjects);
-        sortByTitle(testUserSubjects);
-        u.user.subjects.data.withoutUserSubjects = loadEmployeeSubjects(testSubjects);
-        u.user.subjects.data.userSubjects = loadEmployeeSubjects(testUserSubjects);
-        u.user.subjects.loaded = true;
+    if (!u.user.subjects.loaded) {
+        SubjectsEmployeeHttpRequest.get(u.user.id, u.user.token)
+        .then(res =>{
+            u.user.subjects.data.withoutUserSubjects = loadEmployeeSubjects(res);
+            u.user.subjects.data.userSubjects = loadEmployeeSubjects(res);
+            u.user.subjects.loaded = true;   
+            pageData.set('withoutUserSubjects', u.user.subjects.data.withoutUserSubjects);
+            pageData.set('userSubjects', u.user.subjects.data.userSubjects)
+            page.bindingContext = pageData;
+            withoutUserListView = page.getViewById('withoutUserListView');
+            userListView = page.getViewById('userListView');
+        })
+        .catch(() => {
+
+        });
+    }else {
+        // sortByTitle(testSubjects);
+        // sortByTitle(testUserSubjects);
+        pageData.set('withoutUserSubjects', u.user.subjects.data.withoutUserSubjects);
+        pageData.set('userSubjects', u.user.subjects.data.userSubjects)
+        page.bindingContext = pageData;
+        withoutUserListView = page.getViewById('withoutUserListView');
+        userListView = page.getViewById('userListView');
     }
-    pageData.set('withoutUserSubjects', u.user.subjects.data.withoutUserSubjects);
-    pageData.set('userSubjects', u.user.subjects.data.userSubjects)
-    page.bindingContext = pageData;
-    withoutUserListView = page.getViewById('withoutUserListView');
-    userListView = page.getViewById('userListView');
 }
 
 function loadEmployeeSubjects(subjects) {

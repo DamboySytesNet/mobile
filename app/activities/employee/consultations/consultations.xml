@@ -25,10 +25,10 @@
                                         <StackLayout class="list-group-item" id="listUnderDate">
                                             <Label text="{{ 'Kto: ' + student }}" textWrap="true" class="title"/>
                                             <Label text="{{  'Pokój: ' + room  }}" textWrap="true" class="title"/>
-                                            <Label text="{{ 'Godzina: ' + timeStr }}" textWrap="true" class="title"/>
+                                            <Label text="{{ 'Godzina: ' + timeStr}}" textWrap="true" class="title"/>
                                             <DockLayout orientation="horizontal" stretchLastChild="false">
-                                                <Button text="Akceptuj" index="{{ id }}" class="{{state === 'accepted' ? 'button accepted' : 'button'}}" dock="left" tap="accept"/>
-                                                <Button text="Odrzuć" index="{{ id }}" class="{{state === 'declined' ? 'button declined' : 'button'}}" dock="right" tap="decline"/>
+                                                <Button text="Akceptuj" index="{{ id }}" class="{{state === 'Zatwierdzona' ? 'button accepted' : 'button'}}" dock="left" tap="accept"/>
+                                                <Button text="Odrzuć" index="{{ id }}" class="{{state === 'Odrzucona' ? 'button declined' : 'button'}}" dock="right" tap="decline"/>
                                             </DockLayout>
                                         </StackLayout>
 

@@ -4,57 +4,15 @@ const listViewModule = require('tns-core-modules/ui/list-view');
 const dialogsModule = require('tns-core-modules/ui/dialogs');
 const EmployeeConsultation = require('~/common/dataTypes/EmployeeConsultation');
 const u = require('~/common/data/user');
+const ConsultationsEmployeeHttpRequest = require('~/modules/request/consultationsEmployeeHttpRequest');
+const Excuse = require('~/common/dataTypes/Excuse');
 
 let page;
 
 let pageData = new observableModule.fromObject({
     consultations: [],
-    reasons: [
-        'Dzisiaj mnie brzuch boli',
-        'Mam ważniejsze rzeczy',
-        '+ Dodaj własny powód'
-    ]
+    reasons: []
 });
-
-let testConsultation = [
-    {
-        id: 1,
-        student: 'Adrian Adriańsski',
-        room: 243,
-        date: new Date().toString(),
-    },
-    {
-        id: 2,
-        student: 'Damian Trisss',
-        room: 211,
-        date: new Date().toString(),        
-    },
-    {
-        id: 66,
-        student: 'Artur Yen',
-        room: 453,
-        date: new Date().toString(),   
-    },
-    {
-        id: 22,
-        student: 'Tomasz Dziobak',
-        room: 111,
-        date: new Date(2020, 5, 17, 2, 30).toString(),   
-    },
-    {
-        id: 67,
-        student: 'Artur Yesssss',
-        room: 454,
-        date: new Date(2020, 5, 17, 4, 30).toString(),   
-    },
-    {
-        id: 4,
-        student: 'Tomasz Chlebss',
-        room: 099,
-        date: new Date(2020, 10, 27, 8, 30).toString(),   
-    }
-]
-
 
 exports.back = (args) => {
     const button = args.object;
@@ -65,79 +23,138 @@ exports.back = (args) => {
 
 exports.pageLoaded = (args) => {
     page = args.object;
+    pageData.reasons.splice(0, pageData.reasons.length);
+    ConsultationsEmployeeHttpRequest.getExcuses(u.user.id, u.user.token)
+    .then(res => {
+        for (const it of res) {
+            pageData.reasons.push(new Excuse.new(it.id, it.text));
+        }
+    })
+    .catch( () => {
+        alert('Nie udało sie pobrać powodów!');
+        page.frame.goBack(); 
+    });
+
     if(!u.user.consultations.loaded) {
-        u.user.consultations.data = loadEmployeeConsultations(testConsultation);
-        u.user.consultations.loaded = true;
+        ConsultationsEmployeeHttpRequest.get(u.user.id, u.user.token)
+        .then(res => {
+            u.user.consultations.data = loadEmployeeConsultations(res);
+            u.user.consultations.loaded = true;
+            pageData.set('consultations', groupByDayOfTheYear(u.user.consultations.data));
+            page.bindingContext = pageData; 
+            list = page.getViewById('list');
+            listView = page.getViewById('listView');
+        })
+        .catch( () => {
+            alert('Nie udało sie pobrać konsultacji!');
+            page.frame.goBack(); 
+        });
     }
-    pageData.set('consultations', groupByDayOfTheYear(u.user.consultations.data)); // insert here function returning cons from db
-    page.bindingContext = pageData; 
-    list = page.getViewById('list');
-    listView = page.getViewById('listView');
+    else {
+        pageData.set('consultations', groupByDayOfTheYear(u.user.consultations.data));
+        page.bindingContext = pageData; 
+        list = page.getViewById('list');
+        listView = page.getViewById('listView');
+    }
 }
 
 exports.accept = (args) => {
     let id = parseInt(args.object.index, 10);
-    for (let i of pageData.get('consultations')) {
-        let tmp = i.cons.find(el => el.id === id);
-        if (tmp) {
-            tmp.state = 'accepted';
-            tmp.excuse = null;
-        }
-   }
-   listView.refresh();
+    ConsultationsEmployeeHttpRequest.setState(u.user.id, id, 2, null, u.user.token)
+        .then(res => {
+            console.log(res);
+            for (let i of pageData.get('consultations')) {
+                let tmp = i.cons.find(el => el.id === id);
+                if (tmp) {
+                    tmp.state = 'Zatwierdzona';
+                    tmp.excuse = null;
+                    listView.refresh();
+                    break;
+                }
+            }    
+        })
+        .catch( () => {
+            alert('Nie udało sie zmienić stanu konsultacji!');
+        });
+   
 }
 
 exports.decline = (args) => {
     dialogsModule.confirm({
-    title: 'Odrzuć',
-    message: 'Czy na pewno chcesz odrzucić?',
-    okButtonText: 'Potwierdź',
-    cancelButtonText: 'Anuluj',
-}).then(function (result) {
-    if (result) {
-        chooseReason(args);
-    }
-});
+        title: 'Odrzuć',
+        message: 'Czy na pewno chcesz odrzucić?',
+        okButtonText: 'Potwierdź',
+        cancelButtonText: 'Anuluj',
+    }).then(function (result) {
+        if (result) {
+            chooseReason(args);
+        }
+    });
 }
 
 function chooseReason(args) {
+    let tmp = [];
+    let addExcuseText = '+ Dodaj własny powód';
+    pageData.reasons.forEach(element => {
+        tmp.push(element.text);
+    });
+    tmp.push(addExcuseText);
     dialogsModule.action({
-    message: 'Wybierz powód',
-    cancelButtonText: 'Anuluj',
-    actions: pageData.reasons
-}).then(function (result) {
-    if (result === '+ Dodaj własny powód'){
-        addReason(args);
-    }else if (result === 'Anuluj'){
-        return;
-    }else
-        deleteConsultation(args, result);
-});
+        message: 'Wybierz powód',
+        cancelButtonText: 'Anuluj',
+        actions: tmp
+    }).then(function (result) {
+        if (result === addExcuseText){
+            addReason(args);
+        }else if (result === 'Anuluj'){
+            return;
+        }else
+            deleteConsultation(args, result);
+    });
 }
 
 function addReason(args) {
     dialogsModule.prompt('Dodaj powód', '').then(function (r) {
-        if (r.result)
-            deleteConsultation(args, r.text);
+        if (r.result) {
+            ConsultationsEmployeeHttpRequest.addExcuse(u.user.id, r.text, u.user.token)
+            .then( (res) => {
+                pageData.reasons.push(new Excuse.new(res, r.text));
+                deleteConsultation(args, r.text);   
+           })
+           .catch( () => {
+               alert('Nie udało sie dodać nowego powodu!');
+           });
+        }
     }); 
 }
 
-function deleteConsultation(args, excuse) {
+function deleteConsultation(args, excuseText) {
     let id = parseInt(args.object.index, 10);
-    for (let i of pageData.get('consultations')) {
-        let tmp = i.cons.find(el => el.id === id);
-        if (tmp){
-            tmp.state = 'declined';
-            tmp.excuse = excuse;
-        }
-   }
-   listView.refresh();
+    let excuseId = pageData.reasons.find((el) => {return el.text === excuseText}).id;
+
+    ConsultationsEmployeeHttpRequest.setState(u.user.id, id, 3, excuseId, u.user.token)
+    .then(res => {
+       console.log(res);
+       for (let i of pageData.get('consultations')) {
+           let tmp = i.cons.find(el => el.id === id);
+           if (tmp) {
+               tmp.state = 'Odrzucona';
+               tmp.excuse = excuseText;
+               listView.refresh();
+               break;
+           }
+       }    
+   })
+   .catch( () => {
+       alert('Nie udało sie zmienić stanu konsultacji!');
+   });
 }
 
 function loadEmployeeConsultations(cons) {
     const c = [];
     for(let con of cons) {
-        c.push(new EmployeeConsultation.new(con.id, null, null, con.student, con.room, con.date, 'waiting', null));
+        console.log(con);
+        c.push(new EmployeeConsultation.new(con.id, null, null, con.student, con.room, con.date, con.state, null));
     }
     return c;
 }
@@ -173,12 +190,9 @@ function groupByDayOfTheYear(arr) {
         gr['date'] = `${prefix} ${conDay.getDate()}.${conDay.getMonth() + 1}.${conDay.getYear() + 1900}`;
         gr.cons.sort((a, b) => (a.date > b.date) ? 1 : -1);
     }
-
     grouped.sort((a, b) => (a.day > b.day) ? 1 : -1);
-
     for (let i of grouped) {
         i.height *= i.cons.length;
     }
-
     return grouped; 
 }

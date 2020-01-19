@@ -9,15 +9,15 @@
             </FlexboxLayout>
         </StackLayout>
 
-        <StackLayout>
+        <StackLayout isEnabled="{{ !loading }}">
             <ListView items="{{ consultations }}">
                 <ListView.itemTemplate>
                     <StackLayout>
-                        <Label text="{{ date }}"/>
+                        <Label text="{{ dateStr }}"/>
                         
                         <ListView items="{{ cons }}" height="100">
                             <ListView.itemTemplate> 
-                                <DockLayout>
+                                <DockLayout index="{{ id }}" tap="goToDetails">
                                     <Label text="{{ timeStr }}" dock="right"/>
                                     <Label text="{{ teacher }}" dock="left"/>
                                 </DockLayout>
@@ -26,6 +26,7 @@
                     </StackLayout>
                 </ListView.itemTemplate>
             </ListView>
+            <ActivityIndicator busy="{{ loading }}"/>
         </StackLayout>
     </StackLayout>
 </Page>

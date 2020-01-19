@@ -18,13 +18,17 @@
                        flexDirection="column"
                        flexGrow="1"
                        visibility="{{ loading ? 'collapse' : 'visible' }}">
-            <FlexboxLayout id="main-defaultRoom" flexDirection="row">
+            <FlexboxLayout id="main-defaultRoom"
+                           alignItems="center"
+                           flexDirection="row">
                 <Label text="Domyślny Pokój: " />
+                
                 <TextField hint="Pokój"
                            text="{{ room }}"
                            autocorrect="false"
                            isEnabled="{{ roomEditing }}"
                            flexGrow="1"/>
+
                 <StackLayout orientation="horizontal">
                     <Image tap="editRoom" visibility="{{ roomEditing || roomProcessing ? 'collapse' : 'visible' }}" src="~/icons/pencil.png" />
                     <Image tap="acceptEditRoom" visibility="{{ roomEditing ? 'visible' : 'collapse' }}" src="~/icons/check.png" />

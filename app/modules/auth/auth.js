@@ -45,11 +45,40 @@ exports.login = (user) => {
 
 exports.forgotPassword = (email) => {
     return new Promise((revoke, reject) => {
-        if (email.trim() === '') {
+        let tmp_email = email.trim();
+        if (tmp_email === '') {
             reject('Podaj e-mail!');
             return;
         }
-        
-         revoke(email);
+
+        httpModule.request({
+            url: 'https://damboy.sytes.net/mk/forgotPassword.php',
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            content: JSON.stringify({
+                email: tmp_email
+            })
+        }).then((res) => {
+            if (res.statusCode === 200) {
+                try {
+                    let json = JSON.parse(res.content);
+                    if (json.status === 'success') {
+                        revoke(json.msg);
+                    } else {
+                        console.log('auth.js: 0x14', json);
+                        reject(json.msg);
+                    }
+                } catch(e) {
+                    console.log('auth.js: 0x13', e, res.content);
+                    reject('Server error...');
+                }
+            } else {
+                console.log('auth.js: 0x12');
+                reject('Server error...');
+            }
+        }, (e) => {
+            console.log('auth.js: 0x11');
+            reject('Server error...');
+        });
     });
 }

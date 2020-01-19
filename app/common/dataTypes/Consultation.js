@@ -11,6 +11,7 @@ exports.Cons = class Consultation {
 
         this.timeStr = this.getTimeStr();
         this.dayOfTheYear = this.getDayOfTheYear();
+        this.dateStr = this.getDateStr();
         
     }
 
@@ -51,5 +52,20 @@ exports.Cons = class Consultation {
 
         return timeStr;
 
+    }
+
+    getDateStr() {
+        let day = this.date.getDate();
+        let month = this.date.getMonth() + 1;
+
+        if (day < 10) {
+            day = `0${day}`;
+        }
+        
+        if (month < 10) {
+            month = `0${month}`;
+        }
+
+        return `${day}.${month}.${this.date.getYear() + 1900}`;
     }
 };
