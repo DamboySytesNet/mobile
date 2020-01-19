@@ -1,6 +1,19 @@
-@import '../../common/style/backActionbar.css';
+@import "../../common/style/backActionbar.css";
 
-#listview StackLayout {
-    width: 100%;
-    height: 80;
+#listview DockLayout {
+  width: 100%;
+  padding: 0 20;
+  height: 80;
+}
+
+#listview DockLayout > image {
+  width: 50;
+  height: 50;
+  padding: 15;
+}
+
+#listview DockLayout label {
+  padding: 0 18;
+  font: 17 "OpenSans";
+  color: #fff;
 }

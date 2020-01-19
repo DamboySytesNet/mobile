@@ -12,9 +12,14 @@
         <ScrollView height="100%">
             <ListView height="100%" items="{{ notifications }}" id="listview">
                     <ListView.itemTemplate>
-                        <StackLayout class="notification-post">
-                            <Label text="{{ message }}" textWrap="true" />
-                        </StackLayout>
+                        <DockLayout backgroundColor="{{ type === 1 ? '#41ad49' : type === 2 || type === 5 ? '#ff0000' : '#22a4f2' }}"
+                                    stretchLastChild="true" >
+                            
+                            <Image dock="left" src="{{ type === 1 ? '~/icons/tick.png' : type === 2 || type === 5 ? '~/icons/warn.png' : '~/icons/info.png' }}" />
+                            <FlexboxLayout orientation="horizontal" alignItems="center">
+                                <Label dock="right" text="{{ message }}" textWrap="true" />
+                            </FlexboxLayout>
+                        </DockLayout>
                     </ListView.itemTemplate>
             </ListView>
         </ScrollView>
