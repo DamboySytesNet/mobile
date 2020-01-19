@@ -1,0 +1,23 @@
+<Page class="page" actionBarHidden="true" loaded="pageLoaded" unloaded="onUnloaded">
+    <ActionBar></ActionBar>
+
+    <StackLayout>
+        <StackLayout id="actionbar">
+            <FlexboxLayout tap="exit" orientation="horizontal" alignItems="center">
+                    <Image src="~/icons/arrow-left.png" dock="left"/>
+                    <Label text="Powiadomienia" dock="left"/>
+            </FlexboxLayout>
+        </StackLayout>
+
+        <ScrollView height="100%">
+            <ListView height="100%" items="{{ notifications }}" id="listview">
+                    <ListView.itemTemplate>
+                        <StackLayout class="notification-post">
+                            <Label text="{{ message }}" textWrap="true" />
+                        </StackLayout>
+                    </ListView.itemTemplate>
+            </ListView>
+        </ScrollView>
+        
+    </StackLayout>
+</Page> 

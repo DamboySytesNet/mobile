@@ -1,4 +1,4 @@
-<Page class="page" actionBarHidden="true" loaded="pageLoaded">
+<Page class="page" actionBarHidden="true" loaded="pageLoaded" unloaded="onUnloaded">
     <ActionBar></ActionBar>
 
     <StackLayout>

@@ -12,5 +12,12 @@ exports.user = {
         loaded: false,
         data: []
     },
-    page: null
+    page: null,
+
+    notifications: {
+        latestId: 0,
+        unread: 0,
+        data: [],
+        interval: null
+    }
 };

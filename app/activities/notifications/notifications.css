@@ -1,0 +1,6 @@
+@import '../../common/style/backActionbar.css';
+
+#listview StackLayout {
+    width: 100%;
+    height: 80;
+}
