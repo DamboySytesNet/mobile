@@ -49,6 +49,7 @@ exports.pageLoaded = args => {
         }
     }, 1000);
     page.bindingContext = pageData;
+    bells = page.getViewById("bell");
 };
 
 exports.onUnloaded = () => {

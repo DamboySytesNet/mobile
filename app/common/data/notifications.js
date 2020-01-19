@@ -59,6 +59,7 @@ const request = () => {
 exports.request = request;
 
 const read = () => {
+    u.user.notifications.unread = 0;
     JSON.stringify({
         user_id: u.user.id,
         token: u.user.token,
@@ -93,7 +94,6 @@ const read = () => {
                                     !notification.is_read
                                 ) {
                                     notification.is_read = true;
-                                    u.user.notifications.unread--;
                                 }
                             }
                         } else {
