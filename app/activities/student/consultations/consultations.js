@@ -37,8 +37,10 @@ exports.onPageLoaded = (args) => {
     pageData.set('loading', true);
     // load only when visit activity for the first time
     if (!u.user.consultations.loaded) {
+        
         ConsultationsHttpRequest.get(u.user.id, u.user.token)
             .then(res => {
+                u.user.consultations.data = [];
                 for (const con of res) {
                     u.user.consultations.data.push(new Consultation.Cons(
                         con.id,
