@@ -17,6 +17,12 @@ let pageData = new observableModule.fromObject({
             moduleName: moduleName
         };
         page.frame.navigate(navigationEntry);
+    },
+
+    goToNotifications() {
+        page.frame.navigate({
+            moduleName: "activities/notifications/notifications"
+        });
     }
 });
 
@@ -25,20 +31,22 @@ exports.exit = args => {
     page.frame.goBack();
 };
 
-exports.toNotifications = () => {
-    let moduleName = "activities/notifications/notifications";
-    const navigationEntry = {
-        moduleName: moduleName
-    };
-    page.frame.navigate(navigationEntry);
-};
-
 exports.pageLoaded = args => {
     page = args.object;
     pageData.set("user", `${u.user.name} ${u.user.surname}`);
 
+    let oldValue = u.user.notifications.unread;
+    if (oldValue > 0) animateBell();
+
     interval = setInterval(() => {
-        pageData.set("numberOfNotifications", `${u.user.notifications.unread}`);
+        if (oldValue !== u.user.notifications.unread) {
+            animateBell();
+            oldValue = u.user.notifications.unread;
+            pageData.set(
+                "numberOfNotifications",
+                `${u.user.notifications.unread}`
+            );
+        }
     }, 1000);
     page.bindingContext = pageData;
 };
@@ -46,3 +54,31 @@ exports.pageLoaded = args => {
 exports.onUnloaded = () => {
     if (interval) clearInterval(interval);
 };
+
+function animateBell() {
+    bells
+        .animate({
+            rotate: 40,
+            duration: 270,
+            scale: {
+                x: 1.3,
+                y: 1.3
+            }
+        })
+        .then(() => {
+            return bells.animate({
+                rotate: -40,
+                duration: 270
+            });
+        })
+        .then(() => {
+            return bells.animate({
+                rotate: 0,
+                duration: 270,
+                scale: {
+                    x: 1,
+                    y: 1
+                }
+            });
+        });
+}

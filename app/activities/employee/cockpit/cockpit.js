@@ -11,15 +11,7 @@ let interval;
 
 let pageData = new observableModule.fromObject({
     user: "",
-    numberOfNotifications: 69,
-
-    // w celach testowych:
-    alertNotification() {
-        this.numberOfNotifications++;
-        animateBell();
-
-        pageData.consultations[0];
-    },
+    numberOfNotifications: 0,
 
     goToEmployeeConsultations() {
         let moduleName = "activities/employee/consultations/consultations";
@@ -38,6 +30,12 @@ let pageData = new observableModule.fromObject({
         page.frame.navigate({
             moduleName: "activities/employee/settings/settings"
         });
+    },
+
+    goToNotifications() {
+        page.frame.navigate({
+            moduleName: "activities/notifications/notifications"
+        });
     }
 });
 
@@ -49,8 +47,19 @@ exports.exit = args => {
 exports.pageLoaded = args => {
     page = args.object;
     pageData.set("user", `${u.user.name} ${u.user.surname}`);
+
+    let oldValue = u.user.notifications.unread;
+    if (oldValue > 0) animateBell();
+
     interval = setInterval(() => {
-        pageData.set("numberOfNotifications", `${u.user.notifications.unread}`);
+        if (oldValue !== u.user.notifications.unread) {
+            animateBell();
+            oldValue = u.user.notifications.unread;
+            pageData.set(
+                "numberOfNotifications",
+                `${u.user.notifications.unread}`
+            );
+        }
     }, 1000);
     page.bindingContext = pageData;
     bells = page.getViewById("bell");
