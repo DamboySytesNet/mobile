@@ -1,6 +1,5 @@
 const observableModule = require("tns-core-modules/data/observable");
 const u = require('~/common/data/user');
-const Consultation = require("~/common/dataTypes/Consultation");
 const dialogsModule = require('tns-core-modules/ui/dialogs');
 const LectuerersHttpRequests = require('~/modules/request/lectuerersHttpRequests');
 const ConsultationsHttpRequests = require('~/modules/request/consultationsHttpRequests');
@@ -74,8 +73,7 @@ exports.signToConsulation = (args) => {
                                               pageData.get('chosenSubject').id,
                                               'Oczekujący',
                                               u.user.token)
-                .then((res) => {
-                    console.log(res);
+                .then(() => {
                     u.user.consultations.loaded = false;
                     goBack();
                 })
@@ -101,7 +99,6 @@ function getClosestDate(weekDayNumber) {
     }
     let closestDate = new Date();
     closestDate.setDate(today.getDate() + dayDiff);
-    console.log(closestDate);
     return closestDate;
 }
 

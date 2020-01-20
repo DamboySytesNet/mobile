@@ -16,7 +16,6 @@ exports.onPageLoaded = (args) => {
     pageData.set('id', chosenConsultationId);
 
     const c = u.user.consultations.data.find(element => element.id === chosenConsultationId);
-    alert(JSON.stringify(context));
     pageData.set('consultation', c);
     page.bindingContext = pageData;
 }
