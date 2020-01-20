@@ -15,6 +15,13 @@ exports.clearUser = () => {
         hours: {
             loaded: false,
             data: []
+        },
+        subjects: {
+            loaded: false,
+            data: {
+                subjectsWithoutUser: [],
+                userSubjects: []
+            }
         }
     };
 

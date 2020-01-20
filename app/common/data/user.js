@@ -12,5 +12,12 @@ exports.user = {
         loaded: false,
         data: []
     },
+    subjects: {
+        loaded: false,
+        data: {
+            withoutUserSubjects: [],
+            userSubjects: []
+        }
+    },
     page: null
 };
