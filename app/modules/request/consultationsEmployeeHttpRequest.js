@@ -37,9 +37,9 @@ exports.get = (id, token) => {
     })
 }
 
-exports.setState = (user_id, consultation_id, state_id, excuse_id, token) => {
+exports.setState = (user_id, student_id, consultation_id, state_id, excuse_id, token) => {
     return new Promise((revoke, reject) => {
-        if(!user_id || !consultation_id || !state_id || !token) {
+        if(!user_id || !student_id || !consultation_id || !state_id || !token) {
             reject('Niepoprawne żądanie');
             return;
         }  
@@ -48,11 +48,12 @@ exports.setState = (user_id, consultation_id, state_id, excuse_id, token) => {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             content: JSON.stringify({
-                user_id: user_id,
-                consultation_id: consultation_id,
-                state_id: state_id,
-                excuse_id: excuse_id,
-                token: token
+                user_id,
+                student_id,
+                consultation_id,
+                state_id,
+                excuse_id,
+                token
             })
         }).then( res => {
             if (res.statusCode === 200) {

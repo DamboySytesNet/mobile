@@ -60,7 +60,8 @@ exports.pageLoaded = (args) => {
 
 exports.accept = (args) => {
     let id = parseInt(args.object.index, 10);
-    ConsultationsEmployeeHttpRequest.setState(u.user.id, id, 2, null, u.user.token)
+    let student_id = u.user.consultations.data.find(el => {return el.id === id}).student;
+    ConsultationsEmployeeHttpRequest.setState(u.user.id, student_id, id, 2, null, u.user.token)
         .then(res => {
             console.log(res);
             for (let i of pageData.get('consultations')) {
@@ -131,8 +132,8 @@ function addReason(args) {
 function deleteConsultation(args, excuseText) {
     let id = parseInt(args.object.index, 10);
     let excuseId = pageData.reasons.find((el) => {return el.text === excuseText}).id;
-
-    ConsultationsEmployeeHttpRequest.setState(u.user.id, id, 3, excuseId, u.user.token)
+    let student_id = u.user.consultations.data.find(el => {return el.id === id}).student;
+    ConsultationsEmployeeHttpRequest.setState(u.user.id, student_id, id, 3, excuseId, u.user.token)
     .then(res => {
        console.log(res);
        for (let i of pageData.get('consultations')) {
