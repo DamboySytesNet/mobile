@@ -21,7 +21,6 @@ exports.get = (id, token) => {
             if (res.statusCode === 200) {
                 try {
                     const json = JSON.parse(res.content);
-                    console.log(json);
                     if (json.status === 'success') {
                         const result = JSON.parse(json.msg);
                         revoke(result);

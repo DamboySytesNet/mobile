@@ -1,5 +1,5 @@
 const httpModule = require("tns-core-modules/http");
-const u = require("./user");
+const u = require("../../common/data/user");
 
 const request = () => {
     httpModule
@@ -60,11 +60,6 @@ exports.request = request;
 
 const read = () => {
     u.user.notifications.unread = 0;
-    JSON.stringify({
-        user_id: u.user.id,
-        token: u.user.token,
-        latest_id: u.user.notifications.latestId
-    });
 
     httpModule
         .request({
@@ -96,7 +91,7 @@ const read = () => {
                                     notification.is_read = true;
                                 }
                             }
-                        } else if (json.msg !== 'No new notifications') {
+                        } else if (json.msg !== "No new notifications") {
                             console.log("notifications.js: 0x05");
                         }
                     } catch (e) {

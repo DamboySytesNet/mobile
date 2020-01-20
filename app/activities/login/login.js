@@ -1,13 +1,12 @@
 // Import nativescript modules
 const observableModule = require("tns-core-modules/data/observable");
 const dialogsModule = require("tns-core-modules/ui/dialogs");
-const frameModule = require("tns-core-modules/ui/frame");
 
 // Import custom modules / datatypes
 const auth = require("~/modules/auth/auth");
 const logout = require("~/modules/utils/logout");
 const u = require("~/common/data/user");
-const notifications = require("~/common/data/notifications");
+const notifications = require("~/modules/request/notificationsHttpRequests");
 
 let page;
 

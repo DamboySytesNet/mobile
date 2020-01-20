@@ -1,9 +1,7 @@
 const observableModule = require("tns-core-modules/data/observable");
-const frameModule = require("tns-core-modules/ui/frame");
 
 const u = require("~/common/data/user");
-const logout = require("~/modules/utils/logout");
-const n = require('../../common/data/notifications');
+const n = require('../../modules/request/notificationsHttpRequests');
 
 let page;
 let interval;

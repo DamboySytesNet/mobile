@@ -1,11 +1,11 @@
 const observableModule = require("tns-core-modules/data/observable");
-
-const frameModule = require("tns-core-modules/ui/frame");
 const dialogsModule = require("tns-core-modules/ui/dialogs");
 
-const auth = require("~/modules/auth/auth");
 const u = require("~/common/data/user");
+
+const auth = require("~/modules/auth/auth");
 const logout = require("~/modules/utils/logout");
+const bell = require("~/modules/utils/animateBell");
 
 let page;
 let bells;
@@ -40,24 +40,22 @@ let pageData = new observableModule.fromObject({
     }
 });
 
-exports.exit = args => {
+exports.exit = () => {
     logout.clearUser();
-    let view = args.object;
-    page = view.page;
     page.frame.goBack();
 };
 
 exports.pageLoaded = args => {
     page = args.object;
     pageData.set("user", `${u.user.name} ${u.user.surname}`);
-    bells = page.getViewById("bell");
+    bellIcon = page.getViewById("bell");
 
     let oldValue = u.user.notifications.unread;
-    if (oldValue > 0) animateBell();
+    if (oldValue > 0) bell.shake(bellIcon);
 
     interval = setInterval(() => {
-        if (oldValue < u.user.notifications.unread) {
-            animateBell();
+        if (oldValue !== u.user.notifications.unread) {
+            if (oldValue < u.user.notifications.unread) bell.shake(bellIcon);
             oldValue = u.user.notifications.unread;
             pageData.set(
                 "numberOfNotifications",
@@ -124,31 +122,3 @@ exports.changePassword = () => {
             alert(msg);
         });
 };
-
-function animateBell() {
-    bells
-        .animate({
-            rotate: 40,
-            duration: 270,
-            scale: {
-                x: 1.3,
-                y: 1.3
-            }
-        })
-        .then(() => {
-            return bells.animate({
-                rotate: -40,
-                duration: 270
-            });
-        })
-        .then(() => {
-            return bells.animate({
-                rotate: 0,
-                duration: 270,
-                scale: {
-                    x: 1,
-                    y: 1
-                }
-            });
-        });
-}

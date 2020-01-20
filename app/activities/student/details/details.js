@@ -33,7 +33,10 @@ exports.deleteConsultation = (args) => {
         cancelButtonText: 'Anuluj',
     }).then(function (result) {
         if (result) {
-            ConsultationsHttpRequest.delete(pageData.get('id'), u.user.id, u.user.token)
+            const consultationId = pageData.get('id');
+            const employee_id = u.user.consultations.data.find(element => element.id === consultationId).teacherId;
+
+            ConsultationsHttpRequest.delete(pageData.get('id'), employee_id, u.user.token)
                 .then(() => {
                     u.user.consultations.loaded = false;
                     goBack();

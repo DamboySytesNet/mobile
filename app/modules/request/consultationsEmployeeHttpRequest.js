@@ -11,7 +11,9 @@ exports.get = (id, token) => {
             .request({
                 url: `https://damboy.sytes.net/mk/getLecturerConsultations.php`,
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
+                headers: {
+                    "Content-Type": "application/json"
+                },
                 content: JSON.stringify({
                     user_id: id,
                     token: token
@@ -21,7 +23,6 @@ exports.get = (id, token) => {
                 if (res.statusCode === 200) {
                     try {
                         const json = JSON.parse(res.content);
-                        console.log(json);
                         if (json.status === "success") {
                             const result = JSON.parse(json.msg);
                             revoke(result);
@@ -60,7 +61,9 @@ exports.setState = (
             .request({
                 url: `https://damboy.sytes.net/mk/setConsultationState.php`,
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
+                headers: {
+                    "Content-Type": "application/json"
+                },
                 content: JSON.stringify({
                     user_id,
                     student_id,
@@ -100,7 +103,9 @@ exports.getExcuses = (id, token) => {
             .request({
                 url: `https://damboy.sytes.net/mk/getExcuses.php`,
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
+                headers: {
+                    "Content-Type": "application/json"
+                },
                 content: JSON.stringify({
                     user_id: id,
                     token: token
@@ -110,7 +115,6 @@ exports.getExcuses = (id, token) => {
                 if (res.statusCode === 200) {
                     try {
                         const json = JSON.parse(res.content);
-                        console.log(json);
                         if (json.status === "success") {
                             const result = JSON.parse(json.msg);
                             revoke(result);
@@ -136,7 +140,9 @@ exports.addExcuse = (user_id, excuse, token) => {
             .request({
                 url: `https://damboy.sytes.net/mk/addExcuse.php`,
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
+                headers: {
+                    "Content-Type": "application/json"
+                },
                 content: JSON.stringify({
                     user_id: user_id,
                     excuse: excuse,
@@ -147,7 +153,6 @@ exports.addExcuse = (user_id, excuse, token) => {
                 if (res.statusCode === 200) {
                     try {
                         const json = JSON.parse(res.content);
-                        console.log(json);
                         if (json.status === "success") {
                             revoke(json.msg);
                         } else {

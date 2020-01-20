@@ -1,10 +1,11 @@
 const observableModule = require("tns-core-modules/data/observable");
-const frameModule = require("tns-core-modules/ui/frame");
 const dialogsModule = require("tns-core-modules/ui/dialogs");
 
-const auth = require("~/modules/auth/auth");
 const u = require("~/common/data/user");
+
+const auth = require("~/modules/auth/auth");
 const logout = require("~/modules/utils/logout");
+const bell = require("~/modules/utils/animateBell");
 
 let page;
 let interval = null;
@@ -14,20 +15,15 @@ let pageData = new observableModule.fromObject({
     numberOfNotifications: 0,
 
     goToStudentConsultations() {
-        let moduleName = "activities/student/consultations/consultations";
-        const navigationEntry = {
-            moduleName: moduleName
-        };
-
-        page.frame.navigate(navigationEntry);
+        page.frame.navigate({
+            moduleName: "activities/student/consultations/consultations"
+        });
     },
 
     goToSearch() {
-        let moduleName = "activities/student/search/search";
-        const navigationEntry = {
-            moduleName: moduleName
-        };
-        frameModule.topmost().navigate(navigationEntry);
+        page.frame.navigate({
+            moduleName: "activities/student/search/search"
+        });
     },
 
     goToNotifications() {
@@ -89,9 +85,7 @@ exports.changePassword = () => {
         });
 };
 
-exports.exit = args => {
-    const button = args.object;
-    const page = button.page;
+exports.exit = () => {
     logout.clearUser();
     page.frame.goBack();
 };
@@ -99,14 +93,14 @@ exports.exit = args => {
 exports.pageLoaded = args => {
     page = args.object;
     pageData.set("user", `${u.user.name} ${u.user.surname}`);
-    bells = page.getViewById("bell");
+    bellIcon = page.getViewById("bell");
 
     let oldValue = u.user.notifications.unread;
-    if (oldValue > 0) animateBell();
+    if (oldValue > 0) bell.shake(bellIcon);
 
     interval = setInterval(() => {
         if (oldValue !== u.user.notifications.unread) {
-            animateBell();
+            if (oldValue < u.user.notifications.unread) bell.shake(bellIcon);
             oldValue = u.user.notifications.unread;
             pageData.set(
                 "numberOfNotifications",
@@ -120,31 +114,3 @@ exports.pageLoaded = args => {
 exports.onUnloaded = () => {
     if (interval) clearInterval(interval);
 };
-
-function animateBell() {
-    bells
-        .animate({
-            rotate: 40,
-            duration: 270,
-            scale: {
-                x: 1.3,
-                y: 1.3
-            }
-        })
-        .then(() => {
-            return bells.animate({
-                rotate: -40,
-                duration: 270
-            });
-        })
-        .then(() => {
-            return bells.animate({
-                rotate: 0,
-                duration: 270,
-                scale: {
-                    x: 1,
-                    y: 1
-                }
-            });
-        });
-}

@@ -1,6 +1,4 @@
 const observableModule = require("tns-core-modules/data/observable");
-const frameModule = require("tns-core-modules/ui/frame");
-const listViewModule = require("tns-core-modules/ui/list-view");
 const dialogsModule = require("tns-core-modules/ui/dialogs");
 const EmployeeConsultation = require("~/common/dataTypes/EmployeeConsultation");
 const u = require("~/common/data/user");
@@ -70,15 +68,14 @@ exports.accept = args => {
     }).studentId;
 
     ConsultationsEmployeeHttpRequest.setState(
-        u.user.id,
-        student_id,
-        id,
-        2,
-        null,
-        u.user.token
-    )
+            u.user.id,
+            student_id,
+            id,
+            2,
+            null,
+            u.user.token
+        )
         .then(res => {
-            console.log(res);
             for (let i of pageData.get("consultations")) {
                 let tmp = i.cons.find(el => el.id === id);
                 if (tmp) {
@@ -102,7 +99,7 @@ exports.decline = args => {
             okButtonText: "Potwierdź",
             cancelButtonText: "Anuluj"
         })
-        .then(function(result) {
+        .then(function (result) {
             if (result) {
                 chooseReason(args);
             }
@@ -122,7 +119,7 @@ function chooseReason(args) {
             cancelButtonText: "Anuluj",
             actions: tmp
         })
-        .then(function(result) {
+        .then(function (result) {
             if (result === addExcuseText) {
                 addReason(args);
             } else if (result === "Anuluj") {
@@ -132,13 +129,13 @@ function chooseReason(args) {
 }
 
 function addReason(args) {
-    dialogsModule.prompt("Dodaj powód", "").then(function(r) {
+    dialogsModule.prompt("Dodaj powód", "").then(function (r) {
         if (r.result) {
             ConsultationsEmployeeHttpRequest.addExcuse(
-                u.user.id,
-                r.text,
-                u.user.token
-            )
+                    u.user.id,
+                    r.text,
+                    u.user.token
+                )
                 .then(res => {
                     pageData.reasons.push(new Excuse.new(res, r.text));
                     deleteConsultation(args, r.text);
@@ -159,15 +156,14 @@ function deleteConsultation(args, excuseText) {
         return el.id === id;
     }).studentId;
     ConsultationsEmployeeHttpRequest.setState(
-        u.user.id,
-        student_id,
-        id,
-        3,
-        excuseId,
-        u.user.token
-    )
+            u.user.id,
+            student_id,
+            id,
+            3,
+            excuseId,
+            u.user.token
+        )
         .then(res => {
-            console.log(res);
             for (let i of pageData.get("consultations")) {
                 let tmp = i.cons.find(el => el.id === id);
                 if (tmp) {
@@ -186,7 +182,6 @@ function deleteConsultation(args, excuseText) {
 function loadEmployeeConsultations(cons) {
     const c = [];
     for (let con of cons) {
-        console.log(con);
         c.push(
             new EmployeeConsultation.new(
                 con.id,

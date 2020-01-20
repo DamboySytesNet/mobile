@@ -1,7 +1,8 @@
 exports.Cons = class Consultation {
-    constructor(id, subject, teacher, room, date, state, excuse) {
+    constructor(id, subject, teacherId, teacher, room, date, state, excuse) {
         this.id = id;
         this.subject = subject;
+        this.teacherId = teacherId;
         this.teacher = teacher;
         this.room = room;
         // this.date = date;
@@ -12,7 +13,7 @@ exports.Cons = class Consultation {
         this.timeStr = this.getTimeStr();
         this.dayOfTheYear = this.getDayOfTheYear();
         this.dateStr = this.getDateStr();
-        
+
     }
 
     getDayOfTheYear() {
@@ -20,8 +21,7 @@ exports.Cons = class Consultation {
         let start;
         if (now.getMonth() >= 9) {
             start = new Date(now.getFullYear(), 9, 1);
-        } 
-        else {
+        } else {
             start = new Date(now.getFullYear() - 1, 9, 1);
         }
         var diff = this.date - start;
@@ -38,15 +38,13 @@ exports.Cons = class Consultation {
         let timeStr;
         if (hour < 10) {
             timeStr = `0${hour}`;
-        }
-        else {
+        } else {
             timeStr = `${hour}`;
         }
 
         if (minute < 10) {
             timeStr += `:0${minute}`;
-        }
-        else {
+        } else {
             timeStr += `:${minute}`;
         }
 
@@ -61,7 +59,7 @@ exports.Cons = class Consultation {
         if (day < 10) {
             day = `0${day}`;
         }
-        
+
         if (month < 10) {
             month = `0${month}`;
         }

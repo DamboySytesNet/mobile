@@ -53,6 +53,7 @@ exports.onPageLoaded = (args) => {
                     u.user.consultations.data.push(new Consultation.Cons(
                         con.id,
                         con.subject,
+                        con.teacherId,
                         con.teacher,
                         con.room,
                         `${con.date} ${con.timeFrom}`,
