@@ -67,7 +67,7 @@ exports.accept = args => {
     let id = parseInt(args.object.index, 10);
     let student_id = u.user.consultations.data.find(el => {
         return el.id === id;
-    }).student;
+    }).studentId;
 
     ConsultationsEmployeeHttpRequest.setState(
         u.user.id,
@@ -157,7 +157,7 @@ function deleteConsultation(args, excuseText) {
     }).id;
     let student_id = u.user.consultations.data.find(el => {
         return el.id === id;
-    }).student;
+    }).studentId;
     ConsultationsEmployeeHttpRequest.setState(
         u.user.id,
         student_id,
@@ -192,11 +192,12 @@ function loadEmployeeConsultations(cons) {
                 con.id,
                 null,
                 null,
+                con.studentId,
                 con.student,
                 con.room,
-                con.date,
+                `${con.date} ${con.timeFrom}`,
                 con.state,
-                null
+                con.excuse
             )
         );
     }
