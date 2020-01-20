@@ -1,20 +1,23 @@
 const httpModule = require("tns-core-modules/http");
 
-exports.get = (token) => {
+exports.get = (student_id, token) => {
     return new Promise((revoke, reject) => {
-        if(!token) {
+        if (!token) {
             reject('Niepoprawne żądanie');
             return;
-        }  
+        }
 
         httpModule.request({
             url: `https://damboy.sytes.net/mk/getAllHours.php`,
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json'
+            },
             content: JSON.stringify({
-                token: token
+                student_id,
+                token
             })
-        }).then( res => {
+        }).then(res => {
             if (res.statusCode === 200) {
                 try {
                     const json = JSON.parse(res.content);
@@ -23,13 +26,11 @@ exports.get = (token) => {
                         const result = JSON.parse(json.msg);
                         console.log(result);
                         revoke(result);
-                    }
-                    else {
+                    } else {
                         // console.log('Błąd');
                         reject(json.msg)
                     }
-                }
-                catch (e){
+                } catch (e) {
                     console.log(e);
                 }
             }

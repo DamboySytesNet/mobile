@@ -96,7 +96,7 @@ const read = () => {
                                     notification.is_read = true;
                                 }
                             }
-                        } else {
+                        } else if (json.msg !== 'No new notifications') {
                             console.log("notifications.js: 0x05");
                         }
                     } catch (e) {

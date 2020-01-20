@@ -1,45 +1,41 @@
 const observableModule = require("tns-core-modules/data/observable");
 
-const frameModule = require('tns-core-modules/ui/frame');
-const dialogsModule = require('tns-core-modules/ui/dialogs');
+const frameModule = require("tns-core-modules/ui/frame");
+const dialogsModule = require("tns-core-modules/ui/dialogs");
 
-const auth = require('~/modules/auth/auth');
-const u = require('~/common/data/user');
-const logout = require('~/modules/utils/logout');
+const auth = require("~/modules/auth/auth");
+const u = require("~/common/data/user");
+const logout = require("~/modules/utils/logout");
 
 let page;
+let bells;
 let interval = null;
 
-//! TODO: notification cannot exceed 99
-
 let pageData = new observableModule.fromObject({
-    user: '',
+    user: "",
     numberOfNotifications: 0,
 
     goToEmployeeConsultations() {
-        let moduleName = "activities/employee/consultations/consultations";
-        const navigationEntry = {
-            moduleName: moduleName
-        };
-
-        page.frame.navigate(navigationEntry);
+        page.frame.navigate({
+            moduleName: "activities/employee/consultations/consultations"
+        });
     },
 
     goToEmployeeSubjects() {
         page.frame.navigate({
-            moduleName: 'activities/employee/subjects/subjects'
+            moduleName: "activities/employee/subjects/subjects"
         });
     },
 
     goToEmployeeSettings() {
         page.frame.navigate({
-            moduleName: 'activities/employee/settings/settings'
+            moduleName: "activities/employee/settings/settings"
         });
     },
 
     goToNotifications() {
         page.frame.navigate({
-            moduleName: 'activities/notifications/notifications'
+            moduleName: "activities/notifications/notifications"
         });
     }
 });
@@ -54,6 +50,7 @@ exports.exit = args => {
 exports.pageLoaded = args => {
     page = args.object;
     pageData.set("user", `${u.user.name} ${u.user.surname}`);
+    bells = page.getViewById("bell");
 
     let oldValue = u.user.notifications.unread;
     if (oldValue > 0) animateBell();
@@ -68,8 +65,8 @@ exports.pageLoaded = args => {
             );
         }
     }, 1000);
+
     page.bindingContext = pageData;
-    bells = page.getViewById("bell");
 };
 
 exports.onUnloaded = () => {
@@ -78,48 +75,59 @@ exports.onUnloaded = () => {
 
 exports.changePassword = () => {
     // Prompot user for new password
-    dialogsModule.prompt({
-        title: 'Ustawianie hasła',
-        message: 'Podaj nowe hasło',
-        inputType: 'password',
-        defaultText: '',
-        okButtonText: 'Ok',
-        cancelButtonText: 'Cancel'
-    }).then((data) => {
-        if (data.result) {
-            dialogsModule.prompt({
-                title: 'Ustawianie hasła',
-                message: 'Podaj nowe ponownie hasło',
-                inputType: 'password',
-                defaultText: '',
-                okButtonText: 'Ok',
-                cancelButtonText: 'Cancel'
-            }).then((data2) => {
-                if (data.result) {
-                    if (data.text === data2.text) {
-                        // Send request
-                        auth.changePassword(u.user.id, u.user.token, data.text)
-                            .then((msg) => {
-                                alert(msg);
-                            })
-                            .catch((msg) => {
-                                alert(msg);
-                            });
-                    } else {
-                        alert('Hasła się nie zgadzają!');
-                    }
-                }
-            }).catch((msg) => {
-                alert(msg);
-            });
-        }
-    }).catch((msg) => {
-        alert(msg);
-    });
-}
+    dialogsModule
+        .prompt({
+            title: "Ustawianie hasła",
+            message: "Podaj nowe hasło",
+            inputType: "password",
+            defaultText: "",
+            okButtonText: "Ok",
+            cancelButtonText: "Cancel"
+        })
+        .then(data => {
+            if (data.result) {
+                dialogsModule
+                    .prompt({
+                        title: "Ustawianie hasła",
+                        message: "Podaj nowe ponownie hasło",
+                        inputType: "password",
+                        defaultText: "",
+                        okButtonText: "Ok",
+                        cancelButtonText: "Cancel"
+                    })
+                    .then(data2 => {
+                        if (data.result) {
+                            if (data.text === data2.text) {
+                                // Send request
+                                auth.changePassword(
+                                    u.user.id,
+                                    u.user.token,
+                                    data.text
+                                )
+                                    .then(msg => {
+                                        alert(msg);
+                                    })
+                                    .catch(msg => {
+                                        alert(msg);
+                                    });
+                            } else {
+                                alert("Hasła się nie zgadzają!");
+                            }
+                        }
+                    })
+                    .catch(msg => {
+                        alert(msg);
+                    });
+            }
+        })
+        .catch(msg => {
+            alert(msg);
+        });
+};
 
 function animateBell() {
-    bells.animate({
+    bells
+        .animate({
             rotate: 40,
             duration: 270,
             scale: {
