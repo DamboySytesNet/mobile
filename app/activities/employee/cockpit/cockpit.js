@@ -6,6 +6,8 @@ const auth = require('~/modules/auth/auth');
 const u = require('~/common/data/user');
 const logout = require('~/modules/utils/logout');
 
+let page;
+
 //! TODO: notification cannot exceed 99
 
 let pageData = new observableModule.fromObject({
@@ -21,22 +23,21 @@ let pageData = new observableModule.fromObject({
     },
 
     goToEmployeeConsultations() {
-        let moduleName = 'activities/employee/consultations/consultations';
-        const navigationEntry = {
-            moduleName: moduleName,
-        };
-
-        frameModule.topmost().navigate(navigationEntry);
+        page.frame.navigate(
+            { moduleName: 'activities/employee/consultations/consultations'}
+        );
     },
 
     goToEmployeeSubjects() {
-        //frameModule.topmost().navigate(navigationEntry);
+        page.frame.navigate(
+            { moduleName: 'activities/employee/subjects/subjects'}
+        );
     },
 
     goToEmployeeSettings() {
-        frameModule.topmost().navigate({
-            moduleName: 'activities/employee/settings/settings'
-        });
+        page.frame.navigate(
+            { moduleName: 'activities/employee/settings/settings' }
+        );
     }
 
 });
@@ -44,12 +45,12 @@ let pageData = new observableModule.fromObject({
 exports.exit = (args) => {
     logout.clearUser();
     let view = args.object;
-    let page = view.page;
+    page = view.page;
     page.frame.goBack();
 }
 
 exports.pageLoaded = (args) => {
-    let page = args.object;
+    page = args.object;
     pageData.set('user', `${u.user.name} ${u.user.surname}`);
     page.bindingContext = pageData;
     bells = page.getViewById('bell');
@@ -96,7 +97,6 @@ exports.changePassword = () => {
         alert(msg);
     });
 }
-
 
 function animateBell() {
     bells.animate({
