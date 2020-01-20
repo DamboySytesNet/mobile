@@ -34,7 +34,6 @@ exports.goToDetails = (args) => {
 exports.goToSearch = (args) => {
     const page = args.object.page;
     const moduleName = 'activities/student/search/search';
-    // alert(args.object.index);
     const navigationEntry = {
         moduleName: moduleName
     }

@@ -20,7 +20,6 @@ let pageData = new observableModule.fromObject({
         const navigationEntry = {
             moduleName: moduleName
         };
-        console.log(navigationEntry);
         frameModule.topmost().navigate(navigationEntry);
     }
 });
