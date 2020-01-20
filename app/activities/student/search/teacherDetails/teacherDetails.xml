@@ -1,6 +1,6 @@
 <Page class="page" actionBarHidden="true" loaded="onPageLoaded">
     <ActionBar title="teacher"></ActionBar>
-    <StackLayout>
+    <FlexboxLayout flexDirection="column">
         <StackLayout id="actionbar">
             <FlexboxLayout tap="exit" orientation="horizontal" alignItems="center">
                     <Image src="~/icons/arrow-left.png" dock="left"/>
@@ -8,7 +8,7 @@
             </FlexboxLayout>
         </StackLayout>
 
-    <ScrollView flexGrow="1" orientation="vertical">
+        <ScrollView flexGrow="1" orientation="vertical">
             <FlexboxLayout flexDirection="column"
                            alignItems="center"
                            justifyContent="center">
@@ -31,14 +31,10 @@
                 </StackLayout>
                 <StackLayout class="labelGroup"> 
                     <Label class="title" text="Przedmiot "/>
-                    <Button text="Wybierz przedmiot" tap="chooseSubject"/>
-                    <Label class="info" text="{{ chosenSubject.name }} "/>
+                    <Button text="{{ chosenSubject.name ? chosenSubject.name : 'Wybierz przedmiot'}}" tap="chooseSubject" class="chooseButton"/>
                 </StackLayout>
-                <Button class="signOutButton" text="Zapisz się" tap="signToConsulation"/>
             </FlexboxLayout>
         </ScrollView>
-            
-
-
-    </StackLayout>
+        <Button class="signOutButton" text="Zapisz się" tap="signToConsulation" class="signInButton"/>
+    </FlexboxLayout>
 </Page>

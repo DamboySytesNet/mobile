@@ -12,7 +12,7 @@
         <StackLayout isEnabled="{{ !loading }}">
             <ListView items="{{ consultations }}"
                 separatorColor="silver" 
-                class="list-group" row="1" id="listView">>
+                class="list-group" row="1" id="listView">
                 <ListView.itemTemplate>
                     <StackLayout class="list-group-item">
                         <Label text="{{ dateStr }}" textWrap="true" class="title" id="date"/>
@@ -22,8 +22,8 @@
                             class="list-group" row="2" height="{{ height }}">
                             <ListView.itemTemplate> 
                                 <DockLayout index="{{ id }}" tap="goToDetails" id="listUnderDate">
-                                    <Label text="{{ timeStr }}" dock="right" textWrap="true" class="title"/>
-                                    <Label text="{{ teacher }}" dock="left" textWrap="true" class="title"/>
+                                    <Label text="{{ timeStr }}" dock="right" textWrap="true"/>
+                                    <Label text="{{ teacher }}" dock="left" textWrap="true"/>
                                 </DockLayout>
                             </ListView.itemTemplate>
                         </ListView>

@@ -2,8 +2,7 @@ const observableModule = require("tns-core-modules/data/observable");
 const Consultation = require("~/common/dataTypes/Consultation");
 const u = require('~/common/data/user');
 const ConsultationsHttpRequest = require('~/modules/request/consultationsHttpRequest');
-// only for test purposes
-const test = require('~/common/data/testConsultations');
+
 
 let pageData = new observableModule.fromObject({
     consultations: [],
@@ -89,6 +88,7 @@ function groupByDayOfTheYear(consultations) {
         grouped.push({
             cons: consultations.filter(c => c.dayOfTheYear === day),
             day: day,
+            height: 52
         });
     }
 
@@ -112,6 +112,8 @@ function groupByDayOfTheYear(consultations) {
     }
 
     grouped.sort((a, b) => (a.day > b.day) ? 1 : -1);
-
+    for (let i of grouped) {
+        i.height *= i.cons.length;
+    }
     return grouped;
 }
