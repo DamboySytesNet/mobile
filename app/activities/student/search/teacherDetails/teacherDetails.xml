@@ -1,0 +1,44 @@
+<Page class="page" actionBarHidden="true" loaded="onPageLoaded">
+    <ActionBar title="teacher"></ActionBar>
+    <StackLayout>
+        <StackLayout id="actionbar">
+            <FlexboxLayout tap="exit" orientation="horizontal" alignItems="center">
+                    <Image src="~/icons/arrow-left.png" dock="left"/>
+                    <Label text="Zapisz się" dock="left"/>
+            </FlexboxLayout>
+        </StackLayout>
+
+    <ScrollView flexGrow="1" orientation="vertical">
+            <FlexboxLayout flexDirection="column"
+                           alignItems="center"
+                           justifyContent="center">
+                <StackLayout class="labelGroup">
+                    <Label class="title" text="Prowadzący" />
+                    <Label class="info" text="{{ data.hour.teacher.name }}" />
+                </StackLayout>
+                <StackLayout class="labelGroup">
+                    <Label class="title" text="Godzina" />
+                    <Label class="info" text="{{ data.hour.timeStr }}" />
+                </StackLayout>
+                <StackLayout class="labelGroup">
+                    <Label class="title" text="Pokój" />
+                    <Label class="info" text="{{ data.hour.room }}" />
+                </StackLayout>
+                <StackLayout class="labelGroup">
+                    <Label class="title" text="Dzień tygodnia: " />
+                    <Label class="info" text="{{ data.hour.day }}" />
+
+                </StackLayout>
+                <StackLayout class="labelGroup"> 
+                    <Label class="title" text="Przedmiot "/>
+                    <Button text="Wybierz przedmiot" tap="chooseSubject"/>
+                    <Label class="info" text="{{ chosenSubject.name }} "/>
+                </StackLayout>
+                <Button class="signOutButton" text="Zapisz się" tap="signToConsulation"/>
+            </FlexboxLayout>
+        </ScrollView>
+            
+
+
+    </StackLayout>
+</Page>

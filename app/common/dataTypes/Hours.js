@@ -1,3 +1,5 @@
+const days = require('~/common/data/days')
+
 exports.new = class H {
     constructor(id, from, to, day, room) {
         this.id = id;
@@ -6,5 +8,7 @@ exports.new = class H {
         this.day = day;
         this.room = room;
         this.editing = false;
+        this.timeStr = `${this.from} - ${this.to}`;
+        this.dayObject = days.daysObjects.find(day => day.name === this.day);
     }
 };
