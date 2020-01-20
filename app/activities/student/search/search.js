@@ -63,12 +63,13 @@ exports.goToTeacherDetails = (args) => {
     page.frame.navigate(navigationEntry);
 }
 
-exports.submit = (args) => {
+exports.onTextChange = (args) => {
     const pattern = args.object.text;
-    const refreshed = pageData.get('all').filter(e => e.teacher.name.toUpperCase().includes(pattern.toUpperCase()))
-    pageData.set('consultations', refreshed);
-}
-
-exports.clear = () => {
-    pageData.set('consultations', pageData.get('all'));
+    if (pattern !== null && pattern !== '' && pattern !== ' ') {
+        let refreshed = pageData.get('all').filter(e => e.teacher.name.toUpperCase().includes(pattern.toUpperCase()));
+        pageData.set('consultations', refreshed);
+    } 
+    else {
+        pageData.set('consultations', pageData.get('all'));
+    }
 }

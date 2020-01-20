@@ -9,7 +9,7 @@
         </StackLayout>
         <StackLayout id="page">
             <StackLayout id="search">
-                <SearchBar hint="Wyszukaj" clear="clear" submit="submit" />
+                <TextField hint="Wyszukaj" textChange="onTextChange"/>
             </StackLayout>
             <StackLayout visibility="{{ loading ? 'collapsed' : 'visible' }}">
                 <ListView items="{{ consultations }}"

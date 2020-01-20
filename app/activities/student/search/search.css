@@ -1,13 +1,12 @@
 @import '../../../common/style/backActionbar.css';
 
 #page {
-    padding: 7;
+    padding: 15;
 }
     #search {
-        margin-bottom: 20;
+        margin-bottom: 10;
     }
 
     #list{
-        margin: 0 10 0 10;
         background: #ebebeb;
     }
