@@ -1,0 +1,86 @@
+<Page class="page" actionBarHidden="true" loaded="pageLoaded">
+    <ActionBar></ActionBar>
+
+    <StackLayout>
+        <StackLayout id="actionbar">
+            <FlexboxLayout orientation="horizontal" alignItems="center">
+                <Image tap="back" src="~/icons/arrow-left.png"/>
+                <Label text="Przedmioty"/>
+            </FlexboxLayout>
+        </StackLayout>
+        <Tabs>
+
+            <TabStrip>
+                <TabStripItem>
+                    <Label text="Moje"></Label>
+                </TabStripItem>
+                <TabStripItem>
+                    <Label text="Pozostałe"></Label>
+                </TabStripItem>
+            </TabStrip>
+
+            <TabContentItem>
+                <StackLayout id="body">
+                    <ListView items="{{ userSubjects }}"
+                    separatorColor="silver"
+                    row="1" id="userListView" class="list-group" height="100%"> 
+                        <ListView.itemTemplate >
+                            <StackLayout>
+                                <DockLayout class="dockList" id="userSubjectsDock" tap="changeIsOpen" orientation="horizontal" stretchLastChild="false" index="{{ id }}">
+                                    <Image src="~/icons/arrow-down.png " visibility="{{ !isOpen ? 'visible' : 'collapse'}}"/>
+                                    <Image src="~/icons/arrow-up.png"  visibility="{{ isOpen ? 'visible' : 'collapse'}}"/>
+                                    <Label text="{{ title }}" textWrap="true"/>
+                                </DockLayout>
+                                <StackLayout visibility="{{ isOpen ? 'visible' : 'collapse'}}" >
+                                    <ListView items="{{ employees }}" separatorColor="silver" 
+                                        row="2" height="{{ height }}" class="employeesList">
+                                        
+                                        <ListView.itemTemplate>
+                                            <StackLayout class="list-group-item">
+                                                <Label text="{{ name + ' '+ surname }}" textWrap="true"/>
+                                            </StackLayout>
+
+                                            </ListView.itemTemplate>
+                                    </ListView>
+                                    <Button tap="removeFromUserSubjects" class="quitButton" index ="{{ id }}" text="Wypisz się" />
+                                </StackLayout>
+                            </StackLayout>
+                        </ListView.itemTemplate>
+                    </ListView>
+                </StackLayout>
+            </TabContentItem>
+
+            <TabContentItem>
+                <StackLayout id="body">
+                    <ListView items="{{ withoutUserSubjects }}"
+                        separatorColor="silver" 
+                        class="list-group" row="1" id="withoutUserListView" height="100%">
+                        <ListView.itemTemplate >
+                            <StackLayout>
+                                <DockLayout class="dockList" id="withoutUserSubjectsDock" tap="changeIsOpen" orientation="horizontal" stretchLastChild="false" index="{{ id }}">
+                                    <Image src="~/icons/arrow-down.png " visibility="{{ !isOpen ? 'visible' : 'collapse'}}"/>
+                                    <Image src="~/icons/arrow-up.png"  visibility="{{ isOpen ? 'visible' : 'collapse'}}"/>
+                                    <Label text="{{ title }}" textWrap="true" class="title" />
+                                </DockLayout>
+                                <StackLayout visibility="{{ isOpen ? 'visible' : 'collapse'}}" >
+                                    <ListView items="{{ employees }}" separatorColor="silver" 
+                                        row="2" height="{{ height }}" class="employeesList">
+                                        
+                                        <ListView.itemTemplate>
+                                            <StackLayout class="list-group-item">
+                                                <Label text="{{ name + ' '+ surname }}" textWrap="true"/>
+                                            </StackLayout>
+                                            </ListView.itemTemplate>
+                                    </ListView>
+                                    <Button tap="addToUserSubjects" class="signButton" index ="{{ id }}" text="Zapisz się" />
+                                </StackLayout>
+                                
+                            </StackLayout>
+                        </ListView.itemTemplate>
+                    </ListView>
+
+                </StackLayout>
+            </TabContentItem>
+        </Tabs>
+    </StackLayout>
+</Page> 
