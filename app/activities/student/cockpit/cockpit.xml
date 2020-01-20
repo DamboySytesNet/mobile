@@ -17,14 +17,14 @@
         <ScrollView height="100%">
             <GridLayout class="mainContent" 
                         columns="*, *" 
-                        rows="auto, auto">
+                        rows="auto, auto, auto">
 
                 <DockLayout tap="{{ goToStudentConsultations }}" backgroundColor="#FF8C22" row="0" col="0" class="mainContent-post" stretchLastChild="false" >
                     <Label dock="bottom" text="Moje konsultacje" />
                     <Image dock="top" src="~/images/book.png" />
                 </DockLayout>
 
-                <DockLayout backgroundColor="#36C6A3" row="0" col="1" class="mainContent-post" stretchLastChild="false" >
+                <DockLayout tap="{{ goToSearch }}" backgroundColor="#36C6A3" row="0" col="1" class="mainContent-post" stretchLastChild="false" >
                     <Label dock="bottom" text="Prowadzący" />
                     <Image dock="top" src="~/images/person.png" />
                 </DockLayout>
@@ -37,6 +37,11 @@
                 <DockLayout tap="" backgroundColor="#b53bfd" row="1" col="1" class="mainContent-post" stretchLastChild="false" >
                     <Label dock="bottom" text="Powiadomienia" />
                     <Image dock="top" src="~/images/bell.png" />
+                </DockLayout>
+
+                <DockLayout tap="changePassword" backgroundColor="#e62e2e" row="2" col="1" class="mainContent-post" stretchLastChild="false" >
+                    <Label dock="bottom" text="Zmiana hasła" />
+                    <Image dock="top" src="~/images/lock.png" />
                 </DockLayout>
             </GridLayout>
         </ScrollView>

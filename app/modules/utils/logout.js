@@ -1,4 +1,5 @@
 const u = require('~/common/data/user');
+const AppData = require('~/common/data/AppData');
 
 /** Remove user cache */
 exports.clearUser = () => {
@@ -14,6 +15,25 @@ exports.clearUser = () => {
         hours: {
             loaded: false,
             data: []
+        },
+        subjects: {
+            loaded: false,
+            data: {
+                subjectsWithoutUser: [],
+                userSubjects: []
+            }
         }
     };
+
+    AppData.hours = {
+        loaded: false,
+        data:[]
+    };
+
+    AppData.teachers = {
+        loaded: false,
+        data:[]
+    };
+
+
 }

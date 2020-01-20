@@ -31,6 +31,16 @@ exports.goToDetails = (args) => {
     page.frame.navigate(navigationEntry);
 }
 
+exports.goToSearch = (args) => {
+    const page = args.object.page;
+    const moduleName = 'activities/student/search/search';
+    const navigationEntry = {
+        moduleName: moduleName
+    }
+
+    page.frame.navigate(navigationEntry);
+} 
+
 exports.onPageLoaded = (args) => {
     const page = args.object;
 

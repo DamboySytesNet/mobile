@@ -1,0 +1,28 @@
+<Page class="page" actionBarHidden="true" loaded="onPageLoaded">
+    <ActionBar title="Search"></ActionBar>
+    <StackLayout>
+        <StackLayout id="actionbar">
+            <FlexboxLayout tap="exit" orientation="horizontal" alignItems="center">
+                    <Image src="~/icons/arrow-left.png" dock="left"/>
+                    <Label text="Prowadzącyy" dock="left"/>
+            </FlexboxLayout>
+        </StackLayout>
+
+        <StackLayout>
+            <TextField hint="Wyszukaj"
+                        textChange="onTextChange"/>
+        </StackLayout>
+        <StackLayout visibility="{{ loading ? 'collapsed' : 'visible' }}">
+            <ListView items="{{ consultations }}">
+                <ListView.itemTemplate>
+                    <DockLayout class="teacher" tap="goToTeacherDetails" hourId="{{ id }}">
+                            <Label text="{{ timeStr }}" dock="right"/>
+                            <Label text="{{ dayObject.short }}" dock="right" marginRight="8"/>
+                            <Label text="{{ teacher.name }}" dock="left"/>
+                    </DockLayout>
+                </ListView.itemTemplate>
+            </ListView>
+            <ActivityIndicator busy="{{ loading }}"/>
+        </StackLayout>
+    </StackLayout>
+</Page>
