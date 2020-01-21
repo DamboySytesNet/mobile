@@ -17,7 +17,7 @@
         <ScrollView height="100%">
             <GridLayout class="mainContent" 
                         columns="*, *" 
-                        rows="auto, auto, auto">
+                        rows="auto, auto">
 
                 <DockLayout tap="{{ goToStudentConsultations }}" backgroundColor="#FF8C22" row="0" col="0" class="mainContent-post" stretchLastChild="false" >
                     <Label dock="bottom" text="Moje konsultacje" />
@@ -34,7 +34,7 @@
                     <Image dock="top" src="~/images/subject.png" />
                 </DockLayout> -->
 
-                <DockLayout tap="changePassword" backgroundColor="#e62e2e" row="1" col="1" class="mainContent-post" stretchLastChild="false" >
+                <DockLayout tap="changePassword" backgroundColor="#e62e2e" row="1" col="0" class="mainContent-post" stretchLastChild="false" >
                     <Label dock="bottom" text="Zmiana hasła" />
                     <Image dock="top" src="~/images/lock.png" />
                 </DockLayout>

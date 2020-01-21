@@ -33,32 +33,21 @@ exports.pageLoaded = args => {
             page.frame.goBack();
         });
 
-    if (!u.user.consultations.loaded) {
-        ConsultationsEmployeeHttpRequest.get(u.user.id, u.user.token)
-            .then(res => {
-                u.user.consultations.data = loadEmployeeConsultations(res);
-                u.user.consultations.loaded = true;
-                pageData.set(
-                    "consultations",
-                    groupByDayOfTheYear(u.user.consultations.data)
-                );
-                page.bindingContext = pageData;
-                list = page.getViewById("list");
-                listView = page.getViewById("listView");
-            })
-            .catch(() => {
-                alert("Nie udało sie pobrać konsultacji!");
-                page.frame.goBack();
-            });
-    } else {
-        pageData.set(
-            "consultations",
-            groupByDayOfTheYear(u.user.consultations.data)
-        );
-        page.bindingContext = pageData;
-        list = page.getViewById("list");
-        listView = page.getViewById("listView");
-    }
+    ConsultationsEmployeeHttpRequest.get(u.user.id, u.user.token)
+        .then(res => {
+            u.user.consultations.data = loadEmployeeConsultations(res);
+            pageData.set(
+                "consultations",
+                groupByDayOfTheYear(u.user.consultations.data)
+            );
+            page.bindingContext = pageData;
+            list = page.getViewById("list");
+            listView = page.getViewById("listView");
+        })
+        .catch(() => {
+            alert("Nie udało sie pobrać konsultacji!");
+            page.frame.goBack();
+        });
 };
 
 exports.accept = args => {
