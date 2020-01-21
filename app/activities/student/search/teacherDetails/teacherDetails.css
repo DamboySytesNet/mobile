@@ -1,2 +1,25 @@
 @import '../../../../common/style/backActionbar.css';
 @import '../../details/details.css';
+
+
+.chooseButton {
+    margin: 20 0;
+    font: 18 "OpenSans";
+    border-radius: 5;
+    height: 50;
+    background-color: #9f3b3b;
+    background: #9f3b3b;
+    color: aliceblue;
+    font-weight: bold;
+}
+
+.signInButton{
+    font: 22 "OpenSans";
+    height: 60;
+    vertical-align: bottom;
+    border-radius: 1;
+    background-color: #9f3b3b;
+    background: #9f3b3b;
+    color: aliceblue;
+    font-weight: bold;
+}

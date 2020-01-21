@@ -1,1 +1,14 @@
+@import '../../../common/style/cockpit.css';
 @import '../../../common/style/backActionbar.css';
+
+
+#date {
+    color: black;
+    font: 20 "OpenSans";
+    font-weight: bold;
+    margin: 0 0 15 0;
+}
+    #listUnderDate {
+        padding: 15;
+        background: #ebebeb;
+    }
