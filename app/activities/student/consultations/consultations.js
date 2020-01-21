@@ -87,6 +87,7 @@ function groupByDayOfTheYear(consultations) {
         grouped.push({
             cons: consultations.filter(c => c.dayOfTheYear === day),
             day: day,
+            height: 52
         });
     }
 
@@ -109,6 +110,8 @@ function groupByDayOfTheYear(consultations) {
     }
 
     grouped.sort((a, b) => (a.day > b.day) ? 1 : -1);
-
+    for (let i of grouped) {
+        i.height *= i.cons.length;
+    }
     return grouped;
 }

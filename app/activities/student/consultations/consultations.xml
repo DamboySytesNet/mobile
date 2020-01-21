@@ -10,16 +10,20 @@
         </StackLayout>
 
         <StackLayout isEnabled="{{ !loading }}">
-            <ListView items="{{ consultations }}">
+            <ListView items="{{ consultations }}"
+                separatorColor="silver" 
+                class="list-group" row="1" id="listView">
                 <ListView.itemTemplate>
-                    <StackLayout>
-                        <Label text="{{ dateStr }}"/>
+                    <StackLayout class="list-group-item">
+                        <Label text="{{ dateStr }}" textWrap="true" class="title" id="date"/>
                         
-                        <ListView items="{{ cons }}" height="100">
+                        <ListView items="{{ cons }}" 
+                            separatorColor="silver" 
+                            class="list-group" row="2" height="{{ height }}">
                             <ListView.itemTemplate> 
-                                <DockLayout index="{{ id }}" tap="goToDetails">
-                                    <Label text="{{ timeStr }}" dock="right"/>
-                                    <Label text="{{ teacher }}" dock="left"/>
+                                <DockLayout index="{{ id }}" tap="goToDetails" id="listUnderDate">
+                                    <Label text="{{ timeStr }}" dock="right" textWrap="true"/>
+                                    <Label text="{{ teacher }}" dock="left" textWrap="true"/>
                                 </DockLayout>
                             </ListView.itemTemplate>
                         </ListView>

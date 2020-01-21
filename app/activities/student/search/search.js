@@ -64,9 +64,8 @@ exports.goToTeacherDetails = (args) => {
 
 exports.onTextChange = (args) => {
     const pattern = args.object.text;
-
     if (pattern !== null && pattern !== '' && pattern !== ' ') {
-        const refreshed = pageData.get('all').filter(e => e.teacher.name.includes(pattern))
+        let refreshed = pageData.get('all').filter(e => e.teacher.name.toUpperCase().includes(pattern.toUpperCase()));
         pageData.set('consultations', refreshed);
     } else {
         pageData.set('consultations', pageData.get('all'));

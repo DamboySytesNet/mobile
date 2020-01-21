@@ -1,8 +1,12 @@
 @import '../../../common/style/backActionbar.css';
 
-.teacher {
-    background-color: gainsboro;
-    font: 20;
-    font-family: "OpenSans";
-    margin: 10 10 10 10;
+#page {
+    padding: 15;
 }
+    #search {
+        margin-bottom: 10;
+    }
+
+    #list{
+        background: #ebebeb;
+    }
