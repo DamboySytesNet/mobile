@@ -10,7 +10,9 @@ exports.add = (student_id, employee_id, hour_id, date, subject_id, state, token)
         httpModule.request({
             url: `https://damboy.sytes.net/mk/addConsultations.php`,
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json'
+            },
             content: JSON.stringify({
                 student_id: student_id,
                 employee_id: employee_id,
@@ -24,21 +26,16 @@ exports.add = (student_id, employee_id, hour_id, date, subject_id, state, token)
             if (res.statusCode === 200) {
                 try {
                     const json = JSON.parse(res.content);
-                    console.log(json);
                     if (json.status === 'success') {
                         const result = JSON.parse(json.msg);
-                        console.log(result);
                         revoke(result);
-                    }
-                    else {
+                    } else {
                         reject(json.msg)
                     }
-                }
-                catch (e){
+                } catch (e) {
                     console.log(e);
                 }
             }
         })
     });
 };
-

@@ -3,7 +3,6 @@ const Consultation = require("~/common/dataTypes/Consultation");
 const u = require('~/common/data/user');
 const ConsultationsHttpRequest = require('~/modules/request/consultationsHttpRequest');
 
-
 let pageData = new observableModule.fromObject({
     consultations: [],
     loading: false
@@ -38,7 +37,7 @@ exports.goToSearch = (args) => {
     }
 
     page.frame.navigate(navigationEntry);
-} 
+}
 
 exports.onPageLoaded = (args) => {
     const page = args.object;
@@ -46,7 +45,7 @@ exports.onPageLoaded = (args) => {
     pageData.set('loading', true);
     // load only when visit activity for the first time
     if (!u.user.consultations.loaded) {
-        
+
         ConsultationsHttpRequest.get(u.user.id, u.user.token)
             .then(res => {
                 u.user.consultations.data = [];
@@ -54,21 +53,21 @@ exports.onPageLoaded = (args) => {
                     u.user.consultations.data.push(new Consultation.Cons(
                         con.id,
                         con.subject,
+                        con.teacherId,
                         con.teacher,
                         con.room,
                         `${con.date} ${con.timeFrom}`,
                         con.state,
                         con.excuse));
-                    }
-                    pageData.set('consultations', groupByDayOfTheYear(u.user.consultations.data));
-                    page.bindingContext = pageData;    
-                    u.user.consultations.loaded = true;
-            }).catch( () => {
+                }
+                pageData.set('consultations', groupByDayOfTheYear(u.user.consultations.data));
+                page.bindingContext = pageData;
+                u.user.consultations.loaded = true;
+            }).catch(() => {
                 alert('Nie udało sie pobrać konsultacji!');
                 page.frame.goBack();
             });
-    }
-    else {
+    } else {
         pageData.set('consultations', groupByDayOfTheYear(u.user.consultations.data));
         page.bindingContext = pageData;
     }
@@ -100,8 +99,7 @@ function groupByDayOfTheYear(consultations) {
         if (today.getYear() === conDay.getYear() && today.getMonth() === conDay.getMonth()) {
             if (today.getDate() === conDay.getDate()) {
                 prefix = "Dziś";
-            }
-            else if (today.getDate() + 1 === conDay.getDate()) {
+            } else if (today.getDate() + 1 === conDay.getDate()) {
                 prefix = "Jutro";
             }
         }

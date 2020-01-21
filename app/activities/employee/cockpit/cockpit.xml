@@ -1,10 +1,10 @@
-<Page class="page" actionBarHidden="true" loaded="pageLoaded">
+<Page class="page" actionBarHidden="true" loaded="pageLoaded" unloaded="onUnloaded">
     <ActionBar></ActionBar>
 
     <StackLayout>
         <DockLayout id="actionbar" stretchLastChild="false">
             <Image tap="exit" src="~/icons/exit.png" dock="right"/>
-            <DockLayout dock="right" >
+            <DockLayout dock="right" tap="{{ goToNotifications }}">
                 <Image id="bell" src="~/icons/bell.png" tap="{{ alertNotification }}"/>
                 <AbsoluteLayout id="actionbar-bellLayout">
                     <Label id="bellNumber" text="{{ numberOfNotifications }}"/>
@@ -34,7 +34,7 @@
                     <Image dock="top" src="~/images/gear.png" />
                 </DockLayout>
 
-                <DockLayout tap="" backgroundColor="#b53bfd" row="1" col="1" class="mainContent-post" stretchLastChild="false" >
+                <DockLayout tap="{{ goToNotifications }}" backgroundColor="#b53bfd" row="1" col="1" class="mainContent-post" stretchLastChild="false" >
                     <Label dock="bottom" text="Powiadomienia" />
                     <Image dock="top" src="~/images/bell.png" />
                 </DockLayout>

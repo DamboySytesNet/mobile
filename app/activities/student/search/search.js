@@ -20,29 +20,28 @@ exports.onPageLoaded = (args) => {
     if (!AppData.hours.loaded) {
         // load from database
         AppData.hours.loaded = true;
-        TeachersHttpRequest.get(u.user.token)
-        .then( res => {
-            for (let t of res) {
-                let hourData = new Hours.new(t.id, t.timeFrom, t.timeTo, t.day, t.room);
-                hourData.teacher = {
-                    id: t.lecturerId,
-                    name: t.teacher
+        TeachersHttpRequest.get(u.user.id, u.user.token)
+            .then(res => {
+                for (let t of res) {
+                    let hourData = new Hours.new(t.id, t.timeFrom, t.timeTo, t.day, t.room);
+                    hourData.teacher = {
+                        id: t.lecturerId,
+                        name: t.teacher
+                    }
+                    AppData.hours.data.push(hourData);
                 }
-                AppData.hours.data.push(hourData);
-            }
-            pageData.set('all', AppData.hours.data);
-            pageData.set('loading', false);
-            pageData.set('consultations', pageData.get('all'));
-            page.bindingContext = pageData;    
-        })
-    }
-    else{
+                pageData.set('all', AppData.hours.data);
+                pageData.set('loading', false);
+                pageData.set('consultations', pageData.get('all'));
+                page.bindingContext = pageData;
+            })
+    } else {
         pageData.set('all', AppData.hours.data);
         pageData.set('loading', false);
         pageData.set('consultations', pageData.get('all'));
         page.bindingContext = pageData;
     }
-    
+
 }
 
 exports.exit = (args) => {
@@ -68,8 +67,7 @@ exports.onTextChange = (args) => {
     if (pattern !== null && pattern !== '' && pattern !== ' ') {
         let refreshed = pageData.get('all').filter(e => e.teacher.name.toUpperCase().includes(pattern.toUpperCase()));
         pageData.set('consultations', refreshed);
-    } 
-    else {
+    } else {
         pageData.set('consultations', pageData.get('all'));
     }
 }

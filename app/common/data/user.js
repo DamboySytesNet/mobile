@@ -19,5 +19,12 @@ exports.user = {
             userSubjects: []
         }
     },
-    page: null
+    page: null,
+
+    notifications: {
+        latestId: 0,
+        unread: 0,
+        data: [],
+        interval: null
+    }
 };
