@@ -23,6 +23,7 @@ exports.get = (id, token) => {
                 if (res.statusCode === 200) {
                     try {
                         const json = JSON.parse(res.content);
+
                         if (json.status === "success") {
                             const result = JSON.parse(json.msg);
                             revoke(result);
@@ -32,6 +33,7 @@ exports.get = (id, token) => {
                         }
                     } catch (e) {
                         console.log(e);
+                        reject(e);
                     }
                 }
             });
@@ -86,6 +88,7 @@ exports.setState = (
                         }
                     } catch (e) {
                         console.log(e);
+                        reject(e);
                     }
                 }
             });
