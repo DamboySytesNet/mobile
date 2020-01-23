@@ -113,6 +113,10 @@ exports.pageLoaded = args => {
     // Set page object
     page = args.object;
 
+    // Clear cached info
+    pageData.set('username', '');
+    pageData.set('password', '');
+
     // Set binding context
     page.bindingContext = pageData;
 
