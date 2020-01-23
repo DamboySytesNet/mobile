@@ -33,6 +33,10 @@
                     <!--Tutaj później można zrobić różne kolory w zależności od stanu-->
                     <Label class="info" text="{{ consultation.state }}"/>
                 </StackLayout>
+                <StackLayout class="labelGroup" visibility="{{ consultation.excuse ? 'visible' : 'collapsed' }}">
+                    <Label class="title" text="Przyczyna odrzucenia" />
+                    <Label class="info" text="{{ consultation.excuse }}" />
+                </StackLayout>
             </FlexboxLayout>
         </ScrollView>
 
