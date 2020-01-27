@@ -1,0 +1,48 @@
+<Page class="page" actionBarHidden="true" loaded="onPageLoaded">
+    <ActionBar></ActionBar>
+    <FlexboxLayout flexDirection="column">
+        <StackLayout id="actionbar">
+            <FlexboxLayout tap="back" orientation="horizontal" alignItems="center">
+                <Image src="~/icons/arrow-left.png" />
+                <Label text="Rejestracja" />
+            </FlexboxLayout>
+        </StackLayout>
+
+        <ScrollView flexGrow="1" orientation="vertical">
+            <FlexboxLayout flexDirection="column"
+                           alignItems="center"
+                           justifyContent="" id="content">
+            
+                <StackLayout class="labelGroup">
+                    <!-- <Label class="title" text="Imie" /> -->
+                    <TextField id="name" class="input" hint="Imie"></TextField>
+                </StackLayout>
+                <StackLayout class="labelGroup">
+                    <!-- <Label class="title" text="Nazwisko" /> -->
+                    <TextField id="surname" class="input" hint="Nazwisko"></TextField>
+                </StackLayout>
+                <StackLayout class="labelGroup">
+                    <!-- <Label class="title" text="Email" /> -->
+                    <TextField id="email" class="input" hint="Email" keyboardType="email"></TextField>
+                </StackLayout>
+                <StackLayout class="labelGroup">
+                    <!-- <Label class="title" text="Hasło" /> -->
+                    <TextField id="password" class="input" class="input"
+                               text="{{ password }}"
+                               hint="Hasło"
+                               secure="true"></TextField>
+                </StackLayout>
+                <StackLayout class="labelGroup">
+                    <!-- <Label class="title" text="Hasło" /> -->
+                    <TextField id="repeatedPassword" class="input" class="input"
+                               text="{{ password }}"
+                               hint="Powtórzone hasło"
+                               secure="true"></TextField>
+                    
+                </StackLayout>
+            <Button class="registerButton" tap="register" text="Zarejestruj się"/>
+            </FlexboxLayout>
+        
+        </ScrollView>
+    </FlexboxLayout>
+</Page>
