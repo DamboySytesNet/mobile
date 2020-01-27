@@ -1,12 +1,12 @@
 @import '../../common/style/backActionbar.css';
 
-ScrollView {
+#bg {
     background-size: cover;
     background-image: url("~/images/login.jpg");
 }
 
 #content {
-    padding: 20 34 0 34;
+    padding: 20 36 0 36;
 }
 
 .labelGroup {
@@ -35,7 +35,7 @@ TextField {
     font: 20 "OpenSans";
     font-weight: bold;
     border-radius: 5;
-    margin: 50 40;
+    margin: 30 40;
     height: 50;
     width: 220;
     background: #9f3b3b;

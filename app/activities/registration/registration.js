@@ -6,7 +6,8 @@ let pageData = new observableModule.fromObject({
     name: '',
     surname: '',
     email: '',
-    password: ''
+    password: '',
+    repeatedPassword: ''
 })
 
 exports.back = args => {
@@ -19,3 +20,11 @@ exports.pageLoaded = args => {
     page = args.object;
     page.bindingContext = pageData;
 };
+
+exports.register = () => {
+    alert(pageData.name + '\n'
+        + pageData.surname + '\n'
+        + pageData.email + '\n'
+        + pageData.password + '\n'
+        + pageData.repeatedPassword);
+}
