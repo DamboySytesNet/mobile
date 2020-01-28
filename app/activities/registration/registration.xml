@@ -1,4 +1,4 @@
-<Page class="page" actionBarHidden="true" loaded="onPageLoaded">
+<Page class="page" actionBarHidden="true" loaded="pageLoaded">
     <ActionBar></ActionBar>
     <StackLayout flexDirection="column" id="bg">
         <StackLayout id="actionbar">
