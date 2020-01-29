@@ -123,3 +123,9 @@ exports.pageLoaded = args => {
     // Clear user data
     logout.clearUser();
 };
+
+exports.goToRegisterPage = () => {
+    page.frame.navigate({
+        moduleName: "activities/registration/registration"
+    });
+}

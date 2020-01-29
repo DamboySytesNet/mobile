@@ -1,0 +1,43 @@
+@import '../../common/style/backActionbar.css';
+
+#bg {
+    background-size: cover;
+    background-image: url("~/images/login.jpg");
+}
+
+#content {
+    padding: 20 36 0 36;
+}
+
+.labelGroup {
+    padding-top: 15;
+    padding-bottom: 15;
+}
+
+    .labelGroup > Label {
+        text-align: center;
+        font-family: "OpenSans";
+    }
+
+    .title {
+        font-size: 16;
+    }
+    .info {
+        font-size: 28;
+        font-weight: 800;
+    }
+
+TextField {
+    width: 100%
+}
+
+.registerButton {
+    font: 20 "OpenSans";
+    font-weight: bold;
+    border-radius: 5;
+    margin: 30 40;
+    height: 50;
+    width: 220;
+    background: #9f3b3b;
+    color: #fff;
+}

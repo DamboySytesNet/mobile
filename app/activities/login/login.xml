@@ -42,6 +42,10 @@
             <Label id="forgot"
                    text="Zapomniałeś/aś hasła?"
                    tap="{{ forgotPassword }}"></Label>
+
+            <Label id="registerLabel"
+                   text="Zarejestruj się"
+                   tap="goToRegisterPage"></Label>
         </StackLayout>
 
     </FlexboxLayout>
