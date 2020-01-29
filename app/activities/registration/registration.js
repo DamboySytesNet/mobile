@@ -27,7 +27,7 @@ exports.register = () => {
     if (validateEmail(pageData.get('email')) && 
         pageData.get('name') !== '' &&
         pageData.get('surname') !== '' &&
-        pageData.get('password') == pageData.get('repeatedPassword')) {
+        pageData.get('password') === pageData.get('repeatedPassword')) {
             pageData.set('loading', true);
             RegisterRequest.add(pageData.get('email'), pageData.get('name'),
                                 pageData.get('surname'), pageData.get('password'))
@@ -41,7 +41,7 @@ exports.register = () => {
                                 })
         }
         else {
-            alert('Błąd frontu');
+            alert('Nie udało się zarejestrować.');
         }
         
 }
