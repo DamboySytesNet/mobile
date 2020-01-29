@@ -1,5 +1,4 @@
 const observableModule = require("tns-core-modules/data/observable");
-const dialogsModule = require('tns-core-modules/ui/dialogs');
 const RegisterRequest = require('~/modules/request/registerRequest');
 let page;
 
@@ -20,6 +19,11 @@ exports.back = args => {
 
 exports.pageLoaded = args => {
     page = args.object;
+    pageData.set('name', '');
+    pageData.set('surname', '');
+    pageData.set('email', '');
+    pageData.set('password', '');
+    pageData.set('repeatedPassword', '');
     page.bindingContext = pageData;
 };
 
