@@ -4,7 +4,7 @@ const RegisterRequest = require('~/modules/request/registerRequest');
 let page;
 
 let pageData = new observableModule.fromObject({
-    name: 'Adrian',
+    name: '',
     surname: '',
     email: '',
     password: '',
