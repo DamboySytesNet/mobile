@@ -41,7 +41,7 @@ exports.register = () => {
                                 })
         }
         else {
-            alert('Nie udało się zarejestrować.');
+            alert('Dane w formularzu są niepoprawne');
         }
         
 }

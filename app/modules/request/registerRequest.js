@@ -13,7 +13,6 @@ exports.add = (email, name, surname, password) => {
                 password, password
             })
         }).then((res) => {
-            console.log(JSON.stringify(res));
             if(res.statusCode === 200) {
                 try {
                     let json = JSON.parse(res.content);
